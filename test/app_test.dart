@@ -12,7 +12,11 @@ import 'package:scopify_mobile/shared/fixtures/fixture_mode.dart';
 
 Future<void> pumpApp(WidgetTester tester) async {
   await tester.pumpWidget(
-    ProviderScope(child: ScopifyApp(router: createAppRouter())),
+    ProviderScope(
+      child: ScopifyApp(
+        router: createAppRouter(initialLocation: '/?fixture=data'),
+      ),
+    ),
   );
   await tester.pumpAndSettle();
 }

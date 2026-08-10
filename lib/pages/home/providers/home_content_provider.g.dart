@@ -15,11 +15,11 @@ final homeContentProvider = HomeContentFamily._();
 final class HomeContentProvider
     extends
         $FunctionalProvider<
-          AsyncValue<HomeFixture>,
-          AsyncValue<HomeFixture>,
-          AsyncValue<HomeFixture>
+          AsyncValue<HomeContent>,
+          AsyncValue<HomeContent>,
+          AsyncValue<HomeContent>
         >
-    with $Provider<AsyncValue<HomeFixture>> {
+    with $Provider<AsyncValue<HomeContent>> {
   HomeContentProvider._({
     required HomeContentFamily super.from,
     required FixtureMode super.argument,
@@ -43,21 +43,21 @@ final class HomeContentProvider
 
   @$internal
   @override
-  $ProviderElement<AsyncValue<HomeFixture>> $createElement(
+  $ProviderElement<AsyncValue<HomeContent>> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  AsyncValue<HomeFixture> create(Ref ref) {
+  AsyncValue<HomeContent> create(Ref ref) {
     final argument = this.argument as FixtureMode;
     return homeContent(ref, argument);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AsyncValue<HomeFixture> value) {
+  Override overrideWithValue(AsyncValue<HomeContent> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<AsyncValue<HomeFixture>>(value),
+      providerOverride: $SyncValueProvider<AsyncValue<HomeContent>>(value),
     );
   }
 
@@ -72,10 +72,10 @@ final class HomeContentProvider
   }
 }
 
-String _$homeContentHash() => r'68bfeb6f2eb1082cad6b93a72554a6c125109d0f';
+String _$homeContentHash() => r'5107a83859af5f35b7c78fa482f415cbdbb828ab';
 
 final class HomeContentFamily extends $Family
-    with $FunctionalFamilyOverride<AsyncValue<HomeFixture>, FixtureMode> {
+    with $FunctionalFamilyOverride<AsyncValue<HomeContent>, FixtureMode> {
   HomeContentFamily._()
     : super(
         retry: null,

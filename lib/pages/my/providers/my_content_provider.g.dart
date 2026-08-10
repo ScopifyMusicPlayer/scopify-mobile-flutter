@@ -72,7 +72,7 @@ final class MyContentProvider
   }
 }
 
-String _$myContentHash() => r'b9db9a91c73930910db036c586daa268be6f285b';
+String _$myContentHash() => r'ac26152e50e8f802525e87815fc15d0ba7993183';
 
 final class MyContentFamily extends $Family
     with $FunctionalFamilyOverride<AsyncValue<MyFixture>, FixtureMode> {

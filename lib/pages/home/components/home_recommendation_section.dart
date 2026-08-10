@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scopify_mobile/app/theme/app_tokens.dart';
 import 'package:scopify_mobile/components/shared/media_artwork.dart';
-import 'package:scopify_mobile/pages/playlist/playlist_fixture.dart';
+import 'package:scopify_mobile/pages/home/home_content.dart';
 
 class HomeRecommendationSection extends StatelessWidget {
   const HomeRecommendationSection({
@@ -10,8 +10,8 @@ class HomeRecommendationSection extends StatelessWidget {
     super.key,
   });
 
-  final List<PlaylistFixture> playlists;
-  final ValueChanged<PlaylistFixture> onOpen;
+  final List<HomePlaylist> playlists;
+  final ValueChanged<HomePlaylist> onOpen;
 
   @override
   Widget build(BuildContext context) {

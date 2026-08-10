@@ -15,11 +15,11 @@ final searchContentProvider = SearchContentFamily._();
 final class SearchContentProvider
     extends
         $FunctionalProvider<
-          AsyncValue<List<PlaylistFixture>>,
-          AsyncValue<List<PlaylistFixture>>,
-          AsyncValue<List<PlaylistFixture>>
+          AsyncValue<List<SearchPlaylistResult>>,
+          AsyncValue<List<SearchPlaylistResult>>,
+          AsyncValue<List<SearchPlaylistResult>>
         >
-    with $Provider<AsyncValue<List<PlaylistFixture>>> {
+    with $Provider<AsyncValue<List<SearchPlaylistResult>>> {
   SearchContentProvider._({
     required SearchContentFamily super.from,
     required FixtureMode super.argument,
@@ -43,23 +43,22 @@ final class SearchContentProvider
 
   @$internal
   @override
-  $ProviderElement<AsyncValue<List<PlaylistFixture>>> $createElement(
+  $ProviderElement<AsyncValue<List<SearchPlaylistResult>>> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  AsyncValue<List<PlaylistFixture>> create(Ref ref) {
+  AsyncValue<List<SearchPlaylistResult>> create(Ref ref) {
     final argument = this.argument as FixtureMode;
     return searchContent(ref, argument);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AsyncValue<List<PlaylistFixture>> value) {
+  Override overrideWithValue(AsyncValue<List<SearchPlaylistResult>> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<AsyncValue<List<PlaylistFixture>>>(
-        value,
-      ),
+      providerOverride:
+          $SyncValueProvider<AsyncValue<List<SearchPlaylistResult>>>(value),
     );
   }
 
@@ -74,12 +73,12 @@ final class SearchContentProvider
   }
 }
 
-String _$searchContentHash() => r'b8c3d2173623a22733c73f57f6f48dfa6bca4961';
+String _$searchContentHash() => r'e0d12acc1f29ad878372802c95b02897b6e07abb';
 
 final class SearchContentFamily extends $Family
     with
         $FunctionalFamilyOverride<
-          AsyncValue<List<PlaylistFixture>>,
+          AsyncValue<List<SearchPlaylistResult>>,
           FixtureMode
         > {
   SearchContentFamily._()

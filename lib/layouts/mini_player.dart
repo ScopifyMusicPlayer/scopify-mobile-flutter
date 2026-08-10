@@ -4,7 +4,7 @@ import 'package:scopify_mobile/app/router/app_router.dart';
 import 'package:scopify_mobile/app/theme/app_tokens.dart';
 import 'package:scopify_mobile/components/shared/media_artwork.dart';
 import 'package:scopify_mobile/components/shared/scopify_icon_action.dart';
-import 'package:scopify_mobile/modules/playback/fake_playback_controller.dart';
+import 'package:scopify_mobile/modules/playback/foreground_playback_controller.dart';
 import 'package:scopify_mobile/pages/playlist/playlist_fixture.dart';
 
 class MiniPlayer extends ConsumerWidget {
@@ -12,7 +12,7 @@ class MiniPlayer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final playback = ref.watch(fakePlaybackProvider);
+    final playback = ref.watch(foregroundPlaybackProvider);
     final track = playback.currentTrack;
     if (track == null) return const SizedBox.shrink();
 
@@ -68,7 +68,7 @@ class MiniPlayer extends ConsumerWidget {
                         : Icons.play_arrow_rounded,
                     tooltip: playback.isPlaying ? '暂停' : '播放',
                     onPressed: () => ref
-                        .read(fakePlaybackProvider.notifier)
+                        .read(foregroundPlaybackProvider.notifier)
                         .toggle(demoTrack),
                   ),
                 ],

@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:scopify_mobile/app/theme/app_motion.dart';
 import 'package:scopify_mobile/app/theme/app_tokens.dart';
 import 'package:scopify_mobile/components/shared/media_artwork.dart';
+import 'package:scopify_mobile/modules/playback/lyric_document.dart';
 import 'package:scopify_mobile/modules/playback/media_track.dart';
 
 class PlayerCenter extends StatelessWidget {
@@ -10,19 +11,27 @@ class PlayerCenter extends StatelessWidget {
     required this.track,
     required this.isPlaying,
     required this.showsLyrics,
+    required this.lyrics,
+    required this.position,
     super.key,
   });
 
   final MediaTrack track;
   final bool isPlaying;
   final bool showsLyrics;
+  final LyricDocument? lyrics;
+  final Duration position;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: AppMotion.standard,
       child: showsLyrics
-          ? _LyricsCenter(key: const ValueKey<String>('lyrics'))
+          ? _LyricsCenter(
+              key: const ValueKey<String>('lyrics'),
+              lyrics: lyrics ?? LyricDocument.fixture,
+              position: position,
+            )
           : _DiscCenter(
               key: const ValueKey<String>('disc'),
               track: track,
@@ -69,33 +78,34 @@ class _DiscCenter extends StatelessWidget {
 }
 
 class _LyricsCenter extends StatelessWidget {
-  const _LyricsCenter({super.key});
+  const _LyricsCenter({
+    required this.lyrics,
+    required this.position,
+    super.key,
+  });
+
+  final LyricDocument lyrics;
+  final Duration position;
 
   @override
   Widget build(BuildContext context) {
-    const lines = <(String, String, bool)>[
-      ('No flask can keep it', '没有什么瓶子能留住它', false),
-      ('Bubble up and cut right through', '气泡升起，穿过所有迟疑', false),
-      ("But you're someone I believe", '但你是我愿意相信的人', true),
-      ('You heat me like a fire', '你像一团火那样温暖我', false),
-      ("I can feel it getting brighter", '我感觉一切正在变亮', false),
-    ];
+    final activeIndex = _activeIndex(lyrics.lines, position);
 
     return ListView.separated(
       key: const ValueKey<String>('lyrics-list'),
       padding: const EdgeInsets.symmetric(horizontal: AppTokens.space20),
-      itemCount: lines.length,
+      itemCount: lyrics.lines.length,
       separatorBuilder: (_, _) => const SizedBox(height: AppTokens.space20),
       itemBuilder: (context, index) {
-        final line = lines[index];
-        final isActive = line.$3;
+        final line = lyrics.lines[index];
+        final isActive = index == activeIndex;
         return Opacity(
           opacity: isActive ? 1 : 0.48,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                line.$1,
+                line.text,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: isActive
                       ? AppTokens.textPrimary
@@ -103,12 +113,26 @@ class _LyricsCenter extends StatelessWidget {
                   fontSize: isActive ? 24 : 19,
                 ),
               ),
-              const SizedBox(height: AppTokens.space4),
-              Text(line.$2, style: Theme.of(context).textTheme.bodyMedium),
+              if (line.translation != null) ...<Widget>[
+                const SizedBox(height: AppTokens.space4),
+                Text(
+                  line.translation!,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
             ],
           ),
         );
       },
     );
+  }
+
+  int _activeIndex(List<LyricLine> lines, Duration position) {
+    var activeIndex = 0;
+    for (var index = 0; index < lines.length; index++) {
+      if (lines[index].at > position) return activeIndex;
+      activeIndex = index;
+    }
+    return activeIndex;
   }
 }

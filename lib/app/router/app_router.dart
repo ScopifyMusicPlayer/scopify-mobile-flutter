@@ -13,8 +13,8 @@ import 'package:scopify_mobile/shared/fixtures/fixture_mode.dart';
 
 part 'app_router.g.dart';
 
-GoRouter createAppRouter() =>
-    GoRouter(routes: $appRoutes, initialLocation: '/');
+GoRouter createAppRouter({String initialLocation = '/'}) =>
+    GoRouter(routes: $appRoutes, initialLocation: initialLocation);
 
 final GoRouter appRouter = createAppRouter();
 

@@ -1,4 +1,5 @@
 enum FixtureMode {
+  live,
   loading,
   data,
   empty,
@@ -8,7 +9,7 @@ enum FixtureMode {
     for (final mode in FixtureMode.values) {
       if (mode.name == value) return mode;
     }
-    return FixtureMode.data;
+    return FixtureMode.live;
   }
 }
 

@@ -1,13 +1,17 @@
 import 'package:scopify_mobile/pages/playlist/playlist_fixture.dart';
+import 'package:scopify_mobile/pages/home/home_content.dart';
 
-class HomeFixture {
-  const HomeFixture({required this.shortcuts, required this.recommendations});
+final homeFixture = HomeContent(
+  shortcuts: playlistFixtures.map(_toHomePlaylist).toList(growable: false),
+  recommendations: playlistFixtures
+      .map(_toHomePlaylist)
+      .toList(growable: false),
+);
 
-  final List<PlaylistFixture> shortcuts;
-  final List<PlaylistFixture> recommendations;
-}
-
-final homeFixture = HomeFixture(
-  shortcuts: playlistFixtures,
-  recommendations: playlistFixtures,
+HomePlaylist _toHomePlaylist(PlaylistFixture playlist) => HomePlaylist(
+  id: playlist.id,
+  title: playlist.title,
+  subtitle: playlist.subtitle,
+  description: playlist.description,
+  artworkSeed: playlist.artworkSeed,
 );

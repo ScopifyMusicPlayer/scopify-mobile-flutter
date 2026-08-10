@@ -15,6 +15,7 @@ final myFixture = MyFixture(playlists: playlistFixtures);
 @riverpod
 AsyncValue<MyFixture> myContent(Ref ref, FixtureMode mode) {
   return switch (mode) {
+    FixtureMode.live => AsyncData<MyFixture>(myFixture),
     FixtureMode.loading => const AsyncLoading<MyFixture>(),
     FixtureMode.data => AsyncData<MyFixture>(myFixture),
     FixtureMode.empty => const AsyncData<MyFixture>(

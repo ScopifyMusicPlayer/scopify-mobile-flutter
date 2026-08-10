@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scopify_mobile/app/theme/app_tokens.dart';
 import 'package:scopify_mobile/components/shared/media_artwork.dart';
-import 'package:scopify_mobile/pages/playlist/playlist_fixture.dart';
+import 'package:scopify_mobile/pages/search/search_result.dart';
 
 class SearchResultList extends StatelessWidget {
   const SearchResultList({
@@ -10,8 +10,8 @@ class SearchResultList extends StatelessWidget {
     super.key,
   });
 
-  final List<PlaylistFixture> results;
-  final ValueChanged<PlaylistFixture> onOpen;
+  final List<SearchPlaylistResult> results;
+  final ValueChanged<SearchPlaylistResult> onOpen;
 
   @override
   Widget build(BuildContext context) {

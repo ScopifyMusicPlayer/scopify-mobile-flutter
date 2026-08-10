@@ -7,9 +7,9 @@ import 'package:scopify_mobile/components/shared/primary_page_header.dart';
 import 'package:scopify_mobile/components/shared/section_header.dart';
 import 'package:scopify_mobile/pages/home/components/home_recommendation_section.dart';
 import 'package:scopify_mobile/pages/home/components/home_shortcut_grid.dart';
-import 'package:scopify_mobile/pages/home/home_fixture.dart';
+import 'package:scopify_mobile/pages/home/home_content.dart';
 import 'package:scopify_mobile/pages/home/providers/home_content_provider.dart';
-import 'package:scopify_mobile/pages/playlist/playlist_fixture.dart';
+import 'package:scopify_mobile/pages/home/providers/live_home_content_provider.dart';
 import 'package:scopify_mobile/shared/fixtures/fixture_mode.dart';
 
 class HomePage extends ConsumerWidget {
@@ -19,7 +19,9 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final content = ref.watch(homeContentProvider(fixtureMode));
+    final content = fixtureMode == FixtureMode.live
+        ? ref.watch(liveHomeContentProvider)
+        : ref.watch(homeContentProvider(fixtureMode));
 
     void setFixtureMode(FixtureMode mode) {
       HomeRoute(fixture: mode.queryValue).go(context);
@@ -38,14 +40,24 @@ class HomePage extends ConsumerWidget {
           loading: () => const ScopifyLoadingState(),
           error: (_, _) => ScopifyErrorState(
             title: '首页暂时没有加载出来',
-            description: '这是可复现的 M1 异常状态，稍后会由真实请求接管。',
-            onRetry: () => setFixtureMode(FixtureMode.data),
+            description: fixtureMode == FixtureMode.live
+                ? '请检查设置中的后端地址和网络，然后重试。'
+                : '这是可复现的 Fixture 异常状态。',
+            onRetry: () {
+              if (fixtureMode == FixtureMode.live) {
+                ref.invalidate(liveHomeContentProvider);
+              } else {
+                setFixtureMode(FixtureMode.data);
+              }
+            },
           ),
           data: (fixture) {
-            if (fixture.shortcuts.isEmpty) {
+            if (fixture.isEmpty) {
               return ScopifyEmptyState(
                 title: '这里还没有内容',
-                description: '切回数据 Fixture 后，可以继续浏览推荐内容。',
+                description: fixtureMode == FixtureMode.live
+                    ? '后端暂时没有返回推荐内容。'
+                    : '切回数据 Fixture 后，可以继续浏览推荐内容。',
                 actionLabel: '恢复数据',
                 onAction: () => setFixtureMode(FixtureMode.data),
               );
@@ -72,8 +84,8 @@ class _HomeData extends StatelessWidget {
     required this.onFixtureModeSelected,
   });
 
-  final HomeFixture fixture;
-  final ValueChanged<PlaylistFixture> onOpenPlaylist;
+  final HomeContent fixture;
+  final ValueChanged<HomePlaylist> onOpenPlaylist;
   final FixtureMode fixtureMode;
   final ValueChanged<FixtureMode> onFixtureModeSelected;
 
@@ -117,7 +129,9 @@ class _HomeData extends StatelessWidget {
         SectionHeader(title: '今天适合慢一点'),
         const SizedBox(height: AppTokens.space12),
         _FeaturedActivity(
-          onOpen: () => onOpenPlaylist(fixture.recommendations.first),
+          onOpen: fixture.recommendations.isEmpty
+              ? null
+              : () => onOpenPlaylist(fixture.recommendations.first),
         ),
       ],
     );
@@ -125,9 +139,9 @@ class _HomeData extends StatelessWidget {
 }
 
 class _FeaturedActivity extends StatelessWidget {
-  const _FeaturedActivity({required this.onOpen});
+  const _FeaturedActivity({this.onOpen});
 
-  final VoidCallback onOpen;
+  final VoidCallback? onOpen;
 
   @override
   Widget build(BuildContext context) {

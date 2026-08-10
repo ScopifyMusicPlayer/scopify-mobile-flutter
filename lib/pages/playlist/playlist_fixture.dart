@@ -111,4 +111,7 @@ PlaylistFixture playlistById(String id) {
   );
 }
 
+bool isFixturePlaylistId(String id) =>
+    playlistFixtures.any((playlist) => playlist.id == id);
+
 MediaTrack get demoTrack => playlistFixtures.first.tracks.first;

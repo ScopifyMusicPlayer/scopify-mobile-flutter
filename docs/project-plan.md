@@ -99,6 +99,14 @@ Android Emulator
 - 播放地址解析、歌词、前台音频、队列、循环、随机和失败恢复。
 - Fixture 继续保留，供页面状态和测试使用。
 
+#### M2a — 第一条真实公开数据链路
+
+- [x] 可持久化的 Backend Endpoint、公开数据连接探测和统一 Dio Runtime。
+- [x] Home 通过 `Thin API → Dio Runtime` 读取公开 `/personalized` 数据；Fixture 状态继续可切换。
+- [x] `QueryCacheStore` 提供 Endpoint、账号作用域、参数和 Schema Version 隔离的 SQLite 查询缓存。
+- [x] Search 与公开内容详情接入真实只读数据。
+- [ ] 播放地址、歌词、前台音频、队列与失败恢复。
+
 ### M3 — 登录与账号内容
 
 - QR Login 状态机、安全凭据、Session 恢复与退出。
