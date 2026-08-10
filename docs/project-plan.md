@@ -174,11 +174,11 @@ Riverpod Provider / Notifier
 
 按顺序执行：
 
-- [ ] 建立最小 `app/`、Theme 和 typed router。
-- [ ] 建立 App Shell Layout、三项底部导航、Drawer 与 Mini Player 空壳。
-- [ ] 用 Fixture 完成 Home → Detail → Fake Playback → Player 链路。
-- [ ] 增加 Search 与 My 一级页面。
-- [ ] 增加 Drawer/Modal 中已确认的入口和线稿内容。
+- [x] 建立最小 `app/`、Theme 和 typed router。
+- [x] 建立 App Shell Layout、三项底部导航、Drawer 与 Mini Player 空壳。
+- [x] 用 Fixture 完成 Home → Detail → Fake Playback → Player 链路。
+- [x] 增加 Search 与 My 一级页面。
+- [x] 增加 Drawer/Modal 中已确认的入口和线稿内容。
 - [ ] 补 Provider、Widget 和 Golden 测试。
 - [ ] 在 Android Emulator 按 M1 验收清单完整走一遍。
 - [ ] M1 通过后再开始真实 Dio 与前台音频。
