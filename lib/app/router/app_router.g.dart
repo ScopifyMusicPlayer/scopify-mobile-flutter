@@ -184,7 +184,7 @@ mixin $MyRoute on GoRouteData {
           state.uri.queryParameters,
           _$boolConverter,
         ) ??
-        false,
+        true,
   );
 
   MyRoute get _self => this as MyRoute;
@@ -194,7 +194,7 @@ mixin $MyRoute on GoRouteData {
     '/my',
     queryParams: {
       if (_self.fixture != null) 'fixture': _self.fixture,
-      if (_self.guest != false) 'guest': _self.guest.toString(),
+      if (_self.guest != true) 'guest': _self.guest.toString(),
     },
   );
 

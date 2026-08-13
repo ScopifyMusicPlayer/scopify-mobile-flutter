@@ -133,7 +133,7 @@ class SearchPlaylistRoute extends GoRouteData with $SearchPlaylistRoute {
 }
 
 class MyRoute extends GoRouteData with $MyRoute {
-  const MyRoute({this.fixture, this.guest = false});
+  const MyRoute({this.fixture, this.guest = true});
 
   final String? fixture;
   final bool guest;

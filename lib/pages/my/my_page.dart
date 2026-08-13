@@ -5,6 +5,7 @@ import 'package:scopify_mobile/app/theme/app_tokens.dart';
 import 'package:scopify_mobile/components/shared/fixture_state_view.dart';
 import 'package:scopify_mobile/components/shared/media_artwork.dart';
 import 'package:scopify_mobile/components/shared/primary_page_header.dart';
+import 'package:scopify_mobile/pages/my/components/my_guest_hub.dart';
 import 'package:scopify_mobile/pages/my/components/my_section_content.dart';
 import 'package:scopify_mobile/pages/my/providers/my_content_provider.dart';
 import 'package:scopify_mobile/shared/fixtures/fixture_mode.dart';
@@ -17,14 +18,20 @@ class MyPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final content = ref.watch(myContentProvider(fixtureMode));
-
-    void navigate({FixtureMode? mode, bool? guestMode}) {
+    void navigate({FixtureMode? mode}) {
       MyRoute(
         fixture: (mode ?? fixtureMode).queryValue,
-        guest: guestMode ?? guest,
+        guest: guest,
       ).go(context);
     }
+
+    void showLoginUnavailable() {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('二维码登录将在 M3 接入。')));
+    }
+
+    final content = guest ? null : ref.watch(myContentProvider(fixtureMode));
 
     return SafeArea(
       child: Column(
@@ -33,7 +40,7 @@ class MyPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppTokens.space16),
             child: PrimaryPageHeader(
               title: '我的',
-              subtitle: guest ? '游客模式' : '你的音乐与收藏',
+              subtitle: guest ? '公开内容可正常浏览和播放' : '你的音乐与收藏',
               trailing: PopupMenuButton<FixtureMode>(
                 tooltip: '切换我的状态',
                 initialValue: fixtureMode,
@@ -51,13 +58,8 @@ class MyPage extends ConsumerWidget {
           ),
           Expanded(
             child: guest
-                ? ScopifyEmptyState(
-                    title: '登录后，把音乐留在这里',
-                    description: '二维码登录会在 M3 接入；游客也可以继续浏览和播放公开内容。',
-                    actionLabel: '查看登录态',
-                    onAction: () => navigate(guestMode: false),
-                  )
-                : content.when(
+                ? MyGuestHub(onLogin: showLoginUnavailable)
+                : content!.when(
                     loading: () => const ScopifyLoadingState(),
                     error: (_, _) => ScopifyErrorState(
                       title: '个人内容加载失败',

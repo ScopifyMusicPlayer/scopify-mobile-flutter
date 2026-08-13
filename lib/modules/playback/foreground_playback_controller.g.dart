@@ -42,7 +42,7 @@ final class ForegroundPlaybackProvider
 }
 
 String _$foregroundPlaybackHash() =>
-    r'5baac752cc2c9ad969b130b24fd85be36c8759a9';
+    r'73d6e767f749c30760843949d2ed732a2d7aa5b1';
 
 abstract class _$ForegroundPlayback extends $Notifier<ForegroundPlaybackState> {
   ForegroundPlaybackState build();
