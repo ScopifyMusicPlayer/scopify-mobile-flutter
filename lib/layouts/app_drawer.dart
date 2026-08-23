@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scopify_mobile/app/router/app_router.dart';
 import 'package:scopify_mobile/app/theme/app_tokens.dart';
 import 'package:scopify_mobile/components/shared/media_artwork.dart';
+import 'package:scopify_mobile/components/shared/scopify_pill_button.dart';
 import 'package:scopify_mobile/layouts/modal_layout.dart';
+import 'package:scopify_mobile/modules/session/session_controller.dart';
+import 'package:scopify_mobile/modules/session/session_state.dart';
+import 'package:scopify_mobile/pages/account/providers/vip_sign_provider.dart';
+import 'package:scopify_mobile/pages/account/vip_sign_models.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final session = ref
+        .watch(sessionControllerProvider)
+        .when(
+          data: (value) => value,
+          loading: () => const GuestSession(),
+          error: (_, _) => const GuestSession(),
+        );
+    final profile = session is AuthenticatedSession ? session.profile : null;
+    final signOut = ref.read(sessionControllerProvider.notifier).signOut;
+    final signToday = ref.read(vipSignActionProvider.notifier).signToday;
+    final vipSignState = profile == null
+        ? null
+        : ref.watch(vipSignHistoryProvider);
+    final vipHistory = vipSignState?.when(
+      data: (value) => value,
+      loading: () => null,
+      error: (_, _) => null,
+    );
+
     return Drawer(
       width: 332,
       backgroundColor: AppTokens.surfaceDeep,
@@ -22,55 +47,45 @@ class AppDrawer extends StatelessWidget {
                   key: const Key('app-drawer-scroll'),
                   padding: EdgeInsets.zero,
                   children: <Widget>[
-                    InkWell(
-                      borderRadius: AppTokens.radiusMedium,
+                    _AccountHeader(
+                      profile: profile,
                       onTap: () => _closeThen(
                         context,
-                        (hostContext) => const ProfileRoute().push(hostContext),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 46,
-                            child: MediaArtwork(
-                              seed: 'momo-profile',
-                              circular: true,
-                            ),
-                          ),
-                          const SizedBox(width: AppTokens.space12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'Momo Super Cool',
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.titleMedium,
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  '查看个人资料',
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.labelMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(
-                            Icons.chevron_right_rounded,
-                            color: AppTokens.textTertiary,
-                          ),
-                        ],
+                        (hostContext) => profile == null
+                            ? const QrLoginRoute().push(hostContext)
+                            : const ProfileRoute().push(hostContext),
                       ),
                     ),
                     const SizedBox(height: AppTokens.space20),
                     _VipSignCard(
-                      onTap: () => _closeThen(
-                        context,
-                        (hostContext) => _showVipSign(hostContext),
-                      ),
+                      isGuest: profile == null,
+                      history: vipHistory,
+                      isLoading: vipSignState?.isLoading ?? false,
+                      hasError: vipSignState?.hasError ?? false,
+                      onTap: () => _closeThen(context, (hostContext) {
+                        if (profile == null) {
+                          const QrLoginRoute().push(hostContext);
+                        } else if (vipSignState?.hasError == true) {
+                          ref.invalidate(vipSignHistoryProvider);
+                          ScaffoldMessenger.of(hostContext).showSnackBar(
+                            const SnackBar(content: Text('正在重试读取今日乐签。')),
+                          );
+                        } else {
+                          _showVipSign(
+                            hostContext,
+                            history:
+                                ref
+                                    .read(vipSignHistoryProvider)
+                                    .when(
+                                      data: (value) => value,
+                                      loading: () => null,
+                                      error: (_, _) => null,
+                                    ) ??
+                                vipHistory,
+                            onSign: signToday,
+                          );
+                        }
+                      }),
                     ),
                     const SizedBox(height: AppTokens.space16),
                     _DrawerItem(
@@ -120,6 +135,17 @@ class AppDrawer extends StatelessWidget {
                             const SettingsRoute().push(hostContext),
                       ),
                     ),
+                    if (profile != null)
+                      _DrawerItem(
+                        icon: Icons.logout_rounded,
+                        title: '退出账号',
+                        subtitle: '清除本机登录状态与账号缓存',
+                        onTap: () => _closeThen(
+                          context,
+                          (hostContext) =>
+                              _showSignOutConfirmation(hostContext, signOut),
+                        ),
+                      ),
                     const SizedBox(height: AppTokens.space24),
                     Center(
                       child: Text(
@@ -138,9 +164,81 @@ class AppDrawer extends StatelessWidget {
   }
 }
 
-class _VipSignCard extends StatelessWidget {
-  const _VipSignCard({required this.onTap});
+class _AccountHeader extends StatelessWidget {
+  const _AccountHeader({required this.profile, required this.onTap});
 
+  final SessionProfile? profile;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: AppTokens.radiusMedium,
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppTokens.space4),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: 46,
+              height: 46,
+              child: profile == null
+                  ? const CircleAvatar(
+                      backgroundColor: AppTokens.surfaceRaised,
+                      child: Icon(
+                        Icons.qr_code_scanner_rounded,
+                        color: AppTokens.textSecondary,
+                      ),
+                    )
+                  : MediaArtwork(seed: profile!.nickname, circular: true),
+            ),
+            const SizedBox(width: AppTokens.space12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    profile?.nickname ?? '使用二维码登录',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    profile == null
+                        ? '同步你的音乐库与收藏'
+                        : profile!.signature.isEmpty
+                        ? '查看个人资料'
+                        : profile!.signature,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.chevron_right_rounded,
+              color: AppTokens.textTertiary,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _VipSignCard extends StatelessWidget {
+  const _VipSignCard({
+    required this.isGuest,
+    required this.history,
+    required this.isLoading,
+    required this.hasError,
+    required this.onTap,
+  });
+
+  final bool isGuest;
+  final VipSignHistory? history;
+  final bool isLoading;
+  final bool hasError;
   final VoidCallback onTap;
 
   @override
@@ -167,11 +265,30 @@ class _VipSignCard extends StatelessWidget {
               Text('网易乐签', style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: AppTokens.space4),
               Text(
-                '今日未签 · 点亮今天的音乐感受',
+                isGuest
+                    ? '登录后查看今日乐签'
+                    : isLoading
+                    ? '正在读取今日乐签'
+                    : hasError
+                    ? '今日乐签暂不可用'
+                    : history?.signedToday == true
+                    ? '今日已签 · 查看今日乐签'
+                    : '今日未签 · 查看签到状态',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
               const SizedBox(height: AppTokens.space12),
-              Text('连续签到 5 天', style: Theme.of(context).textTheme.labelLarge),
+              Text(
+                isGuest
+                    ? '使用网易云音乐扫码登录'
+                    : isLoading
+                    ? '请稍候…'
+                    : hasError
+                    ? '点击重试读取'
+                    : history?.subText.isNotEmpty == true
+                    ? history!.subText
+                    : '近 ${history?.signedDayCount ?? 0} 天有签到记录',
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
             ],
           ),
         ),
@@ -221,68 +338,111 @@ void _closeThen(
   });
 }
 
-void _showVipSign(BuildContext context) {
+void _showVipSign(
+  BuildContext context, {
+  VipSignHistory? history,
+  Future<VipSignResult> Function()? onSign,
+}) {
+  final today = history?.today;
   showDialog<void>(
     context: context,
     barrierColor: AppTokens.overlay,
-    builder: (dialogContext) => Dialog(
-      backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.all(AppTokens.space20),
-      child: ModalLayout(
-        title: '网易乐签',
-        subtitle: '今天的音乐从一张小签开始。',
-        onClose: () => Navigator.of(dialogContext).pop(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
+    builder: (dialogContext) {
+      var isSigning = false;
+      return StatefulBuilder(
+        builder: (dialogContext, setState) => Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.all(AppTokens.space20),
+          child: ModalLayout(
+            title: '网易乐签',
+            subtitle: history == null
+                ? '今日乐签暂时没有读取成功。'
+                : today?.isSigned == true
+                ? '今日已签，下面是当前签到状态。'
+                : '今日尚未签到，确认后会同步到当前账号。',
+            onClose: () => Navigator.of(dialogContext).pop(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(
+                      '${history?.signedDayCount ?? 0}',
+                      style: Theme.of(dialogContext).textTheme.displaySmall,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppTokens.space8,
+                      ),
+                      child: Text(
+                        '/',
+                        style: Theme.of(dialogContext).textTheme.titleLarge,
+                      ),
+                    ),
+                    Text(
+                      '${history?.days.length ?? 0}',
+                      style: Theme.of(dialogContext).textTheme.displaySmall,
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: 72,
+                      child: MediaArtwork(
+                        seed: today?.songCoverUrl.isNotEmpty == true
+                            ? today!.songCoverUrl
+                            : 'vip-sign',
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppTokens.space16),
                 Text(
-                  '08',
-                  style: Theme.of(dialogContext).textTheme.displaySmall,
+                  today?.isSigned == true ? '今日已签' : '今日乐签',
+                  style: Theme.of(dialogContext).textTheme.titleMedium,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppTokens.space8,
-                  ),
-                  child: Text(
-                    '/',
-                    style: Theme.of(dialogContext).textTheme.titleLarge,
-                  ),
-                ),
+                const SizedBox(height: AppTokens.space4),
                 Text(
-                  '10',
-                  style: Theme.of(dialogContext).textTheme.displaySmall,
+                  today?.isSigned == true
+                      ? '签到记录已同步到当前账号。'
+                      : '签到成功后会刷新今日状态，不会重复提交。',
+                  style: Theme.of(dialogContext).textTheme.bodyMedium,
                 ),
-                const Spacer(),
-                SizedBox(width: 72, child: MediaArtwork(seed: 'vip-sign')),
+                const SizedBox(height: AppTokens.space20),
+                ScopifyPillButton(
+                  onPressed: history == null || today?.isSigned == true
+                      ? () => Navigator.of(dialogContext).pop()
+                      : () async {
+                          if (onSign == null || isSigning) return;
+                          setState(() => isSigning = true);
+                          try {
+                            final result = await onSign();
+                            if (!dialogContext.mounted) return;
+                            Navigator.of(dialogContext).pop();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(result.message)),
+                            );
+                          } on Object {
+                            if (!dialogContext.mounted) return;
+                            setState(() => isSigning = false);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('签到失败，请稍后重试。')),
+                            );
+                          }
+                        },
+                  isLoading: isSigning,
+                  icon: today?.isSigned == true
+                      ? Icons.check_circle_outline_rounded
+                      : Icons.check_rounded,
+                  label: today?.isSigned == true ? '今日已签' : '今日签到',
+                  variant: today?.isSigned == true
+                      ? ScopifyPillButtonVariant.soft
+                      : ScopifyPillButtonVariant.brand,
+                ),
               ],
             ),
-            const SizedBox(height: AppTokens.space16),
-            Text(
-              'From The Start',
-              style: Theme.of(dialogContext).textTheme.titleMedium,
-            ),
-            const SizedBox(height: AppTokens.space4),
-            Text(
-              '让今天从一首愿意反复听的歌开始。',
-              style: Theme.of(dialogContext).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: AppTokens.space20),
-            FilledButton.icon(
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('乐签已在 Fixture 中点亮。')),
-                );
-              },
-              icon: const Icon(Icons.play_arrow_rounded),
-              label: const Text('点亮乐签'),
-            ),
-          ],
+          ),
         ),
-      ),
-    ),
+      );
+    },
   );
 }
 
@@ -402,6 +562,45 @@ void _showUpdate(BuildContext context) {
       ),
     ),
   );
+}
+
+Future<void> _showSignOutConfirmation(
+  BuildContext context,
+  Future<void> Function() signOut,
+) async {
+  final confirmed = await showDialog<bool>(
+    context: context,
+    barrierColor: AppTokens.overlay,
+    builder: (dialogContext) => AlertDialog(
+      title: const Text('退出当前账号？'),
+      content: const Text('本机会清除登录凭证与账号缓存，公共内容和当前播放不会受影响。'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.of(dialogContext).pop(false),
+          child: const Text('取消'),
+        ),
+        FilledButton(
+          key: const Key('confirm-sign-out'),
+          onPressed: () => Navigator.of(dialogContext).pop(true),
+          child: const Text('退出账号'),
+        ),
+      ],
+    ),
+  );
+  if (confirmed != true) return;
+
+  try {
+    await signOut();
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('已退出账号。')));
+  } on Object {
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('本机登录状态清理失败，请重试。')));
+  }
 }
 
 class _VersionLine extends StatelessWidget {

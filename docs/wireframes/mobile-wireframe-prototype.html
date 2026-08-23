@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
-    <title>Scopify Mobile Wireframe Prototype</title>
+    <title>Scopify Mobile Design & State Prototype</title>
     <!--
       Device shell: picturepan2/devices.css v0.2.0 (MIT).
       The page remains usable with the local fallback rules below when the CDN is unavailable.
@@ -16,18 +16,19 @@
     />
     <style>
       :root {
-        --bg: #0b0c0e;
-        --panel: #121418;
-        --panel-2: #1a1d22;
-        --panel-3: #252930;
-        --ink: #f4f5f2;
-        --muted: #a4aaa6;
-        --dim: #6f7671;
-        --line: #3a3f46;
-        --line-soft: #292d33;
-        --accent: #69dda0;
-        --warning: #f2bd67;
-        --danger: #e88187;
+      /* Canonical values mirror packages/ui/themes/shadcn/scopify-default.css. */
+      --bg: #000000;
+      --panel: #121212;
+      --panel-2: #181818;
+      --panel-3: #282828;
+      --ink: #ffffff;
+      --muted: #b3b3b3;
+      --dim: #727272;
+      --line: rgb(255 255 255 / 10%);
+      --line-soft: rgb(255 255 255 / 6%);
+      --accent: #1ed760;
+      --warning: #f59e0b;
+      --danger: #ef4444;
         --phone-width: 340px;
         --phone-height: 720px;
       }
@@ -43,7 +44,7 @@
       body {
         margin: 0;
         background:
-          linear-gradient(180deg, #14171b 0, var(--bg) 340px),
+          linear-gradient(180deg, #181818 0, var(--bg) 340px),
           var(--bg);
         color: var(--ink);
         font-family:
@@ -2906,8 +2907,8 @@
     <header class="prototype-header">
       <div class="prototype-header-inner">
         <div class="prototype-kicker">
-          <span class="prototype-badge">Prototype — Throwaway / Read-only</span>
-          <h1>Scopify Mobile · V1 页面线稿画廊</h1>
+          <span class="prototype-badge">Design Contract — Read-only States</span>
+          <h1>Scopify Mobile · V1 页面设计与状态画廊</h1>
         </div>
         <p>
           只验证页面分配、导航和状态，不代表最终视觉。页面内写操作、播放器与评论跳转全部禁用；顶部筛选仅用于阅览。
@@ -3946,7 +3947,8 @@
       <aside class="notes">
         <strong>阅览结论记录方式：</strong>
         反馈请使用页面编号，例如“MY-01 的快捷入口保留，子筛选换成横滑”。
-        线稿确认后，生产 Flutter 首轮只实现灰阶布局与 Fake 状态；HTML 本身保持可丢弃，不提升为生产代码。
+        页面结构与状态在此处评审，视觉 token 与组件配方遵循跨端设计合同；HTML 仍不直接提升为生产 Flutter 代码。
+        <a href="../cross-platform-design-contract.md">查看跨端设计合同</a>。
         设备外壳使用
         <a href="https://github.com/picturepan2/devices.css" target="_blank" rel="noreferrer">devices.css v0.2.0</a>
         的 iPhone 14 Pro（MIT）；CDN 不可用时会退回本文件内的等尺寸 CSS 外壳。

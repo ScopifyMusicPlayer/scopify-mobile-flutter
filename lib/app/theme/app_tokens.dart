@@ -11,9 +11,9 @@ abstract final class AppTokens {
   static const Color textTertiary = Color(0xFF727272);
   static const Color accent = Color(0xFF1ED760);
   static const Color accentHover = Color(0xFF3BE477);
-  static const Color danger = Color(0xFFF15B5D);
-  static const Color warning = Color(0xFFF5A524);
-  static const Color overlay = Color(0xB8000000);
+  static const Color danger = Color(0xFFEF4444);
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color overlay = Color(0xCC000000);
   static const Color divider = Color(0x1AFFFFFF);
   static const Color surfaceSoft = Color(0x0DFFFFFF);
   static const Color surfaceInteractive = Color(0x1AFFFFFF);

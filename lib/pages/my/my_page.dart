@@ -5,33 +5,41 @@ import 'package:scopify_mobile/app/theme/app_tokens.dart';
 import 'package:scopify_mobile/components/shared/fixture_state_view.dart';
 import 'package:scopify_mobile/components/shared/media_artwork.dart';
 import 'package:scopify_mobile/components/shared/primary_page_header.dart';
+import 'package:scopify_mobile/modules/session/session_controller.dart';
+import 'package:scopify_mobile/modules/session/session_state.dart';
+import 'package:scopify_mobile/pages/account/account_models.dart';
+import 'package:scopify_mobile/pages/account/providers/account_overview_provider.dart';
 import 'package:scopify_mobile/pages/my/components/my_guest_hub.dart';
 import 'package:scopify_mobile/pages/my/components/my_section_content.dart';
 import 'package:scopify_mobile/pages/my/providers/my_content_provider.dart';
 import 'package:scopify_mobile/shared/fixtures/fixture_mode.dart';
 
 class MyPage extends ConsumerWidget {
-  const MyPage({required this.fixtureMode, required this.guest, super.key});
+  const MyPage({required this.fixtureMode, super.key});
 
   final FixtureMode fixtureMode;
-  final bool guest;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     void navigate({FixtureMode? mode}) {
-      MyRoute(
-        fixture: (mode ?? fixtureMode).queryValue,
-        guest: guest,
-      ).go(context);
+      MyRoute(fixture: (mode ?? fixtureMode).queryValue).go(context);
     }
 
-    void showLoginUnavailable() {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('二维码登录将在 M3 接入。')));
-    }
-
-    final content = guest ? null : ref.watch(myContentProvider(fixtureMode));
+    final sessionAsync = ref.watch(sessionControllerProvider);
+    final session = sessionAsync.when(
+      data: (value) => value,
+      loading: () => const GuestSession(),
+      error: (_, _) => const GuestSession(),
+    );
+    final restoringSession = sessionAsync is AsyncLoading<SessionState>;
+    final profile = session is AuthenticatedSession ? session.profile : null;
+    final authenticated = profile != null;
+    final fixtureContent = authenticated && fixtureMode != FixtureMode.live
+        ? ref.watch(myContentProvider(fixtureMode))
+        : null;
+    final liveContent = authenticated && fixtureMode == FixtureMode.live
+        ? ref.watch(accountOverviewProvider)
+        : null;
 
     return SafeArea(
       child: Column(
@@ -40,7 +48,11 @@ class MyPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppTokens.space16),
             child: PrimaryPageHeader(
               title: '我的',
-              subtitle: guest ? '公开内容可正常浏览和播放' : '你的音乐与收藏',
+              subtitle: restoringSession
+                  ? '正在恢复账号状态'
+                  : authenticated
+                  ? '你的音乐与收藏'
+                  : '公开内容可正常浏览和播放',
               trailing: PopupMenuButton<FixtureMode>(
                 tooltip: '切换我的状态',
                 initialValue: fixtureMode,
@@ -57,9 +69,26 @@ class MyPage extends ConsumerWidget {
             ),
           ),
           Expanded(
-            child: guest
-                ? MyGuestHub(onLogin: showLoginUnavailable)
-                : content!.when(
+            child: restoringSession
+                ? const ScopifyLoadingState()
+                : !authenticated
+                ? MyGuestHub(onLogin: () => const QrLoginRoute().push(context))
+                : fixtureMode == FixtureMode.live
+                ? liveContent!.when(
+                    loading: () => const ScopifyLoadingState(),
+                    error: (_, _) => ScopifyErrorState(
+                      title: '账号资料加载失败',
+                      description: '请检查网络和登录状态后重试。',
+                      onRetry: () => ref.invalidate(accountOverviewProvider),
+                    ),
+                    data: (overview) => _SignedInHub(
+                      overview: overview,
+                      onOpen: (playlist) => MyPlaylistRoute(
+                        playlistId: playlist.id,
+                      ).push(context),
+                    ),
+                  )
+                : fixtureContent!.when(
                     loading: () => const ScopifyLoadingState(),
                     error: (_, _) => ScopifyErrorState(
                       title: '个人内容加载失败',
@@ -76,7 +105,10 @@ class MyPage extends ConsumerWidget {
                         );
                       }
                       return _SignedInHub(
-                        fixture: fixture,
+                        overview: AccountOverview(
+                          profile: AccountProfile.fromSession(profile),
+                          playlists: fixture.playlists,
+                        ),
                         onOpen: (playlist) => MyPlaylistRoute(
                           playlistId: playlist.id,
                         ).push(context),
@@ -91,13 +123,20 @@ class MyPage extends ConsumerWidget {
 }
 
 class _SignedInHub extends StatelessWidget {
-  const _SignedInHub({required this.fixture, required this.onOpen});
+  const _SignedInHub({required this.overview, required this.onOpen});
 
-  final MyFixture fixture;
-  final ValueChanged<dynamic> onOpen;
+  final AccountOverview overview;
+  final ValueChanged<AccountPlaylist> onOpen;
 
   @override
   Widget build(BuildContext context) {
+    final profile = overview.profile;
+    final ownedPlaylists = overview.playlists
+        .where((playlist) => playlist.isOwnedByCurrentUser)
+        .toList(growable: false);
+    final collectedPlaylists = overview.playlists
+        .where((playlist) => !playlist.isOwnedByCurrentUser)
+        .toList(growable: false);
     return DefaultTabController(
       length: 3,
       child: Column(
@@ -114,9 +153,11 @@ class _SignedInHub extends StatelessWidget {
                 SizedBox(
                   width: 68,
                   child: MediaArtwork(
-                    seed: 'momo-profile',
+                    seed: profile.avatarUrl.isEmpty
+                        ? profile.userId.toString()
+                        : profile.avatarUrl,
                     circular: true,
-                    semanticLabel: 'Momo 的头像',
+                    semanticLabel: '${profile.nickname} 的头像',
                   ),
                 ),
                 const SizedBox(width: AppTokens.space16),
@@ -125,12 +166,16 @@ class _SignedInHub extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Momo Super Cool',
+                        profile.nickname,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: AppTokens.space4),
                       Text(
-                        '12 个关注 · 34 位粉丝',
+                        profile.signature.isEmpty
+                            ? '已通过网易云音乐扫码登录'
+                            : profile.signature,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
@@ -143,6 +188,17 @@ class _SignedInHub extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppTokens.space16),
+            child: Row(
+              children: <Widget>[
+                _ProfileMetric(value: '${profile.followingCount}', label: '关注'),
+                _ProfileMetric(value: '${profile.followerCount}', label: '粉丝'),
+                _ProfileMetric(value: '${profile.listenSongs}', label: '听歌'),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppTokens.space12),
           const TabBar(
             tabs: <Widget>[
               Tab(text: '音乐'),
@@ -154,23 +210,43 @@ class _SignedInHub extends StatelessWidget {
             child: TabBarView(
               children: <Widget>[
                 MySectionContent(
-                  playlists: fixture.playlists,
+                  playlists: ownedPlaylists,
                   kind: '歌单',
                   onOpen: onOpen,
                 ),
                 MySectionContent(
-                  playlists: fixture.playlists.take(2).toList(),
+                  playlists: const <AccountPlaylist>[],
                   kind: '声音单',
                   onOpen: onOpen,
                 ),
                 MySectionContent(
-                  playlists: fixture.playlists.reversed.toList(),
+                  playlists: collectedPlaylists,
                   kind: '已收藏',
                   onOpen: onOpen,
                 ),
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ProfileMetric extends StatelessWidget {
+  const _ProfileMetric({required this.value, required this.label});
+
+  final String value;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          Text(value, style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: AppTokens.space4),
+          Text(label, style: Theme.of(context).textTheme.labelMedium),
         ],
       ),
     );

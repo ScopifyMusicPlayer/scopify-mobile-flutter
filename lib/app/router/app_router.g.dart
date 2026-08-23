@@ -9,6 +9,7 @@ part of 'app_router.dart';
 List<RouteBase> get $appRoutes => [
   $appShellRoute,
   $playerRoute,
+  $qrLoginRoute,
   $profileRoute,
   $recentRoute,
   $settingsRoute,
@@ -176,26 +177,15 @@ mixin $SearchPlaylistRoute on GoRouteData {
 }
 
 mixin $MyRoute on GoRouteData {
-  static MyRoute _fromState(GoRouterState state) => MyRoute(
-    fixture: state.uri.queryParameters['fixture'],
-    guest:
-        _$convertMapValue(
-          'guest',
-          state.uri.queryParameters,
-          _$boolConverter,
-        ) ??
-        true,
-  );
+  static MyRoute _fromState(GoRouterState state) =>
+      MyRoute(fixture: state.uri.queryParameters['fixture']);
 
   MyRoute get _self => this as MyRoute;
 
   @override
   String get location => GoRouteData.$location(
     '/my',
-    queryParams: {
-      if (_self.fixture != null) 'fixture': _self.fixture,
-      if (_self.guest != true) 'guest': _self.guest.toString(),
-    },
+    queryParams: {if (_self.fixture != null) 'fixture': _self.fixture},
   );
 
   @override
@@ -237,26 +227,6 @@ mixin $MyPlaylistRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-T? _$convertMapValue<T>(
-  String key,
-  Map<String, String> map,
-  T? Function(String) converter,
-) {
-  final value = map[key];
-  return value == null ? null : converter(value);
-}
-
-bool _$boolConverter(String value) {
-  switch (value) {
-    case 'true':
-      return true;
-    case 'false':
-      return false;
-    default:
-      throw UnsupportedError('Cannot convert "$value" into a bool.');
-  }
-}
-
 RouteBase get $playerRoute => GoRouteData.$route(
   path: '/player',
   hasOverriddenOnExit: false,
@@ -268,6 +238,32 @@ mixin $PlayerRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/player');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $qrLoginRoute => GoRouteData.$route(
+  path: '/login/qr',
+  hasOverriddenOnExit: false,
+  factory: $QrLoginRoute._fromState,
+);
+
+mixin $QrLoginRoute on GoRouteData {
+  static QrLoginRoute _fromState(GoRouterState state) => const QrLoginRoute();
+
+  @override
+  String get location => GoRouteData.$location('/login/qr');
 
   @override
   void go(BuildContext context) => context.go(location);

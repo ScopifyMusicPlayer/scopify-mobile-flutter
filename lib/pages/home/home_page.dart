@@ -9,6 +9,7 @@ import 'package:scopify_mobile/pages/home/components/home_recommendation_section
 import 'package:scopify_mobile/pages/home/components/home_shortcut_grid.dart';
 import 'package:scopify_mobile/pages/home/home_content.dart';
 import 'package:scopify_mobile/pages/home/providers/home_content_provider.dart';
+import 'package:scopify_mobile/pages/home/providers/home_greeting_provider.dart';
 import 'package:scopify_mobile/pages/home/providers/live_home_content_provider.dart';
 import 'package:scopify_mobile/shared/fixtures/fixture_mode.dart';
 
@@ -22,6 +23,7 @@ class HomePage extends ConsumerWidget {
     final content = fixtureMode == FixtureMode.live
         ? ref.watch(liveHomeContentProvider)
         : ref.watch(homeContentProvider(fixtureMode));
+    final greeting = ref.watch(homeGreetingProvider);
 
     void setFixtureMode(FixtureMode mode) {
       HomeRoute(fixture: mode.queryValue).go(context);
@@ -64,6 +66,7 @@ class HomePage extends ConsumerWidget {
             }
             return _HomeData(
               fixture: fixture,
+              greeting: greeting,
               onOpenPlaylist: (playlist) =>
                   HomePlaylistRoute(playlistId: playlist.id).push(context),
               fixtureMode: fixtureMode,
@@ -79,12 +82,14 @@ class HomePage extends ConsumerWidget {
 class _HomeData extends StatelessWidget {
   const _HomeData({
     required this.fixture,
+    required this.greeting,
     required this.onOpenPlaylist,
     required this.fixtureMode,
     required this.onFixtureModeSelected,
   });
 
   final HomeContent fixture;
+  final String greeting;
   final ValueChanged<HomePlaylist> onOpenPlaylist;
   final FixtureMode fixtureMode;
   final ValueChanged<FixtureMode> onFixtureModeSelected;
@@ -100,7 +105,7 @@ class _HomeData extends StatelessWidget {
       ),
       children: <Widget>[
         PrimaryPageHeader(
-          title: '早上好，Momo',
+          title: greeting,
           subtitle: '把一天打开得轻一些',
           trailing: PopupMenuButton<FixtureMode>(
             tooltip: '切换首页状态',

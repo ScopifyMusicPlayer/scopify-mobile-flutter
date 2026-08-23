@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scopify_mobile/app/theme/app_tokens.dart';
-import 'package:scopify_mobile/components/shared/media_artwork.dart';
+import 'package:scopify_mobile/components/shared/scopify_media_card.dart';
 import 'package:scopify_mobile/pages/home/home_content.dart';
 
 class HomeRecommendationSection extends StatelessWidget {
@@ -26,32 +26,11 @@ class HomeRecommendationSection extends StatelessWidget {
           final playlist = playlists[index];
           return SizedBox(
             width: 148,
-            child: InkWell(
-              borderRadius: AppTokens.radiusMedium,
+            child: ScopifyMediaCard(
+              title: playlist.title,
+              subtitle: playlist.subtitle,
+              artworkSeed: playlist.artworkSeed,
               onTap: () => onOpen(playlist),
-              child: Padding(
-                padding: const EdgeInsets.all(AppTokens.space4),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    MediaArtwork(seed: playlist.artworkSeed, shadow: true),
-                    const SizedBox(height: AppTokens.space12),
-                    Text(
-                      playlist.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: AppTokens.space4),
-                    Text(
-                      playlist.subtitle,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  ],
-                ),
-              ),
             ),
           );
         },

@@ -16,40 +16,43 @@ class DetailLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppTokens.space8,
-              AppTokens.space8,
-              AppTokens.space16,
-              AppTokens.space8,
-            ),
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                  onPressed: () => context.pop(),
-                  tooltip: '返回',
-                ),
-                const SizedBox(width: AppTokens.space8),
-                Expanded(
-                  child: Text(
-                    eyebrow,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.labelLarge,
-                    textAlign: TextAlign.center,
+    return Material(
+      color: AppTokens.surfaceBase,
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppTokens.space8,
+                AppTokens.space8,
+                AppTokens.space16,
+                AppTokens.space8,
+              ),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                    onPressed: () => context.pop(),
+                    tooltip: '返回',
                   ),
-                ),
-                const SizedBox(width: AppTokens.space8),
-                SizedBox(width: 48, child: trailing),
-              ],
+                  const SizedBox(width: AppTokens.space8),
+                  Expanded(
+                    child: Text(
+                      eyebrow,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.labelLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(width: AppTokens.space8),
+                  SizedBox(width: 48, child: trailing),
+                ],
+              ),
             ),
-          ),
-          Expanded(child: body),
-        ],
+            Expanded(child: body),
+          ],
+        ),
       ),
     );
   }

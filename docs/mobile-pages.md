@@ -2,9 +2,9 @@
 
 > 产品基线：独立 Flutter App，与 Web/Electron 共用后端，但不共享前端、播放状态或发布周期。
 > 首发平台：Android。iOS 在 Android 核心体验稳定后跟进。
-> 首轮目标：**先把全部页面的低保真布局、导航关系和状态槽位搭出来，不追求一次完成视觉稿。**
+> 首轮目标：先把全部页面的构图、导航关系和状态槽位搭出来；M4 前通过跨端设计合同把线稿升级为可验收的视觉实现。
 
-Web 能力与接口映射见 [web-capabilities.md](./web-capabilities.md)，视觉语言与 Flutter 映射见 [web-design-language.md](./web-design-language.md)，实施与目录约束见 [project-plan.md](./project-plan.md)，可浏览线稿见 [wireframes/mobile-wireframe-prototype.html](./wireframes/mobile-wireframe-prototype.html)。
+Web 能力与接口映射见 [web-capabilities.md](./web-capabilities.md)，视觉语言与 Flutter 映射见 [web-design-language.md](./web-design-language.md)，跨端组件接口见 [cross-platform-design-contract.md](./cross-platform-design-contract.md)，实施与目录约束见 [project-plan.md](./project-plan.md)，可浏览线稿见 [wireframes/mobile-wireframe-prototype.html](./wireframes/mobile-wireframe-prototype.html)。
 
 ## 1. V1 产品边界
 
@@ -533,7 +533,7 @@ V1 必须保证控制可靠性高于动画。后台、锁屏和页面控制都�
 - 字体、颜色、间距只达到可评审程度；不以像素级还原作为完成条件。
 - 线稿验证后才按“信息层级 → 交互 → 数据状态 → 动效与视觉”顺序迭代。
 
-当前 HTML 原型明确是 `PROTOTYPE — throwaway/read-only`，只用于共同阅览，不直接复制为生产 Flutter 代码。
+当前 HTML 线稿是设计评审与状态验收载体，不直接复制为生产 Flutter 代码。其核心变量必须与 [跨端设计合同](./cross-platform-design-contract.md) 和 Web dark theme 保持一致；页面结构与状态可以继续在原型中快速迭代。
 
 ## 12. V1 明确不做
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scopify_mobile/app/theme/app_tokens.dart';
-import 'package:scopify_mobile/components/shared/media_artwork.dart';
-import 'package:scopify_mobile/pages/playlist/playlist_fixture.dart';
+import 'package:scopify_mobile/components/shared/scopify_media_list_tile.dart';
+import 'package:scopify_mobile/pages/account/account_models.dart';
 
 class MySectionContent extends StatelessWidget {
   const MySectionContent({
@@ -11,9 +11,9 @@ class MySectionContent extends StatelessWidget {
     super.key,
   });
 
-  final List<PlaylistFixture> playlists;
+  final List<AccountPlaylist> playlists;
   final String kind;
-  final ValueChanged<PlaylistFixture> onOpen;
+  final ValueChanged<AccountPlaylist> onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -28,37 +28,15 @@ class MySectionContent extends StatelessWidget {
       separatorBuilder: (_, _) => const SizedBox(height: AppTokens.space12),
       itemBuilder: (context, index) {
         final playlist = playlists[index];
-        return InkWell(
-          borderRadius: AppTokens.radiusMedium,
+        return ScopifyMediaListTile(
+          title: playlist.name,
+          subtitle:
+              '$kind · ${playlist.trackCount} 首 · ${playlist.creatorName}',
+          artworkSeed: playlist.id,
           onTap: () => onOpen(playlist),
-          child: Row(
-            children: <Widget>[
-              SizedBox(
-                width: 64,
-                child: MediaArtwork(seed: playlist.artworkSeed),
-              ),
-              const SizedBox(width: AppTokens.space12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      playlist.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: AppTokens.space4),
-                    Text(
-                      '$kind · ${playlist.subtitle}',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(
-                Icons.chevron_right_rounded,
-                color: AppTokens.textTertiary,
-              ),
-            ],
+          trailing: const Icon(
+            Icons.chevron_right_rounded,
+            color: AppTokens.textTertiary,
           ),
         );
       },
