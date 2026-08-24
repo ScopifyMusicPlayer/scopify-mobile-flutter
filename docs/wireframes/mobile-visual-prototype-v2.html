@@ -1263,30 +1263,36 @@
     .quick-actions {
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 7px;
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      justify-content: space-between;
       margin: 0 4px 14px;
     }
 
     .quick-action {
-      display: grid;
-      place-items: center;
-      gap: 6px;
-      min-height: 61px;
-      border: 1px solid rgb(255 255 255 / 7%);
-      border-radius: var(--radius-lg);
+      display: inline-flex;
+      flex: 0 0 auto;
+      gap: 3px;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 9px;
+      border: 1px solid rgb(255 255 255 / 9%);
+      border-radius: 8px;
       color: var(--text-secondary);
-      background: rgb(255 255 255 / 6%);
-      backdrop-filter: blur(16px);
-      font-size: 10px;
-      font-weight: 700;
+      background: rgb(255 255 255 / 5%);
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgb(255 255 255 / 3%);
+      font-size: 9px;
+      font-weight: 650;
+      white-space: nowrap;
     }
 
     .quick-action .icon {
-      width: 19px;
-      height: 19px;
-      color: var(--text-primary);
+      width: 14px;
+      height: 14px;
+      color: rgb(255 255 255 / 76%);
     }
 
     .library-panel {
@@ -1515,11 +1521,122 @@
     }
 
     .playlist-tracks {
-      margin-top: 7px;
+      margin-top: 8px;
     }
 
     .playlist-tracks .track-row {
-      grid-template-columns: 16px 42px 1fr auto;
+      grid-template-columns: 18px 40px minmax(0, 1fr) 34px 28px;
+      gap: 9px;
+      min-height: 56px;
+      margin: 0 -4px;
+      padding: 8px 4px;
+      border-bottom: 1px solid rgb(255 255 255 / 6%);
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .playlist-tracks .track-row.current {
+      background: transparent;
+    }
+
+    .playlist-tracks .track-row:last-child {
+      border-bottom: 0;
+    }
+
+    .playlist-track-index {
+      display: grid;
+      place-items: center;
+      width: 18px;
+      color: var(--text-tertiary);
+      font-size: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .playlist-tracks .playlist-playing-indicator {
+      width: 14px;
+      height: 14px;
+      border-radius: 0;
+      object-fit: contain;
+    }
+
+    .playlist-tracks .playlist-track-cover {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+    }
+
+    .playlist-track-copy {
+      min-width: 0;
+    }
+
+    .playlist-track-copy strong {
+      display: block;
+      overflow: hidden;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 520;
+      line-height: 1.2;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .playlist-tracks .track-row.current .playlist-track-copy strong {
+      color: var(--brand);
+    }
+
+    .playlist-track-meta {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      min-width: 0;
+      margin-top: 4px;
+      color: var(--text-secondary);
+      font-size: 9.5px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .playlist-track-meta>span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-quality-badge {
+      flex: 0 0 auto;
+      height: 14px;
+      padding: 1px 4px 0;
+      border: 1px solid rgb(255 92 112 / 45%);
+      border-radius: 2px;
+      color: #ff7589;
+      background: rgb(255 92 112 / 10%);
+      font-size: 7px;
+      font-weight: 760;
+      line-height: 10px;
+      text-transform: uppercase;
+    }
+
+    .track-quality-badge.lossless {
+      border-color: rgb(235 188 92 / 45%);
+      color: #eac66f;
+      background: rgb(235 188 92 / 10%);
+    }
+
+    .playlist-track-duration {
+      color: var(--text-tertiary);
+      font-size: 9px;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .playlist-tracks .row-action {
+      width: 28px;
+      height: 28px;
+      color: var(--text-tertiary);
+    }
+
+    .playlist-tracks .row-action .icon {
+      width: 16px;
+      height: 16px;
     }
 
     .player-screen {
@@ -1557,53 +1674,98 @@
 
     .turntable {
       position: relative;
-      display: grid;
-      place-items: center;
-      height: 290px;
-      margin-top: 36px;
+      width: 292px;
+      height: 292px;
+      margin: 36px auto 0;
     }
 
-    .record-shadow {
+    .turntable-record,
+    .turntable-vinyl,
+    .turntable-tonearm {
       position: absolute;
-      width: 274px;
-      height: 274px;
-      border-radius: 50%;
-      background: rgb(0 0 0 / 42%);
-      filter: blur(18px);
-      transform: translateY(18px) scaleX(0.9);
+      inset: 0;
+      width: 100%;
+      height: 100%;
     }
 
-    .record {
-      position: relative;
+    .turntable-record {
+      z-index: 1;
+      animation: turntable-record-spin 8s linear infinite;
+      animation-play-state: paused;
+      transform-origin: 48% 50%;
+    }
+
+    .turntable-vinyl {
+      inset: auto;
+      top: 11px;
+      left: 48%;
+      width: 360px;
+      max-width: none;
+      height: 270px;
+      object-fit: contain;
+      filter: brightness(1.08) contrast(1.04);
+      transform: translateX(-50%);
+    }
+
+    .turntable-tonearm {
+      z-index: 3;
+      inset: 10px -8px auto auto;
+      width: 190px;
+      height: 190px;
+      opacity: 0.96;
+      filter: saturate(0.76) brightness(0.88) contrast(0.96) drop-shadow(0 8px 12px rgb(0 0 0 / 34%));
+      transform: rotate(-46deg);
+      transform-origin: 70.8% 22.7%;
+      transition: transform 760ms cubic-bezier(0.2, 0.76, 0.22, 1);
+    }
+
+    .turntable[data-playback-state="playing"] .turntable-record {
+      animation-play-state: running;
+    }
+
+    .turntable[data-playback-state="playing"] .turntable-tonearm {
+      transform: rotate(-20deg);
+    }
+
+    @keyframes turntable-record-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .turntable-record {
+        animation: none;
+      }
+
+      .turntable[data-playback-state="playing"] .turntable-tonearm {
+        transform: rotate(-20deg);
+        transition: none;
+      }
+    }
+
+    .turntable-label {
+      position: absolute;
+      top: 50%;
+      left: 48%;
       display: grid;
       place-items: center;
-      width: 280px;
-      height: 280px;
-      border: 1px solid rgb(255 255 255 / 7%);
-      border-radius: 50%;
-      background:
-        repeating-radial-gradient(circle, transparent 0 4px, rgb(255 255 255 / 3%) 5px 6px),
-        radial-gradient(circle, #161b1a 0 7%, #070908 8% 62%, #101312 63% 100%);
-      box-shadow: 0 24px 54px rgb(0 0 0 / 60%), inset 0 0 0 3px rgb(255 255 255 / 2%);
-    }
-
-    .record-label {
-      position: relative;
-      width: 148px;
-      height: 148px;
+      width: 78px;
+      height: 78px;
       overflow: hidden;
-      border: 5px solid #111513;
+      border: 4px solid #111513;
       border-radius: 50%;
-      box-shadow: 0 0 0 1px rgb(255 255 255 / 8%);
+      box-shadow: 0 10px 28px rgb(0 0 0 / 48%), 0 0 0 1px rgb(255 255 255 / 8%);
+      transform: translate(-50%, -50%);
     }
 
-    .record-label img {
+    .turntable-label img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .record-label::after {
+    .turntable-label::after {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -1614,43 +1776,6 @@
       background: #d6d8d7;
       content: "";
       transform: translate(-50%, -50%);
-    }
-
-    .tonearm {
-      position: absolute;
-      top: 5px;
-      right: 24px;
-      z-index: 4;
-      width: 24px;
-      height: 160px;
-      transform: rotate(15deg);
-      transform-origin: 12px 12px;
-      pointer-events: none;
-    }
-
-    .tonearm::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 24px;
-      height: 24px;
-      border: 3px solid #1a1e1c;
-      border-radius: 50%;
-      background: radial-gradient(circle, #adb5b2 0 40%, #5b625f 100%);
-      box-shadow: 0 4px 12px rgb(0 0 0 / 70%);
-      content: "";
-    }
-
-    .tonearm::after {
-      position: absolute;
-      top: 20px;
-      left: 9px;
-      width: 5px;
-      height: 136px;
-      border-radius: 3px;
-      background: linear-gradient(90deg, #474d4a, #c2c8c5 45%, #424845);
-      box-shadow: -2px 3px 8px rgb(0 0 0 / 50%);
-      content: "";
     }
 
     .player-track-heading {
@@ -1688,6 +1813,7 @@
     }
 
     .progress-track {
+      --progress-position: 58.5%;
       position: relative;
       height: 3px;
       margin-top: 18px;
@@ -1697,17 +1823,35 @@
 
     .progress-track::before {
       position: absolute;
+      z-index: 1;
       inset: 0 auto 0 0;
-      width: 38%;
+      width: var(--progress-position);
       border-radius: inherit;
       background: var(--text-primary);
       content: "";
     }
 
+    .progress-track .chorus-range {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: var(--range-start);
+      width: calc(var(--range-end) - var(--range-start));
+      height: 8px;
+      border-radius: var(--radius-pill);
+      background: var(--brand);
+      box-shadow: 0 0 8px var(--brand);
+      filter: blur(2px);
+      opacity: 0.3;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+
     .progress-track::after {
       position: absolute;
+      z-index: 3;
       top: 50%;
-      left: 38%;
+      left: var(--progress-position);
       width: 8px;
       height: 8px;
       border-radius: 50%;
@@ -1777,10 +1921,13 @@
       place-items: center;
       width: 56px;
       height: 56px;
+      padding: 0;
+      border: 0;
       border-radius: 50%;
       color: #000;
       background: var(--text-primary);
       box-shadow: 0 10px 28px rgb(0 0 0 / 30%);
+      cursor: pointer;
     }
 
     .main-control .icon {
@@ -3228,7 +3375,7 @@
     .vip-sign-screen {
       isolation: isolate;
       overflow: hidden;
-      background: #687871;
+      background: #a9bac5;
     }
 
     .vip-sign-screen::before {
@@ -3236,8 +3383,8 @@
       z-index: -2;
       inset: -36px;
       background: url("assets/v2/cover-weightless.jpg") center / cover;
-      filter: blur(28px) saturate(0.72) brightness(0.7);
-      transform: scale(1.16);
+      filter: blur(36px) saturate(0.62) brightness(1.05);
+      transform: scale(1.22);
       content: "";
     }
 
@@ -3246,8 +3393,8 @@
       z-index: -1;
       inset: 0;
       background:
-        linear-gradient(180deg, rgb(135 156 166 / 74%), rgb(72 82 79 / 58%) 55%, rgb(31 34 33 / 78%)),
-        rgb(33 43 40 / 32%);
+        linear-gradient(180deg, rgb(163 184 199 / 78%), rgb(197 197 184 / 58%) 48%, rgb(143 157 148 / 76%)),
+        rgb(152 174 184 / 38%);
       content: "";
     }
 
@@ -3257,34 +3404,52 @@
       background: transparent;
     }
 
+    .vip-sign-screen .status-bar {
+      top: -1px;
+      height: 34px;
+      padding-top: 5px;
+      background: linear-gradient(180deg, rgb(111 130 122 / 92%), rgb(111 130 122 / 58%), transparent);
+      backdrop-filter: blur(12px);
+    }
+
     .vip-sign-content {
       position: absolute;
-      inset: 92px 16px 26px;
+      inset: 94px 14px 24px;
     }
 
     .vip-sign-kicker {
-      color: rgb(255 255 255 / 72%);
-      font-size: 12px;
-      font-weight: 760;
-      letter-spacing: 0.08em;
+      color: rgb(255 255 255 / 86%);
+      font-family: "STKaiti", "Kaiti SC", "KaiTi", "FZKai-Z03", cursive;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-align: center;
     }
 
     .vip-sign-ticket-large {
-      margin-top: 16px;
-      padding: 12px 12px 15px;
+      --vip-tear-y: 450.5px;
+      margin-top: 14px;
+      padding: 12px 12px 14px;
       overflow: hidden;
-      border: 1px solid rgb(255 255 255 / 42%);
+      border: 0;
       border-radius: 24px;
       color: #202832;
-      background: rgb(240 244 247 / 93%);
-      box-shadow: 0 24px 70px rgb(6 14 12 / 34%);
-      backdrop-filter: blur(18px);
+      background: rgb(239 244 248 / 96%);
+      box-shadow: 0 28px 76px rgb(31 49 52 / 26%);
+      backdrop-filter: blur(22px);
+      -webkit-mask:
+        radial-gradient(circle 7px at 0 var(--vip-tear-y), transparent 6.75px, #000 7.25px),
+        radial-gradient(circle 7px at 100% var(--vip-tear-y), transparent 6.75px, #000 7.25px);
+      -webkit-mask-composite: source-in;
+      mask:
+        radial-gradient(circle 7px at 0 var(--vip-tear-y), transparent 6.75px, #000 7.25px),
+        radial-gradient(circle 7px at 100% var(--vip-tear-y), transparent 6.75px, #000 7.25px);
+      mask-composite: intersect;
     }
 
     .vip-sign-cover-large {
       position: relative;
-      aspect-ratio: 1.2;
+      height: 318px;
       overflow: hidden;
       border-radius: 18px;
       background: #24312c;
@@ -3292,8 +3457,8 @@
 
     .vip-sign-cover-large::after {
       position: absolute;
-      inset: 40% 0 0;
-      background: linear-gradient(180deg, transparent, rgb(7 10 9 / 86%));
+      inset: 48% 0 0;
+      background: linear-gradient(180deg, transparent, rgb(7 10 9 / 88%));
       content: "";
     }
 
@@ -3306,15 +3471,15 @@
     .vip-sign-song-copy {
       position: absolute;
       z-index: 2;
-      right: 62px;
-      bottom: 16px;
+      right: 106px;
+      bottom: 20px;
       left: 17px;
       color: white;
     }
 
     .vip-sign-song-copy strong {
       display: block;
-      font-size: 21px;
+      font-size: 22px;
       font-weight: 920;
       letter-spacing: -0.04em;
     }
@@ -3330,60 +3495,60 @@
     .vip-sign-like {
       position: absolute;
       z-index: 3;
-      bottom: 14px;
+      bottom: 20px;
       display: grid;
       place-items: center;
-      width: 40px;
-      height: 40px;
+      width: 34px;
+      height: 34px;
       border: 0;
-      border-radius: 50%;
-      color: #000;
-      background: var(--brand);
-      box-shadow: var(--shadow-brand);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
     .vip-sign-play {
-      right: 14px;
+      right: 16px;
+      color: white;
     }
 
     .vip-sign-like {
-      right: 62px;
+      right: 60px;
       color: var(--brand);
-      background: rgb(8 11 10 / 66%);
-      box-shadow: 0 8px 22px rgb(0 0 0 / 24%);
-      backdrop-filter: blur(10px);
     }
 
-    .vip-sign-play .icon,
-    .vip-sign-like .icon {
-      width: 17px;
-      height: 17px;
-    }
-
-    .vip-sign-like .icon {
+    .vip-sign-play .icon {
+      width: 30px;
+      height: 30px;
       fill: currentColor;
-      stroke: currentColor;
+      stroke: none;
+    }
+
+    .vip-sign-like .icon {
+      width: 29px;
+      height: 29px;
+      fill: currentColor;
+      stroke: none;
     }
 
     .vip-sign-message {
       display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 16px;
+      grid-template-columns: 82px 1fr;
+      gap: 14px;
       align-items: center;
-      min-height: 122px;
-      padding: 17px 5px 11px;
+      min-height: 118px;
+      padding: 14px 5px 9px;
     }
 
     .vip-sign-date-large {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: baseline;
-      padding-right: 14px;
+      padding-right: 13px;
       border-right: 1px solid rgb(32 40 50 / 13%);
     }
 
     .vip-sign-date-large strong {
-      font-size: 31px;
+      font-size: 28px;
       font-weight: 820;
       letter-spacing: -0.06em;
       line-height: 1.12;
@@ -3396,52 +3561,72 @@
 
     .vip-sign-date-large i {
       grid-column: 1 / -1;
-      height: 14px;
-      padding-left: 22px;
+      height: 16px;
+      padding-left: 26px;
       color: rgb(32 40 50 / 46%);
       font-size: 17px;
       font-style: normal;
       line-height: 0.8;
     }
 
+    .vip-letter-salutation {
+      display: block;
+      margin-bottom: 5px;
+      color: rgb(32 40 50 / 58%);
+      font-family: "STKaiti", "Kaiti SC", "KaiTi", "FZKai-Z03", cursive;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+    }
+
     .vip-sign-quote strong {
       display: block;
-      font-size: 14px;
-      font-weight: 850;
-      line-height: 1.5;
+      font-family: "STKaiti", "Kaiti SC", "KaiTi", "FZKai-Z03", cursive;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.035em;
+      line-height: 1.55;
     }
 
     .vip-sign-quote small {
       display: block;
-      margin-top: 9px;
+      margin-top: 6px;
       color: rgb(32 40 50 / 48%);
-      font-size: 8px;
+      font-family: "STKaiti", "Kaiti SC", "KaiTi", "FZKai-Z03", cursive;
+      font-size: 9px;
+      letter-spacing: 0.06em;
       text-align: right;
     }
 
     .vip-sign-tear {
+      position: relative;
       height: 5px;
-      margin: 0 -12px 12px;
+      margin: 0 -12px 10px;
+    }
+
+    .vip-sign-tear span {
+      position: absolute;
+      inset: 0 24px;
       background: radial-gradient(circle, rgb(32 40 50 / 32%) 2px, transparent 2.5px) center / 12px 5px repeat-x;
     }
 
     .vip-sign-summary {
       display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
       align-items: center;
+      min-height: 68px;
       padding: 0 4px;
     }
 
     .vip-sign-total {
-      padding-right: 14px;
+      padding-right: 8px;
       border-right: 1px solid rgb(32 40 50 / 10%);
       text-align: center;
     }
 
     .vip-sign-total strong {
       display: block;
-      font-size: 26px;
+      font-size: 30px;
       font-weight: 900;
       line-height: 1;
     }
@@ -3459,35 +3644,42 @@
       font-size: 8px;
     }
 
-    .vip-sign-ticket-large .vip-qr-guide {
-      max-width: none;
-    }
-
-    .vip-sign-ticket-large .vip-qr-guide span {
-      color: rgb(32 40 50 / 58%);
+    .vip-sign-streak {
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+      color: rgb(32 40 50 / 55%);
       font-size: 8px;
+      text-align: center;
     }
 
-    .vip-sign-ticket-large .vip-qr-guide img {
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgb(32 40 50 / 10%);
+    .vip-sign-streak strong {
+      color: #202832;
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .vip-sign-streak strong small {
+      margin-left: 3px;
+      font-size: 10px;
+      font-weight: 700;
     }
 
     .vip-sign-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
     .vip-sign-actions button {
-      min-height: 48px;
+      min-height: 40px;
       padding: 0 12px;
-      border: 1px solid rgb(255 255 255 / 46%);
+      border: 0;
       border-radius: var(--radius-pill);
       color: #202832;
-      background: rgb(248 250 252 / 92%);
+      background: rgb(250 251 252 / 94%);
       box-shadow: 0 12px 30px rgb(6 14 12 / 18%);
       font-size: 11px;
       font-weight: 850;
@@ -5377,6 +5569,605 @@
         transition-duration: 0.01ms !important;
       }
     }
+    /* Batch 3: contextual actions, recent playback and user profiles. */
+    html[data-gallery-filter="review-three"] .boards {
+      grid-template-columns: repeat(3, minmax(360px, 1fr));
+      column-gap: 20px;
+    }
+
+    .batch3-modal-context {
+      background:
+        linear-gradient(180deg, rgb(8 28 22 / 25%), rgb(0 0 0 / 88%)),
+        url("assets/v2/cover-weightless.jpg") center 24% / cover;
+    }
+
+    .batch3-modal-context::before {
+      inset: 0;
+      height: auto;
+      border-radius: 0;
+      background: rgb(0 0 0 / 54%);
+      opacity: 1;
+      backdrop-filter: blur(8px);
+    }
+
+    .context-song {
+      position: absolute;
+      top: 96px;
+      right: 24px;
+      left: 24px;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 13px;
+      align-items: center;
+      color: rgb(255 255 255 / 72%);
+    }
+
+    .context-song img {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+      opacity: 0.76;
+    }
+
+    .context-song strong,
+    .context-song small {
+      display: block;
+    }
+
+    .context-song strong {
+      font-size: 15px;
+    }
+
+    .context-song small {
+      margin-top: 5px;
+      color: rgb(255 255 255 / 45%);
+      font-size: 10px;
+    }
+
+    .guest-gate-sheet {
+      min-height: 344px;
+      padding: 10px 20px 30px;
+      background: #181818;
+    }
+
+    .gate-symbol {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      margin: 8px 0 16px;
+      border-radius: 16px;
+      color: #000;
+      background: var(--brand);
+      box-shadow: var(--shadow-brand);
+    }
+
+    .gate-symbol .icon {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.4;
+    }
+
+    .gate-copy h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+    }
+
+    .gate-copy p {
+      max-width: 280px;
+      margin: 8px 0 0;
+      color: var(--text-secondary);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .gate-context-note {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      margin-top: 16px;
+      color: var(--text-tertiary);
+      font-size: 9px;
+    }
+
+    .gate-context-note .icon {
+      width: 14px;
+      height: 14px;
+      color: var(--brand);
+    }
+
+    .sheet-action-stack {
+      display: grid;
+      gap: 7px;
+      margin-top: 20px;
+    }
+
+    .sheet-action-stack button {
+      width: 100%;
+      min-height: 44px;
+    }
+
+    .text-action {
+      border: 0;
+      color: var(--text-secondary);
+      background: transparent;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .create-sheet {
+      min-height: 470px;
+      padding: 10px 20px 28px;
+    }
+
+    .create-sheet .modal-header {
+      margin-bottom: 22px;
+    }
+
+    .create-cover-row {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 14px;
+      align-items: end;
+    }
+
+    .playlist-cover-draft {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 86px;
+      height: 86px;
+      overflow: hidden;
+      border-radius: 12px;
+      color: rgb(255 255 255 / 78%);
+      background:
+        linear-gradient(145deg, rgb(30 215 96 / 34%), transparent 58%),
+        #343434;
+    }
+
+    .playlist-cover-draft .icon {
+      width: 25px;
+      height: 25px;
+    }
+
+    .playlist-cover-draft small {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 7px;
+      color: rgb(255 255 255 / 62%);
+      background: linear-gradient(transparent, rgb(0 0 0 / 76%));
+      font-size: 8px;
+      text-align: center;
+    }
+
+    .compact-form-field {
+      min-width: 0;
+    }
+
+    .compact-form-field>span,
+    .privacy-heading {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--text-secondary);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .compact-form-field .setting-input {
+      min-height: 46px;
+      padding: 13px 0 9px;
+      border: 0;
+      border-bottom: 1px solid rgb(255 255 255 / 22%);
+      border-radius: 0;
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    .field-counter {
+      display: block;
+      margin-top: 5px;
+      color: var(--text-tertiary);
+      font-size: 8px;
+      text-align: right;
+    }
+
+    .privacy-block {
+      margin-top: 22px;
+    }
+
+    .privacy-segment {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+      padding: 4px;
+      border-radius: 12px;
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .privacy-option {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      align-items: center;
+      min-height: 42px;
+      border-radius: 9px;
+      color: var(--text-tertiary);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .privacy-option .icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .privacy-option.active {
+      color: var(--text-primary);
+      background: #2a2a2a;
+      box-shadow: 0 4px 14px rgb(0 0 0 / 22%);
+    }
+
+    .create-sheet>.primary-pill {
+      width: 100%;
+      min-height: 44px;
+      margin-top: 24px;
+    }
+
+    .recent-v3 {
+      background: var(--surface-base);
+    }
+
+    .recent-v3-scroll {
+      position: absolute;
+      inset: 72px 0 0;
+      overflow: hidden;
+      padding: 6px 16px 18px;
+    }
+
+    .recent-v3 .search-in-list {
+      margin-bottom: 2px;
+    }
+
+    .recent-playlist-tracks {
+      margin-top: 6px;
+    }
+
+    .profile-v3 {
+      background: var(--surface-base);
+    }
+
+    .profile-v3::before {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 360px;
+      background: url("assets/v2/avatar-profile.jpg") center 30% / cover;
+      filter: saturate(0.68) brightness(0.64);
+      content: "";
+    }
+
+    .profile-v3.other-profile::before {
+      background-image: url("assets/v2/cover-podcast.jpg");
+      background-position: center;
+    }
+
+    .profile-v3::after {
+      right: 0;
+      bottom: auto;
+      left: 0;
+      z-index: 1;
+      height: 362px;
+      border-radius: 0;
+      background: linear-gradient(180deg, rgb(0 0 0 / 14%), rgb(18 18 18 / 28%) 42%, var(--surface-base) 96%);
+    }
+
+    .profile-v3>.status-bar,
+    .profile-v3>.app-bar,
+    .profile-v3>.profile-v3-scroll,
+    .profile-v3>.shell-layer {
+      z-index: 3;
+    }
+
+    .profile-v3-scroll {
+      position: absolute;
+      inset: 81px 0 121px;
+      overflow: hidden;
+      padding: 8px 16px 20px;
+    }
+
+    .profile-v3-hero {
+      display: grid;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .profile-v3-avatar {
+      width: 92px;
+      height: 92px;
+      padding: 3px;
+      border: 1px solid rgb(255 255 255 / 32%);
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 12px 30px rgb(0 0 0 / 46%);
+    }
+
+    .profile-v3-hero h1 {
+      margin: 11px 0 0;
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+    }
+
+    .profile-identity {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px 9px;
+      margin-top: 6px;
+      color: rgb(255 255 255 / 68%);
+      font-size: 8px;
+    }
+
+    .profile-signature {
+      max-width: 270px;
+      margin: 7px 0 0;
+      color: rgb(255 255 255 / 78%);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .profile-v3-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 248px;
+      margin-top: 12px;
+    }
+
+    .profile-v3-stats span {
+      display: grid;
+      gap: 3px;
+      color: rgb(255 255 255 / 55%);
+      font-size: 8px;
+    }
+
+    .profile-v3-stats span+span {
+      border-left: 1px solid rgb(255 255 255 / 14%);
+    }
+
+    .profile-v3-stats strong {
+      color: var(--text-primary);
+      font-size: 13px;
+    }
+
+    .profile-v3-content {
+      margin: 16px -16px 0;
+      min-height: 244px;
+      padding: 16px 16px 22px;
+      border-radius: 24px 24px 0 0;
+      background: var(--surface-base);
+      box-shadow: 0 -14px 34px rgb(0 0 0 / 18%);
+    }
+
+    .profile-section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .profile-section-heading h2 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .profile-section-heading span {
+      color: var(--text-tertiary);
+      font-size: 8px;
+    }
+
+    .profile-section-heading.profile-section-spaced {
+      margin-top: 13px;
+    }
+
+    .profile-recent-tracks {
+      margin-top: 0;
+    }
+
+    .profile-playlist-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .profile-playlist-tile {
+      min-width: 0;
+    }
+
+    .profile-playlist-tile img {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 9px;
+      object-fit: cover;
+      box-shadow: 0 10px 24px rgb(0 0 0 / 22%);
+    }
+
+    .profile-playlist-tile strong,
+    .profile-playlist-tile small {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .profile-playlist-tile strong {
+      margin-top: 7px;
+      color: var(--text-primary);
+      font-size: 10px;
+      font-weight: 780;
+    }
+
+    .profile-playlist-tile small {
+      margin-top: 3px;
+      color: var(--text-tertiary);
+      font-size: 8px;
+    }
+
+    .profile-edit-v3 {
+      background:
+        radial-gradient(circle at 50% 0, rgb(30 215 96 / 10%), transparent 25%),
+        var(--surface-base);
+    }
+
+    .profile-edit-v3 .app-bar {
+      grid-template-columns: 40px minmax(0, 1fr) 62px;
+    }
+
+    .profile-edit-v3 .save-profile-button {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: var(--radius-pill);
+      color: #000;
+      background: var(--brand);
+      box-shadow: 0 6px 18px rgb(30 215 96 / 18%);
+      font-size: 9px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .profile-edit-v3 .save-profile-button .icon {
+      width: 13px;
+      height: 13px;
+    }
+
+    .edit-profile-body {
+      position: absolute;
+      inset: 81px 0 0;
+      padding: 18px 20px 28px;
+      overflow: hidden;
+    }
+
+    .edit-avatar-block {
+      display: grid;
+      justify-items: center;
+      margin-bottom: 24px;
+    }
+
+    .edit-avatar-wrap {
+      position: relative;
+    }
+
+    .edit-avatar-wrap img {
+      width: 98px;
+      height: 98px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: var(--shadow-floating);
+    }
+
+    .edit-avatar-button {
+      position: absolute;
+      right: -2px;
+      bottom: 1px;
+      display: grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      border: 2px solid rgb(255 255 255 / 30%);
+      border-radius: 50%;
+      color: var(--text-primary);
+      background: rgb(18 18 18 / 88%);
+      box-shadow: 0 6px 18px rgb(0 0 0 / 32%);
+    }
+
+    .edit-avatar-button .icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .edit-avatar-block span {
+      margin-top: 9px;
+      color: var(--text-secondary);
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .edit-form-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      align-items: start;
+      min-height: 62px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgb(255 255 255 / 8%);
+    }
+
+    .edit-form-row>span {
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .edit-form-value {
+      color: var(--text-primary);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .edit-form-value small {
+      display: block;
+      margin-top: 6px;
+      color: var(--text-tertiary);
+      font-size: 8px;
+      text-align: right;
+    }
+
+    .gender-options {
+      display: flex;
+      justify-self: start;
+      gap: 0;
+      width: fit-content;
+      padding: 3px;
+      border: 1px solid rgb(255 255 255 / 7%);
+      border-radius: var(--radius-pill);
+      background: var(--surface-soft);
+    }
+
+    .gender-options span {
+      min-width: 44px;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      color: var(--text-tertiary);
+      background: transparent;
+      font-size: 9px;
+      text-align: center;
+    }
+
+    .gender-options span.active {
+      color: var(--text-primary);
+      background: rgb(255 255 255 / 14%);
+      box-shadow: 0 3px 10px rgb(0 0 0 / 22%);
+      font-weight: 800;
+    }
+
+    .edit-note {
+      margin: 14px 0 0;
+      color: var(--text-tertiary);
+      font-size: 8px;
+      line-height: 1.55;
+    }
   </style>
 </head>
 
@@ -5625,7 +6416,7 @@
       </div>
       <nav class="filters" aria-label="页面筛选">
         <button class="filter-button" type="button" data-filter="all" aria-pressed="true">全部画面</button>
-        <button class="filter-button" type="button" data-filter="review-two">第二批 6 张</button>
+        <button class="filter-button" type="button" data-filter="review-three">第三批 6 张</button>
         <button class="filter-button" type="button" data-filter="time-themes">时间主题</button>
         <button class="filter-button" type="button" data-filter="home">首页</button>
         <button class="filter-button" type="button" data-filter="search">搜索</button>
@@ -5881,20 +6672,18 @@
                   <use href="#i-search"></use>
                 </svg><span>在歌单中搜索</span></div>
               <section class="playlist-tracks">
-                <div class="track-row current"><span class="track-index">1</span><img
-                    src="assets/v2/cover-weightless.jpg" alt="" /><span
-                    class="media-copy"><strong>失重拥抱</strong><small>Bbcsr · 失重拥抱</small></span><span
-                    class="row-action"><svg class="icon">
+                <div class="track-row current"><span class="playlist-track-index"><img class="playlist-playing-indicator" src="assets/v2/web-eq-playing.svg" alt="正在播放" /></span><img
+                    class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><span
+                    class="playlist-track-copy"><strong>失重拥抱</strong><span class="playlist-track-meta"><span class="track-quality-badge">Hi-Res</span><span>Bbcsr · 失重拥抱</span></span></span><time class="playlist-track-duration">02:56</time><span
+                    class="row-action" aria-label="失重拥抱的更多操作"><svg class="icon">
                       <use href="#i-more"></use>
                     </svg></span></div>
-                <div class="track-row"><span class="track-index">2</span><img src="assets/v2/cover-vinyl.jpg"
-                    alt="" /><span class="media-copy"><strong>From The Start</strong><small>Laufey ·
-                      Bewitched</small></span><span class="row-action"><svg class="icon">
+                <div class="track-row"><span class="playlist-track-index">2</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg"
+                    alt="From The Start 封面" /><span class="playlist-track-copy"><strong>From The Start</strong><span class="playlist-track-meta"><span class="track-quality-badge lossless">Lossless</span><span>Laufey · Bewitched</span></span></span><time class="playlist-track-duration">02:49</time><span class="row-action" aria-label="From The Start 的更多操作"><svg class="icon">
                       <use href="#i-more"></use>
                     </svg></span></div>
-                <div class="track-row"><span class="track-index">3</span><img src="assets/v2/cover-podcast.jpg"
-                    alt="" /><span class="media-copy"><strong>Moon River</strong><small>Frank Ocean ·
-                      Single</small></span><span class="row-action"><svg class="icon">
+                <div class="track-row"><span class="playlist-track-index">3</span><img class="playlist-track-cover" src="assets/v2/cover-podcast.jpg"
+                    alt="Moon River 封面" /><span class="playlist-track-copy"><strong>Moon River</strong><span class="playlist-track-meta"><span>Frank Ocean · Single</span></span></span><time class="playlist-track-duration">03:58</time><span class="row-action" aria-label="Moon River 的更多操作"><svg class="icon">
                       <use href="#i-more"></use>
                     </svg></span></div>
               </section>
@@ -5924,8 +6713,7 @@
       </figure>
 
       <figure class="screen-board" data-screen="player-disc" data-groups="player immersive">
-        <figcaption class="screen-caption"><strong>PLAYER-01A · 完整播放页 / CD 中心</strong><span>沉浸背景与唱片是唯一主视觉；白色中央播放和绿色状态遵循
-            Web 播放控制语义。</span></figcaption>
+        <figcaption class="screen-caption"><strong>PLAYER-01A · 完整播放页 / 唱机中心</strong><span>移除唱机外框，真实黑胶与透明磁臂独立分层；播放时旋转落针，暂停时抬臂回到右侧停放位。</span></figcaption>
         <div class="device">
           <section class="screen player-screen">
             <div class="player-background"></div>
@@ -5941,11 +6729,9 @@
                 </svg></button>
             </div>
             <div class="player-content">
-              <section class="turntable" aria-label="唱片中心模式">
-                <span class="record-shadow"></span>
-                <span class="record"><span class="record-label"><img src="assets/v2/cover-weightless.jpg"
-                      alt="失重拥抱封面" /></span></span>
-                <span class="tonearm"></span>
+              <section class="turntable" data-playback-state="playing" aria-label="唱片中心模式，正在播放">
+                <span class="turntable-record"><img class="turntable-vinyl" src="assets/v2/vinyl-record-public-domain.png" alt="旋转中的黑胶唱片" /><span class="turntable-label"><img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /></span></span>
+                <img class="turntable-tonearm" src="assets/v2/turntable-tonearm-topdown-v2.png" alt="正俯视的真实磁臂，当前已落针" />
               </section>
               <div class="player-track-heading">
                 <div>
@@ -5955,7 +6741,7 @@
                     <use href="#i-heart"></use>
                   </svg></span>
               </div>
-              <div class="progress-track"></div>
+              <div class="progress-track" aria-label="播放进度，包含两段副歌区间"><span class="chorus-range" style="--range-start: 27%; --range-end: 40%" aria-hidden="true"></span><span class="chorus-range" style="--range-start: 60%; --range-end: 73%" aria-hidden="true"></span></div>
               <div class="time-row"><span>01:43</span><span class="quality-badge">HI-RES</span><span>02:56</span></div>
               <div class="player-controls">
                 <span class="control active"><svg class="icon">
@@ -5964,9 +6750,9 @@
                 <span class="control"><svg class="icon">
                     <use href="#i-skip-back"></use>
                   </svg></span>
-                <span class="control"><span class="main-control"><svg class="icon">
+                <span class="control"><button class="main-control" type="button" data-player-toggle aria-label="暂停"><svg class="icon">
                       <use href="#i-pause"></use>
-                    </svg></span></span>
+                    </svg></button></span>
                 <span class="control"><svg class="icon">
                     <use href="#i-skip-forward"></use>
                   </svg></span>
@@ -6708,12 +7494,12 @@
             <div class="status-bar"><span>20:08</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
             <div class="app-bar"><span></span><div class="app-bar-center"><strong>网易乐签</strong></div><button class="icon-button subtle" aria-label="关闭"><svg class="icon"><use href="#i-x"></use></svg></button></div>
             <div class="vip-sign-content">
-              <div class="vip-sign-kicker"># 今日为你推荐 #</div>
+              <div class="vip-sign-kicker"># 去年今日我在听 #</div>
               <article class="vip-sign-ticket-large">
                 <div class="vip-sign-cover-large"><img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><div class="vip-sign-song-copy"><strong>失重拥抱</strong><span>Bbcsr · 循环边界</span></div><button class="vip-sign-like" aria-label="喜欢"><svg class="icon"><use href="#i-heart-filled"></use></svg></button><button class="vip-sign-play" aria-label="播放"><svg class="icon"><use href="#i-play"></use></svg></button></div>
-                <div class="vip-sign-message"><div class="vip-sign-date-large"><strong>08</strong><span>月</span><i>/</i><strong>23</strong><span>日</span></div><div class="vip-sign-quote"><strong>愿今天听见的旋律，替你收好那些没说出口的情绪。</strong><small>— 来自今日乐签</small></div></div>
-                <div class="vip-sign-tear"></div>
-                <div class="vip-sign-summary"><div class="vip-sign-total"><strong>12<small>天</small></strong><span>本月累计 · 连签 4 天</span></div><div class="vip-qr-guide"><span>打开网易云音乐<br />扫码查看乐签</span><img src="assets/v2/qr-login.svg" alt="网易云音乐二维码" /></div></div>
+                <div class="vip-sign-message"><div class="vip-sign-date-large"><strong>08</strong><span>月</span><i>/</i><strong>24</strong><span>日</span></div><div class="vip-sign-quote"><span class="vip-letter-salutation">给今天的你：</span><strong>你往细节看一眼，爱与不爱都太明显。</strong><small>—— 来自去年的这一刻</small></div></div>
+                <div class="vip-sign-tear"><span aria-hidden="true"></span></div>
+                <div class="vip-sign-summary"><div class="vip-sign-total"><strong>6<small>天</small></strong><span>本月累计打卡</span></div><div class="vip-sign-streak"><strong>4<small>天</small></strong><span>连续签到</span></div></div>
               </article>
               <div class="vip-sign-actions"><button>保存 / 定制乐签</button><button>去分享</button></div>
             </div>
@@ -6804,60 +7590,78 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="guest-action-gate" data-groups="auth modal states">
-        <figcaption class="screen-caption"><strong>AUTH · 游客操作门</strong><span>收藏、关注和创建歌单共用轻量登录拦截，不丢失当前上下文。</span>
+      <figure class="screen-board" data-screen="guest-action-gate" data-groups="auth modal states review-three">
+        <figcaption class="screen-caption"><strong>AUTH-03 · 游客操作门</strong><span>保留歌曲上下文，只解释一次原因；主动作统一使用“登录”。</span>
         </figcaption>
         <div class="device">
-          <section class="screen modal-context">
-            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span></div>
-            <div class="bottom-sheet"><span class="sheet-handle"></span>
-              <div class="modal-header">
-                <div><small>SIGN IN REQUIRED</small>
-                  <h1>登录后收藏这首歌</h1>
-                </div><button class="modal-close"><svg class="icon">
+          <section class="screen modal-context batch3-modal-context">
+            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span><span class="system-icons"><i
+                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="context-song"><img src="assets/v2/cover-weightless.jpg" alt="" />
+              <span><strong>失重拥抱</strong><small>Bbcsr · 正在播放</small></span>
+            </div>
+            <div class="bottom-sheet guest-gate-sheet"><span class="sheet-handle"></span>
+              <div class="modal-header"><span class="gate-symbol"><svg class="icon">
+                    <use href="#i-heart"></use>
+                  </svg></span><button class="modal-close"><svg class="icon">
                     <use href="#i-x"></use>
-                  </svg></button>
+                  </svg></button></div>
+              <div class="gate-copy">
+                <h1>登录后收藏</h1>
+                <p>把喜欢的音乐同步到你的账号，并在所有设备继续收听。</p>
               </div>
-              <p class="page-subtitle">登录完成后会返回当前歌曲，并继续刚才的收藏操作。</p>
-              <div class="button-row"><button class="secondary-pill">暂不登录</button><button
-                  class="primary-pill">扫码登录</button></div>
+              <div class="gate-context-note"><svg class="icon">
+                  <use href="#i-check"></use>
+                </svg><span>登录完成后回到这里，不会打断当前播放</span></div>
+              <div class="sheet-action-stack"><button class="primary-pill">登录</button><button
+                  class="text-action">暂不登录</button></div>
             </div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="create-playlist" data-groups="catalog modal">
-        <figcaption class="screen-caption"><strong>PLAYLIST · 创建歌单</strong><span>名称、隐私和提交动作收敛成一个移动端表单面板。</span>
+      <figure class="screen-board" data-screen="create-playlist" data-groups="catalog modal review-three">
+        <figcaption class="screen-caption"><strong>PLAYLIST-02 · 创建歌单</strong><span>底部表单只保留名称与隐私，封面作为轻量视觉锚点。</span>
         </figcaption>
         <div class="device">
-          <section class="screen modal-context">
-            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span></div>
-            <div class="bottom-sheet"><span class="sheet-handle"></span>
+          <section class="screen modal-context batch3-modal-context">
+            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span><span class="system-icons"><i
+                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="bottom-sheet create-sheet"><span class="sheet-handle"></span>
               <div class="modal-header">
-                <div><small>NEW COLLECTION</small>
+                <div><small>NEW PLAYLIST</small>
                   <h1>创建歌单</h1>
                 </div><button class="modal-close"><svg class="icon">
                     <use href="#i-x"></use>
                   </svg></button>
-              </div><label class="setting-field"><span>歌单名称</span>
-                <div class="setting-input">周末循环</div><small>2 / 40</small>
-              </label>
-              <div class="choice-list">
-                <div class="choice-row active"><span>公开歌单</span><svg class="icon">
-                    <use href="#i-check"></use>
-                  </svg></div>
-                <div class="choice-row"><span>私密歌单</span></div>
-              </div><button class="primary-pill">创建</button>
+              </div>
+              <div class="create-cover-row">
+                <div class="playlist-cover-draft"><svg class="icon">
+                    <use href="#i-plus"></use>
+                  </svg><small>选择封面</small></div>
+                <label class="compact-form-field"><span>歌单名称</span>
+                  <div class="setting-input">周末循环</div><small class="field-counter">4 / 40</small>
+                </label>
+              </div>
+              <div class="privacy-block"><span class="privacy-heading">谁可以看到</span>
+                <div class="privacy-segment"><span class="privacy-option active"><svg class="icon">
+                      <use href="#i-globe"></use>
+                    </svg>公开</span><span class="privacy-option"><svg class="icon">
+                      <use href="#i-lock"></use>
+                    </svg>仅自己</span></div>
+              </div>
+              <button class="primary-pill">创建歌单</button>
             </div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="recent" data-groups="catalog shell">
-        <figcaption class="screen-caption"><strong>HISTORY-01 · 最近播放</strong><span>时间分组、内容类型和继续播放入口对齐 Web 内容列表。</span>
+      <figure class="screen-board" data-screen="recent" data-groups="catalog shell review-three">
+        <figcaption class="screen-caption"><strong>RECENT-01 · 最近播放</strong><span>完整复用歌单详情的封面 Hero 与曲目列表，以最近播放的第一首歌曲作为封面和背景提色来源。</span>
         </figcaption>
         <div class="device">
-          <section class="screen page-screen">
+          <section class="screen playlist-screen recent-v3">
+            <div class="playlist-hero-bg"></div>
             <div class="status-bar"><span>12:36</span><span class="camera-dot"></span><span class="system-icons"><i
                   class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
             <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
@@ -6868,127 +7672,151 @@
                   <use href="#i-more"></use>
                 </svg></button>
             </div>
-            <div class="page-scroll">
-              <h1 class="page-title">继续听</h1>
-              <p class="page-subtitle">保留最近 100 条本地与云端播放记录。</p>
-              <h2 class="section-title">今天</h2>
-              <article class="podcast-card"><img src="assets/v2/cover-weightless.jpg" alt="" />
-                <div><strong>失重拥抱</strong><span>Bbcsr</span><small>播放至 01:43</small></div><button
-                  class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
-              <article class="podcast-card"><img src="assets/v2/cover-podcast.jpg" alt="" />
-                <div><strong>凌晨两点的路灯</strong><span>城市夜航</span><small>播放至 18:20</small></div><button
-                  class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
-              <h2 class="section-title">昨天</h2>
-              <article class="podcast-card"><img src="assets/v2/cover-vinyl.jpg" alt="" />
-                <div><strong>循环边界</strong><span>Neon Harbor</span><small>已播完</small></div><button
-                  class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
+            <div class="content-scroll with-shell playlist-scroll recent-v3-scroll">
+              <header class="detail-hero">
+                <img class="detail-cover" src="assets/v2/cover-weightless.jpg" alt="最近播放第一首歌曲《失重拥抱》的封面" />
+                <h1>最近播放</h1>
+                <p class="detail-description">按最近播放顺序收纳听过的歌曲，继续播放时从最上方开始。</p>
+                <div class="creator-line"><img src="assets/v2/avatar-profile.jpg" alt="" /><strong>Momo</strong><span>·</span><span>仅自己</span></div>
+                <div class="meta-line">5 首歌曲 · 最近更新</div>
+              </header>
+              <div class="action-station">
+                <button class="play-button" aria-label="播放全部最近歌曲"><svg class="icon"><use href="#i-play"></use></svg></button>
+                <span class="secondary-action active" aria-label="随机播放"><svg class="icon"><use href="#i-shuffle"></use></svg></span>
+                <span class="secondary-action" aria-label="最近播放的更多操作"><svg class="icon"><use href="#i-more"></use></svg></span>
+              </div>
+              <div class="search-in-list"><svg class="icon"><use href="#i-search"></use></svg><span>搜索最近播放</span></div>
+              <section class="playlist-tracks recent-playlist-tracks" aria-label="最近播放歌曲列表">
+                <div class="track-row current"><span class="playlist-track-index"><img class="playlist-playing-indicator" src="assets/v2/web-eq-playing.svg" alt="正在播放" /></span><img class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><span class="playlist-track-copy"><strong>失重拥抱</strong><span class="playlist-track-meta"><span class="track-quality-badge">Hi-Res</span><span>Bbcsr · 失重拥抱</span></span></span><time class="playlist-track-duration">02:56</time><span class="row-action" aria-label="失重拥抱的更多操作"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">2</span><img class="playlist-track-cover" src="assets/v2/cover-podcast.jpg" alt="凌晨两点的路灯封面" /><span class="playlist-track-copy"><strong>凌晨两点的路灯</strong><span class="playlist-track-meta"><span class="track-quality-badge lossless">Lossless</span><span>城市夜航 · 单曲</span></span></span><time class="playlist-track-duration">04:29</time><span class="row-action" aria-label="凌晨两点的路灯的更多操作"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">3</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="Dissolve 封面" /><span class="playlist-track-copy"><strong>Dissolve</strong><span class="playlist-track-meta"><span class="track-quality-badge">Hi-Res</span><span>Absofacto · Thousand Peaces</span></span></span><time class="playlist-track-duration">03:44</time><span class="row-action" aria-label="Dissolve 的更多操作"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">4</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="循环边界封面" /><span class="playlist-track-copy"><strong>循环边界</strong><span class="playlist-track-meta"><span>Neon Harbor · Single</span></span></span><time class="playlist-track-duration">03:48</time><span class="row-action" aria-label="循环边界的更多操作"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">5</span><img class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="From The Start 封面" /><span class="playlist-track-copy"><strong>From The Start</strong><span class="playlist-track-meta"><span class="track-quality-badge lossless">Lossless</span><span>Laufey · Bewitched</span></span></span><time class="playlist-track-duration">02:49</time><span class="row-action" aria-label="From The Start 的更多操作"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+              </section>
+            </div>
+            <div class="shell-layer">
+              <div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
+                  class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg
+                    class="icon">
+                    <use href="#i-heart"></use>
+                  </svg></span><span class="mini-icon"><svg class="icon">
+                    <use href="#i-pause"></use>
+                  </svg></span></div>
+              <nav class="bottom-nav" aria-label="一级导航"><span class="nav-item"><svg class="icon">
+                    <use href="#i-home"></use>
+                  </svg>首页</span><span class="nav-item"><svg class="icon">
+                    <use href="#i-search"></use>
+                  </svg>搜索</span><span class="nav-item active"><svg class="icon">
+                    <use href="#i-library"></use>
+                  </svg>我的</span></nav>
             </div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="profile-self" data-groups="profile catalog">
-        <figcaption class="screen-caption"><strong>PROFILE-01 · 个人主页 / 自己</strong><span>Web
-            的大气氛背景映射为移动端头像英雄区，资料动作保持克制。</span></figcaption>
+      <figure class="screen-board" data-screen="profile-self" data-groups="profile catalog review-three">
+        <figcaption class="screen-caption"><strong>PROFILE-01A · 个人主页 / 自己</strong><span>最近歌曲保持连续 Row，最近歌单映射 Web 的双列 GridView；编辑资料与分享收进右上角 More。</span></figcaption>
         <div class="device">
-          <section class="screen profile-page-bg">
-            <div class="status-bar"><span>12:36</span><span class="camera-dot"></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
+          <section class="screen profile-v3 self-profile">
+            <div class="status-bar"><span>12:36</span><span class="camera-dot"></span><span class="system-icons"><i
+                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><button class="icon-button"><svg class="icon">
                   <use href="#i-chevron-left"></use>
-                </svg></button><span></span><button class="icon-button subtle"><svg class="icon">
+                </svg></button><span></span><button class="icon-button" aria-label="更多：编辑资料、分享"><svg class="icon">
                   <use href="#i-more"></use>
                 </svg></button></div>
-            <div class="profile-page-scroll">
-              <section class="profile-page-hero"><img src="assets/v2/avatar-profile.jpg" alt="" />
+            <div class="profile-v3-scroll">
+              <section class="profile-v3-hero"><img class="profile-v3-avatar" src="assets/v2/avatar-profile.jpg" alt="" />
                 <h1>Shuhe</h1>
-                <p>在声音里保存生活的切片。</p>
-                <div class="profile-meta"><span>32 关注</span><span>128 粉丝</span><span>Lv.7</span></div>
-                <div class="profile-action-row"><button class="primary-pill"><svg class="icon">
-                      <use href="#i-edit"></use>
-                    </svg>编辑资料</button><button class="secondary-pill">分享</button></div>
+                <div class="profile-identity"><span>上海</span><span>·</span><span>双子座</span><span>·</span><span>加入 3 年</span><span>VIP 5</span></div>
+                <p class="profile-signature">在声音里保存生活的切片。</p>
+                <div class="profile-v3-stats"><span><strong>32</strong>关注</span><span><strong>128</strong>粉丝</span><span><strong>1,286</strong>听歌</span></div>
               </section>
-              <section class="profile-content-card">
-                <h2>创建的歌单</h2>
-                <article class="podcast-card"><img src="assets/v2/cover-vinyl.jpg" alt="" />
-                  <div><strong>深夜循环</strong><span>48 首歌曲</span><small>刚刚更新</small></div><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg>
-                </article>
-                <article class="podcast-card"><img src="assets/v2/cover-weightless.jpg" alt="" />
-                  <div><strong>周末失重</strong><span>21 首歌曲</span><small>公开</small></div><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg>
-                </article>
+              <section class="profile-v3-content">
+                <div class="profile-section-heading"><h2>最近歌曲</h2><span>查看全部</span></div>
+                <section class="playlist-tracks profile-recent-tracks" aria-label="最近歌曲列表">
+                  <div class="track-row current"><span class="playlist-track-index"><img class="playlist-playing-indicator" src="assets/v2/web-eq-playing.svg" alt="正在播放" /></span><img class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><span class="playlist-track-copy"><strong>失重拥抱</strong><span class="playlist-track-meta"><span class="track-quality-badge">Hi-Res</span><span>Bbcsr · 失重拥抱</span></span></span><time class="playlist-track-duration">02:56</time><span class="row-action" aria-label="失重拥抱的更多操作"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                </section>
+                <div class="profile-section-heading profile-section-spaced"><h2>最近歌单</h2><span>2 个公开</span></div>
+                <div class="profile-playlist-grid">
+                  <article class="profile-playlist-tile"><img src="assets/v2/cover-vinyl.jpg" alt="深夜循环歌单封面" /><strong>深夜循环</strong><small>48 首歌曲 · 今天更新</small></article>
+                  <article class="profile-playlist-tile"><img src="assets/v2/cover-podcast.jpg" alt="城市夜航歌单封面" /><strong>城市夜航</strong><small>36 首歌曲 · 本周播放</small></article>
+                </div>
               </section>
+            </div>
+            <div class="shell-layer">
+              <div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
+                  class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon">
+                    <use href="#i-heart"></use>
+                  </svg></span><span class="mini-icon"><svg class="icon">
+                    <use href="#i-pause"></use>
+                  </svg></span></div>
+              <nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav>
             </div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="profile-other" data-groups="profile catalog">
-        <figcaption class="screen-caption"><strong>PROFILE-03 · 他人主页</strong><span>资料骨架与本人页一致，仅把编辑替换为关注，并呈现公开内容。</span>
+      <figure class="screen-board" data-screen="profile-other" data-groups="profile catalog review-three">
+        <figcaption class="screen-caption"><strong>PROFILE-01B · 个人主页 / 他人</strong><span>公开歌单与本人页最近歌单共用双列 GridView；关注与分享收进右上角 More。</span>
         </figcaption>
         <div class="device">
-          <section class="screen profile-page-bg">
-            <div class="status-bar"><span>12:36</span><span class="camera-dot"></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
+          <section class="screen profile-v3 other-profile">
+            <div class="status-bar"><span>12:36</span><span class="camera-dot"></span><span class="system-icons"><i
+                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><button class="icon-button"><svg class="icon">
                   <use href="#i-chevron-left"></use>
-                </svg></button><span></span><button class="icon-button subtle"><svg class="icon">
+                </svg></button><span></span><button class="icon-button" aria-label="更多：关注、分享"><svg class="icon">
                   <use href="#i-more"></use>
                 </svg></button></div>
-            <div class="profile-page-scroll">
-              <section class="profile-page-hero"><img src="assets/v2/cover-podcast.jpg" alt="" />
+            <div class="profile-v3-scroll">
+              <section class="profile-v3-hero"><img class="profile-v3-avatar" src="assets/v2/cover-podcast.jpg" alt="" />
                 <h1>Neon Harbor</h1>
-                <p>独立电子音乐人与夜行记录者。</p>
-                <div class="profile-meta"><span>18 关注</span><span>2.4 万粉丝</span><span>音乐人</span></div>
-                <div class="profile-action-row"><button class="primary-pill">+ 关注</button><button
-                    class="secondary-pill">分享</button></div>
+                <div class="profile-identity"><span>杭州</span><span>·</span><span>天蝎座</span><span>·</span><span>加入 5 年</span><span>音乐人</span></div>
+                <p class="profile-signature">独立电子音乐人与夜行记录者。</p>
+                <div class="profile-v3-stats"><span><strong>18</strong>关注</span><span><strong>2.4 万</strong>粉丝</span><span><strong>36</strong>歌单</span></div>
               </section>
-              <section class="profile-content-card">
-                <h2>公开歌单</h2>
-                <article class="podcast-card"><img src="assets/v2/cover-vinyl.jpg" alt="" />
-                  <div><strong>夜航电台</strong><span>36 首歌曲</span><small>1.2 万次播放</small></div><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg>
-                </article>
+              <section class="profile-v3-content">
+                <div class="profile-section-heading"><h2>公开歌单</h2><span>查看全部</span></div>
+                <div class="profile-playlist-grid">
+                  <article class="profile-playlist-tile"><img src="assets/v2/cover-vinyl.jpg" alt="夜航电台歌单封面" /><strong>夜航电台</strong><small>36 首歌曲 · 1.2 万次播放</small></article>
+                  <article class="profile-playlist-tile"><img src="assets/v2/cover-weightless.jpg" alt="凌晨之后歌单封面" /><strong>凌晨之后</strong><small>24 首歌曲 · 本周更新</small></article>
+                </div>
               </section>
+            </div>
+            <div class="shell-layer">
+              <div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
+                  class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon">
+                    <use href="#i-heart"></use>
+                  </svg></span><span class="mini-icon"><svg class="icon">
+                    <use href="#i-pause"></use>
+                  </svg></span></div>
+              <nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav>
             </div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="profile-edit" data-groups="profile modal">
-        <figcaption class="screen-caption"><strong>PROFILE-02 · 编辑资料</strong><span>头像、昵称和简介使用独立表单页，保存动作固定在标题栏。</span>
+      <figure class="screen-board" data-screen="profile-edit" data-groups="profile modal review-three">
+        <figcaption class="screen-caption"><strong>PROFILE-02 · 编辑资料</strong><span>覆盖式编辑页只保留后端已支持字段；输入内容与保存动作始终可见。</span>
         </figcaption>
         <div class="device">
-          <section class="screen page-screen">
+          <section class="screen profile-edit-v3">
             <div class="status-bar"><span>12:36</span><span class="camera-dot"></span><span class="system-icons"><i
                   class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
             <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
                   <use href="#i-x"></use>
                 </svg></button>
-              <div class="app-bar-center"><strong>编辑资料</strong></div><button class="compact-button">保存</button>
+              <div class="app-bar-center"><strong>编辑资料</strong></div><button class="save-profile-button"><svg class="icon"><use href="#i-check"></use></svg>保存</button>
             </div>
-            <div class="page-scroll no-shell">
-              <section class="guest-hero"><img class="guest-avatar" src="assets/v2/avatar-profile.jpg" alt="" /><button
-                  class="secondary-pill">更换头像</button></section><label class="setting-field"><span>昵称</span>
-                <div class="setting-input">Shuhe</div><small>5 / 30</small>
-              </label><label class="setting-field"><span>个人简介</span>
-                <div class="setting-input">在声音里保存生活的切片。</div><small>14 / 140</small>
-              </label><label class="setting-field"><span>性别</span>
-                <div class="setting-input">不公开</div>
-              </label><label class="setting-field"><span>地区</span>
-                <div class="setting-input">中国 · 上海</div>
-              </label>
+            <div class="edit-profile-body">
+              <section class="edit-avatar-block"><div class="edit-avatar-wrap"><img src="assets/v2/avatar-profile.jpg" alt="" /><button class="edit-avatar-button"><svg class="icon">
+                      <use href="#i-edit"></use>
+                    </svg></button></div><span>更换头像</span></section>
+              <div class="edit-form-row"><span>昵称</span><div class="edit-form-value">Shuhe<small>5 / 30</small></div></div>
+              <div class="edit-form-row"><span>个人简介</span><div class="edit-form-value">在声音里保存生活的切片。<small>14 / 140</small></div></div>
+              <div class="edit-form-row"><span>性别</span><div class="gender-options"><span>男</span><span>女</span><span class="active">不公开</span></div></div>
+              <p class="edit-note">保存失败时保留当前输入，并在页面顶部提示错误。</p>
             </div>
           </section>
         </div>
@@ -7146,7 +7974,7 @@
               <p class="lyric-line">再慢一点离开</p>
             </div>
             <div class="lyric-player-lower">
-              <div class="progress-track"></div>
+              <div class="progress-track" aria-label="播放进度，包含两段副歌区间"><span class="chorus-range" style="--range-start: 27%; --range-end: 40%" aria-hidden="true"></span><span class="chorus-range" style="--range-start: 60%; --range-end: 73%" aria-hidden="true"></span></div>
               <div class="time-row"><span>01:43</span><span>02:56</span></div>
               <div class="player-controls"><span class="control active"><svg class="icon">
                     <use href="#i-shuffle"></use>
@@ -7630,6 +8458,10 @@
       const boards = [...document.querySelectorAll("[data-screen]")];
       const buttons = [...document.querySelectorAll("[data-filter]")];
       const timeButtons = [...document.querySelectorAll("[data-time].time-theme")];
+      const playerToggle = document.querySelector("[data-player-toggle]");
+      const turntable = document.querySelector(".turntable");
+      const playerStateLabel = turntable?.closest(".screen")?.querySelector(".app-bar-center small");
+      const tonearm = turntable?.querySelector(".turntable-tonearm");
       const homeScreen = document.querySelector(".home-screen");
       const homeGreeting = document.querySelector("[data-home-greeting]");
       const params = new URLSearchParams(window.location.search);
@@ -7694,6 +8526,16 @@
 
       buttons.forEach((button) => button.addEventListener("click", () => applyFilter(button.dataset.filter || "all", true)));
       timeButtons.forEach((button) => button.addEventListener("click", () => applyTimeTheme(button.dataset.time || "morning", true)));
+      playerToggle?.addEventListener("click", () => {
+        const isPlaying = turntable.dataset.playbackState === "playing";
+        const nextState = isPlaying ? "paused" : "playing";
+        turntable.dataset.playbackState = nextState;
+        turntable.setAttribute("aria-label", `唱片中心模式，${nextState === "playing" ? "正在播放" : "已暂停"}`);
+        tonearm.alt = nextState === "playing" ? "已落针的真实磁臂" : "已移回停放位的真实磁臂";
+        playerToggle.setAttribute("aria-label", nextState === "playing" ? "暂停" : "播放");
+        playerToggle.querySelector("use").setAttribute("href", nextState === "playing" ? "#i-pause" : "#i-play");
+        if (playerStateLabel) playerStateLabel.textContent = nextState === "playing" ? "正在播放" : "已暂停";
+      });
       applyFilter(initial, false);
       applyTimeTheme(params.get("time"), false);
     })();
