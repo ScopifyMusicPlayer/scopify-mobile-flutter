@@ -2767,9 +2767,11 @@
     .vip-sign-card {
       display: grid;
       grid-template-columns: 1fr auto;
-      align-items: end;
+      gap: 12px;
+      align-items: center;
       margin: 8px 0 18px;
-      padding: 14px;
+      min-height: 58px;
+      padding: 11px 13px;
       border: 0;
       border-radius: 14px;
       background:
@@ -2794,8 +2796,9 @@
     }
 
     .vip-sign-card small {
-      max-width: 128px;
-      line-height: 1.5;
+      max-width: none;
+      margin-top: 3px;
+      line-height: 1.35;
     }
 
     .vip-sign-card button {
@@ -2891,8 +2894,13 @@
     }
 
     .drawer-login-invite {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
       margin: 8px 0 18px;
-      padding: 14px;
+      min-height: 58px;
+      padding: 11px 13px;
       border-radius: 14px;
       background: linear-gradient(135deg, rgb(30 215 96 / 15%), rgb(30 215 96 / 4%));
     }
@@ -2903,10 +2911,10 @@
     }
 
     .drawer-login-invite p {
-      margin: 5px 0 12px;
+      margin: 3px 0 0;
       color: var(--text-secondary);
       font-size: 9px;
-      line-height: 1.55;
+      line-height: 1.35;
     }
 
     .drawer-login-invite button {
@@ -3217,6 +3225,275 @@
       background: white;
     }
 
+    .vip-sign-screen {
+      isolation: isolate;
+      overflow: hidden;
+      background: #687871;
+    }
+
+    .vip-sign-screen::before {
+      position: absolute;
+      z-index: -2;
+      inset: -36px;
+      background: url("assets/v2/cover-weightless.jpg") center / cover;
+      filter: blur(28px) saturate(0.72) brightness(0.7);
+      transform: scale(1.16);
+      content: "";
+    }
+
+    .vip-sign-screen::after {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgb(135 156 166 / 74%), rgb(72 82 79 / 58%) 55%, rgb(31 34 33 / 78%)),
+        rgb(33 43 40 / 32%);
+      content: "";
+    }
+
+    .vip-sign-screen .app-bar {
+      z-index: 3;
+      grid-template-columns: 44px 1fr 44px;
+      background: transparent;
+    }
+
+    .vip-sign-content {
+      position: absolute;
+      inset: 92px 16px 26px;
+    }
+
+    .vip-sign-kicker {
+      color: rgb(255 255 255 / 72%);
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    .vip-sign-ticket-large {
+      margin-top: 16px;
+      padding: 12px 12px 15px;
+      overflow: hidden;
+      border: 1px solid rgb(255 255 255 / 42%);
+      border-radius: 24px;
+      color: #202832;
+      background: rgb(240 244 247 / 93%);
+      box-shadow: 0 24px 70px rgb(6 14 12 / 34%);
+      backdrop-filter: blur(18px);
+    }
+
+    .vip-sign-cover-large {
+      position: relative;
+      aspect-ratio: 1.2;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #24312c;
+    }
+
+    .vip-sign-cover-large::after {
+      position: absolute;
+      inset: 40% 0 0;
+      background: linear-gradient(180deg, transparent, rgb(7 10 9 / 86%));
+      content: "";
+    }
+
+    .vip-sign-cover-large>img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .vip-sign-song-copy {
+      position: absolute;
+      z-index: 2;
+      right: 62px;
+      bottom: 16px;
+      left: 17px;
+      color: white;
+    }
+
+    .vip-sign-song-copy strong {
+      display: block;
+      font-size: 21px;
+      font-weight: 920;
+      letter-spacing: -0.04em;
+    }
+
+    .vip-sign-song-copy span {
+      display: block;
+      margin-top: 4px;
+      color: rgb(255 255 255 / 68%);
+      font-size: 10px;
+    }
+
+    .vip-sign-play,
+    .vip-sign-like {
+      position: absolute;
+      z-index: 3;
+      bottom: 14px;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      color: #000;
+      background: var(--brand);
+      box-shadow: var(--shadow-brand);
+    }
+
+    .vip-sign-play {
+      right: 14px;
+    }
+
+    .vip-sign-like {
+      right: 62px;
+      color: var(--brand);
+      background: rgb(8 11 10 / 66%);
+      box-shadow: 0 8px 22px rgb(0 0 0 / 24%);
+      backdrop-filter: blur(10px);
+    }
+
+    .vip-sign-play .icon,
+    .vip-sign-like .icon {
+      width: 17px;
+      height: 17px;
+    }
+
+    .vip-sign-like .icon {
+      fill: currentColor;
+      stroke: currentColor;
+    }
+
+    .vip-sign-message {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      align-items: center;
+      min-height: 122px;
+      padding: 17px 5px 11px;
+    }
+
+    .vip-sign-date-large {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      padding-right: 14px;
+      border-right: 1px solid rgb(32 40 50 / 13%);
+    }
+
+    .vip-sign-date-large strong {
+      font-size: 31px;
+      font-weight: 820;
+      letter-spacing: -0.06em;
+      line-height: 1.12;
+    }
+
+    .vip-sign-date-large span {
+      color: rgb(32 40 50 / 55%);
+      font-size: 9px;
+    }
+
+    .vip-sign-date-large i {
+      grid-column: 1 / -1;
+      height: 14px;
+      padding-left: 22px;
+      color: rgb(32 40 50 / 46%);
+      font-size: 17px;
+      font-style: normal;
+      line-height: 0.8;
+    }
+
+    .vip-sign-quote strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.5;
+    }
+
+    .vip-sign-quote small {
+      display: block;
+      margin-top: 9px;
+      color: rgb(32 40 50 / 48%);
+      font-size: 8px;
+      text-align: right;
+    }
+
+    .vip-sign-tear {
+      height: 5px;
+      margin: 0 -12px 12px;
+      background: radial-gradient(circle, rgb(32 40 50 / 32%) 2px, transparent 2.5px) center / 12px 5px repeat-x;
+    }
+
+    .vip-sign-summary {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 14px;
+      align-items: center;
+      padding: 0 4px;
+    }
+
+    .vip-sign-total {
+      padding-right: 14px;
+      border-right: 1px solid rgb(32 40 50 / 10%);
+      text-align: center;
+    }
+
+    .vip-sign-total strong {
+      display: block;
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .vip-sign-total strong small {
+      margin-left: 3px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .vip-sign-total span {
+      display: block;
+      margin-top: 7px;
+      color: rgb(32 40 50 / 55%);
+      font-size: 8px;
+    }
+
+    .vip-sign-ticket-large .vip-qr-guide {
+      max-width: none;
+    }
+
+    .vip-sign-ticket-large .vip-qr-guide span {
+      color: rgb(32 40 50 / 58%);
+      font-size: 8px;
+    }
+
+    .vip-sign-ticket-large .vip-qr-guide img {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgb(32 40 50 / 10%);
+    }
+
+    .vip-sign-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .vip-sign-actions button {
+      min-height: 48px;
+      padding: 0 12px;
+      border: 1px solid rgb(255 255 255 / 46%);
+      border-radius: var(--radius-pill);
+      color: #202832;
+      background: rgb(248 250 252 / 92%);
+      box-shadow: 0 12px 30px rgb(6 14 12 / 18%);
+      font-size: 11px;
+      font-weight: 850;
+      backdrop-filter: blur(14px);
+    }
+
     .recognition-modal {
       top: 50%;
       right: 20px;
@@ -3306,6 +3583,64 @@
       width: 100%;
       margin-top: 18px;
       min-height: 42px;
+    }
+
+    .recognition-screen {
+      background:
+        radial-gradient(circle at 50% 39%, rgb(30 215 96 / 15%), transparent 30%),
+        radial-gradient(circle at 15% 0, rgb(20 83 61 / 24%), transparent 28%),
+        linear-gradient(180deg, #101a16 0%, #101210 48%, #090a09 100%);
+    }
+
+    .recognition-screen .app-bar {
+      z-index: 3;
+      grid-template-columns: 44px 1fr 44px;
+      background: transparent;
+    }
+
+    .recognition-full-content {
+      position: absolute;
+      inset: 88px 22px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .recognition-full-content .eyebrow {
+      color: var(--brand);
+    }
+
+    .recognition-full-content .recognition-orbit {
+      width: 194px;
+      height: 194px;
+      margin: 76px auto 28px;
+    }
+
+    .recognition-full-content h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 950;
+      letter-spacing: -0.045em;
+    }
+
+    .recognition-full-content>p {
+      max-width: 248px;
+      margin: 9px auto 0;
+      color: var(--text-secondary);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .recognition-full-content .listening-status {
+      margin-top: 19px;
+    }
+
+    .recognition-full-content .recognition-stop {
+      min-height: 46px;
+      margin-top: auto;
+      border-color: rgb(255 255 255 / 16%);
+      background: rgb(255 255 255 / 4%);
     }
 
     .update-hero {
@@ -4154,7 +4489,7 @@
 
     .launch-screen {
       background:
-        radial-gradient(circle at 50% 36%, rgb(30 215 96 / 15%), transparent 26%),
+        radial-gradient(circle at 50% 38%, rgb(30 215 96 / 16%), transparent 32%),
         radial-gradient(circle at 22% 78%, rgb(49 46 129 / 18%), transparent 36%),
         #050706;
     }
@@ -4179,13 +4514,13 @@
 
     .launch-vinyl {
       position: relative;
-      width: 176px;
-      height: 176px;
-      margin-bottom: 34px;
+      width: 220px;
+      height: 220px;
+      margin-bottom: 38px;
       animation: launch-disc-spin 3s linear infinite;
-      filter: drop-shadow(0 22px 32px rgb(0 0 0 / 62%));
-      -webkit-mask-image: radial-gradient(circle at center, transparent 9px, #000 10px, #000 87px, transparent 88px);
-      mask-image: radial-gradient(circle at center, transparent 9px, #000 10px, #000 87px, transparent 88px);
+      filter: drop-shadow(0 26px 36px rgb(0 0 0 / 65%));
+      -webkit-mask-image: radial-gradient(circle at center, transparent 11px, #000 12px, #000 109px, transparent 110px);
+      mask-image: radial-gradient(circle at center, transparent 11px, #000 12px, #000 109px, transparent 110px);
     }
 
     .launch-vinyl-disc,
@@ -4220,8 +4555,8 @@
       left: 50%;
       display: grid;
       place-items: center;
-      width: 68px;
-      height: 68px;
+      width: 84px;
+      height: 84px;
       border: 3px solid #0a0a0c;
       background: #c00;
       box-shadow: inset 0 0 0 3px rgb(255 255 255 / 30%), 0 0 10px rgb(0 0 0 / 80%);
@@ -4231,11 +4566,11 @@
     .launch-loading-text {
       position: relative;
       margin: 0;
-      margin-left: 33px;
       color: #444;
       font-size: 15px;
       font-weight: 600;
-      letter-spacing: 5px;
+      letter-spacing: 6px;
+      text-indent: 6px;
       line-height: 1;
       text-shadow: 0 2px 4px rgb(0 0 0 / 80%);
       text-transform: uppercase;
@@ -4848,8 +5183,12 @@
       box-shadow: 0 25px 52px rgb(0 0 0 / 48%);
     }
 
+    .podcast-collection-hero .type-badge {
+      margin-top: 10px;
+    }
+
     .podcast-collection-hero h1 {
-      margin: 12px 0 0;
+      margin: 8px 0 0;
       font-size: 25px;
       font-weight: 900;
       letter-spacing: -0.045em;
@@ -4903,13 +5242,18 @@
         var(--surface-base);
     }
 
+    .favorites-screen .batch-scroll {
+      padding-top: 12px;
+      padding-bottom: 28px;
+    }
+
     .favorites-intro {
-      padding: 3px 0 8px;
+      padding: 2px 0 16px;
     }
 
     .favorites-screen .favorite-grid {
-      gap: 10px;
-      padding-top: 4px;
+      gap: 20px 12px;
+      padding-top: 0;
     }
 
     .favorites-screen .favorite-item {
@@ -4918,7 +5262,7 @@
     }
 
     .favorites-screen .favorite-item img {
-      aspect-ratio: 1.18;
+      aspect-ratio: 1.24;
       filter: saturate(0.82) brightness(0.72);
     }
 
@@ -4937,7 +5281,17 @@
     }
 
     .favorites-screen .favorite-item strong {
+      margin-top: 10px;
       font-size: 11px;
+    }
+
+    .favorites-screen .favorite-item small {
+      margin-top: 4px;
+    }
+
+    .favorites-screen .section-heading {
+      margin-top: 24px;
+      margin-bottom: 12px;
     }
 
     .favorites-screen .podcast-card {
@@ -5061,6 +5415,10 @@
     </symbol>
     <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
       stroke-linejoin="round">
+      <path
+        d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+    </symbol>
+    <symbol id="i-heart-filled" viewBox="0 0 24 24" fill="currentColor" stroke="none">
       <path
         d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
     </symbol>
@@ -6263,7 +6621,7 @@
                 </svg>
               </div>
               <div class="vip-sign-card">
-                <div><strong>网易乐签 · 今日未签</strong><small>连续 4 天 · 本月累计 12 天</small></div><button>签到</button>
+                <div><strong>网易乐签 · 今日未签</strong><small>连签 4 天 · 本月 12 天</small></div><button>签到</button>
               </div>
               <p class="drawer-section-label">常用工具</p>
               <div class="drawer-list">
@@ -6313,8 +6671,8 @@
                   <use href="#i-chevron-right"></use>
                 </svg>
               </div>
-              <div class="drawer-login-invite"><strong>连接你的音乐世界</strong>
-                <p>使用网易云音乐 App 扫码，收藏与播放记录会自动同步。</p><button>扫码登录</button>
+              <div class="drawer-login-invite"><div><strong>连接你的音乐</strong>
+                  <p>登录后同步收藏与记录</p></div><button>登录</button>
               </div>
               <p class="drawer-section-label">常用工具</p>
               <div class="drawer-list">
@@ -6343,35 +6701,21 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="drawer-vip-sign" data-groups="drawer modal review-two">
-        <figcaption class="screen-caption"><strong>DRAWER-03 · VIP 签到结果</strong><span>直接压缩 Web VipSignModal
-            的日期、歌曲、祝福语、月累计和二维码层级，不再另造签到格。</span></figcaption>
+      <figure class="screen-board" data-screen="drawer-vip-sign" data-groups="drawer immersive review-two">
+        <figcaption class="screen-caption"><strong>DRAWER-03 · VIP 签到结果</strong><span>全屏氛围背景承载大型纵向乐签，放大封面、日期、祝福语与本月累计。</span></figcaption>
         <div class="device">
-          <section class="screen modal-context">
-            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span></div>
-            <div class="feature-modal vip-result-modal"><button class="modal-close" aria-label="关闭"><svg class="icon">
-                  <use href="#i-x"></use>
-                </svg></button>
-              <div class="vip-result-body">
-                <div class="vip-date"><strong>08</strong><span>月</span><i>/</i><strong>23</strong><span>日</span></div>
-                <div class="vip-song-v2">
-                  <div>
-                    <h2>失重拥抱</h2><span class="artist">Bbcsr</span>
-                    <p class="wish">“愿今天听见的旋律，能替你收好那些没说出口的情绪。”</p>
-                  </div>
-                  <div class="vip-cover"><img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><button
-                      aria-label="播放"><svg class="icon">
-                        <use href="#i-play"></use>
-                      </svg></button></div>
-                </div>
-                <div class="vip-divider"></div>
-                <div class="vip-result-footer">
-                  <div><span class="vip-month-label">本月累计签到</span><strong
-                      class="vip-month-count">12<small>天</small></strong></div>
-                  <div class="vip-qr-guide"><span>打开网易云音乐<br />扫码查看乐签</span><img src="assets/v2/qr-login.svg"
-                      alt="网易云音乐二维码" /></div>
-                </div>
-              </div>
+          <section class="screen vip-sign-screen">
+            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><span></span><div class="app-bar-center"><strong>网易乐签</strong></div><button class="icon-button subtle" aria-label="关闭"><svg class="icon"><use href="#i-x"></use></svg></button></div>
+            <div class="vip-sign-content">
+              <div class="vip-sign-kicker"># 今日为你推荐 #</div>
+              <article class="vip-sign-ticket-large">
+                <div class="vip-sign-cover-large"><img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><div class="vip-sign-song-copy"><strong>失重拥抱</strong><span>Bbcsr · 循环边界</span></div><button class="vip-sign-like" aria-label="喜欢"><svg class="icon"><use href="#i-heart-filled"></use></svg></button><button class="vip-sign-play" aria-label="播放"><svg class="icon"><use href="#i-play"></use></svg></button></div>
+                <div class="vip-sign-message"><div class="vip-sign-date-large"><strong>08</strong><span>月</span><i>/</i><strong>23</strong><span>日</span></div><div class="vip-sign-quote"><strong>愿今天听见的旋律，替你收好那些没说出口的情绪。</strong><small>— 来自今日乐签</small></div></div>
+                <div class="vip-sign-tear"></div>
+                <div class="vip-sign-summary"><div class="vip-sign-total"><strong>12<small>天</small></strong><span>本月累计 · 连签 4 天</span></div><div class="vip-qr-guide"><span>打开网易云音乐<br />扫码查看乐签</span><img src="assets/v2/qr-login.svg" alt="网易云音乐二维码" /></div></div>
+              </article>
+              <div class="vip-sign-actions"><button>保存 / 定制乐签</button><button>去分享</button></div>
             </div>
           </section>
         </div>
@@ -6407,15 +6751,13 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="drawer-song-recognition" data-groups="drawer modal review-two">
-        <figcaption class="screen-caption"><strong>DRAWER-05 · 听歌识曲</strong><span>延续 Web
-            深色浮层与品牌绿状态反馈，识别中只保留声纹舞台和一个停止动作。</span></figcaption>
+      <figure class="screen-board" data-screen="drawer-song-recognition" data-groups="drawer immersive review-two">
+        <figcaption class="screen-caption"><strong>DRAWER-05 · 听歌识曲</strong><span>从 Drawer 进入独立的全屏识别流程，声纹舞台和停止动作占据完整沉浸空间。</span></figcaption>
         <div class="device">
-          <section class="screen modal-context">
-            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span></div>
-            <div class="feature-modal recognition-modal"><button class="modal-close" aria-label="关闭"><svg class="icon">
-                  <use href="#i-x"></use>
-                </svg></button>
+          <section class="screen recognition-screen">
+            <div class="status-bar"><span>20:08</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><button class="icon-button subtle" aria-label="关闭"><svg class="icon"><use href="#i-x"></use></svg></button><div class="app-bar-center"><strong>听歌识曲</strong></div><span></span></div>
+            <div class="recognition-full-content"><span class="eyebrow">LISTENING</span>
               <div class="recognition-orbit"><svg class="icon">
                   <use href="#i-mic"></use>
                 </svg></div>
