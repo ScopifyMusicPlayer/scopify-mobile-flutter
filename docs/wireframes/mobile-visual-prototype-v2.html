@@ -3994,9 +3994,52 @@
     }
 
     .vip-sign-screen {
+      --vip-paper-base: #edf0ee;
+      --vip-paper-time: rgb(126 76 161 / 22%);
+      --vip-paper-cover: rgb(75 104 83 / 16%);
       isolation: isolate;
       overflow: hidden;
       background: #a9bac5;
+    }
+
+    .vip-sign-screen[data-time="night"] {
+      --vip-paper-base: #e9eaf0;
+      --vip-paper-time: rgb(71 58 143 / 28%);
+    }
+
+    .vip-sign-screen[data-time="dawn"] {
+      --vip-paper-base: #f3eeea;
+      --vip-paper-time: rgb(251 146 130 / 26%);
+    }
+
+    .vip-sign-screen[data-time="morning"] {
+      --vip-paper-base: #eaf1f1;
+      --vip-paper-time: rgb(81 168 209 / 24%);
+    }
+
+    .vip-sign-screen[data-time="afternoon"] {
+      --vip-paper-base: #e8f0ee;
+      --vip-paper-time: rgb(14 165 233 / 22%);
+    }
+
+    .vip-sign-screen[data-time="daylight"] {
+      --vip-paper-base: #e9f2ef;
+      --vip-paper-time: rgb(34 211 238 / 20%);
+    }
+
+    .vip-sign-screen[data-time="sunset"] {
+      --vip-paper-base: #f3ece7;
+      --vip-paper-time: rgb(251 146 60 / 27%);
+    }
+
+    .vip-sign-screen[data-time="evening"] {
+      --vip-paper-base: #edf0ee;
+      --vip-paper-time: rgb(126 76 161 / 22%);
+    }
+
+    .vip-sign-screen[data-time="late-night"] {
+      --vip-paper-base: #e9edf0;
+      --vip-paper-time: rgb(15 23 42 / 25%);
     }
 
     .vip-sign-screen::before {
@@ -4049,15 +4092,16 @@
 
     .vip-sign-ticket-large {
       --vip-tear-y: 450.5px;
+      position: relative;
+      isolation: isolate;
       margin-top: 14px;
       padding: 12px 12px 14px;
       overflow: hidden;
       border: 0;
       border-radius: 24px;
       color: #202832;
-      background: rgb(239 244 248 / 96%);
+      background: var(--vip-paper-base);
       box-shadow: 0 28px 76px rgb(31 49 52 / 26%);
-      backdrop-filter: blur(22px);
       -webkit-mask:
         radial-gradient(circle 7px at 0 var(--vip-tear-y), transparent 6.75px, #000 7.25px),
         radial-gradient(circle 7px at 100% var(--vip-tear-y), transparent 6.75px, #000 7.25px);
@@ -4066,6 +4110,36 @@
         radial-gradient(circle 7px at 0 var(--vip-tear-y), transparent 6.75px, #000 7.25px),
         radial-gradient(circle 7px at 100% var(--vip-tear-y), transparent 6.75px, #000 7.25px);
       mask-composite: intersect;
+    }
+
+    .vip-sign-ticket-large::before,
+    .vip-sign-ticket-large::after {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+    }
+
+    .vip-sign-ticket-large::before {
+      background:
+        radial-gradient(ellipse 64% 44% at 100% 0, var(--vip-paper-time), transparent 72%),
+        radial-gradient(ellipse 42% 28% at 0 100%, var(--vip-paper-cover), transparent 76%);
+    }
+
+    .vip-sign-ticket-large::after {
+      inset: -14px;
+      background:
+        repeating-linear-gradient(112deg, rgb(31 48 42 / 10%) 0 0.55px, transparent 0.55px 4px),
+        repeating-linear-gradient(12deg, rgb(255 255 255 / 46%) 0 0.75px, transparent 0.75px 7px);
+      filter: url("#vip-paper-texture");
+      mix-blend-mode: multiply;
+      opacity: 0.25;
+    }
+
+    .vip-sign-ticket-large > * {
+      position: relative;
+      z-index: 1;
     }
 
     .vip-sign-cover-large {
@@ -8141,6 +8215,17 @@
 <body>
   <svg width="0" height="0" aria-hidden="true" style="position: absolute">
     <!-- Lucide v1.26.0 icons, generated from the workspace lucide-react package (ISC). -->
+    <filter id="vip-paper-texture" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.62 0.14" numOctaves="3" seed="6" result="paperFibers" />
+      <feColorMatrix in="paperFibers" type="saturate" values="0" result="paperMono" />
+      <feComponentTransfer in="paperMono" result="paperGrain">
+        <feFuncR type="table" tableValues="0.34 0.68" />
+        <feFuncG type="table" tableValues="0.34 0.68" />
+        <feFuncB type="table" tableValues="0.34 0.68" />
+        <feFuncA type="table" tableValues="0 0.18" />
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="paperGrain" mode="multiply" />
+    </filter>
     <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
       stroke-linejoin="round">
       <path d="M4 5h16" />
@@ -9291,14 +9376,14 @@
       <figure class="screen-board" data-screen="drawer-vip-sign" data-groups="drawer immersive">
         <figcaption class="screen-caption"><strong>DRAWER-03 · VIP 签到结果</strong><span>全屏氛围背景承载大型纵向乐签，放大封面、日期、祝福语与本月累计。</span></figcaption>
         <div class="device">
-          <section class="screen vip-sign-screen">
+          <section class="screen vip-sign-screen" data-time="evening">
             <div class="status-bar"><span>20:08</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
             <div class="app-bar"><span></span><div class="app-bar-center"><strong>网易乐签</strong></div><button class="icon-button subtle" aria-label="关闭"><svg class="icon"><use href="#i-x"></use></svg></button></div>
             <div class="vip-sign-content">
-              <div class="vip-sign-kicker"># 去年今日我在听 #</div>
+              <div class="vip-sign-kicker" data-vip-sign-kicker>晚安之前，把这首歌留给你</div>
               <article class="vip-sign-ticket-large">
                 <div class="vip-sign-cover-large"><img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><div class="vip-sign-song-copy"><strong>失重拥抱</strong><span>Bbcsr · 循环边界</span></div><button class="vip-sign-like" aria-label="喜欢"><svg class="icon"><use href="#i-heart-filled"></use></svg></button><button class="vip-sign-play" aria-label="播放"><svg class="icon"><use href="#i-play"></use></svg></button></div>
-                <div class="vip-sign-message"><div class="vip-sign-date-large"><strong>08</strong><span>月</span><i>/</i><strong>24</strong><span>日</span></div><div class="vip-sign-quote"><span class="vip-letter-salutation">给今天的你：</span><strong>你往细节看一眼，爱与不爱都太明显。</strong><small>—— 来自去年的这一刻</small></div></div>
+                <div class="vip-sign-message"><div class="vip-sign-date-large"><strong>08</strong><span>月</span><i>/</i><strong>24</strong><span>日</span></div><div class="vip-sign-quote"><span class="vip-letter-salutation">写给此刻的你：</span><strong>你往细节看一眼，爱与不爱都太明显。</strong><small>—— Scopify 的一封乐信</small></div></div>
                 <div class="vip-sign-tear"><span aria-hidden="true"></span></div>
                 <div class="vip-sign-summary"><div class="vip-sign-total"><strong>6<small>天</small></strong><span>本月累计打卡</span></div><div class="vip-sign-streak"><strong>4<small>天</small></strong><span>连续签到</span></div></div>
               </article>
@@ -10007,6 +10092,8 @@
       const tonearm = turntable?.querySelector(".turntable-tonearm");
       const homeScreen = document.querySelector(".home-screen");
       const homeGreeting = document.querySelector("[data-home-greeting]");
+      const vipSignScreen = document.querySelector(".vip-sign-screen");
+      const vipSignKicker = document.querySelector("[data-vip-sign-kicker]");
       const params = new URLSearchParams(window.location.search);
       const initial = params.get("screen") || "all";
       const galleryOrder = {
@@ -10069,6 +10156,16 @@
         { key: "evening", start: 19, end: 22, greeting: "晚上好" },
         { key: "late-night", start: 22, end: 24, greeting: "夜深了" }
       ];
+      const vipSignLetters = {
+        night: "夜还很长，把这首歌留给你",
+        dawn: "天快亮了，先把这首歌寄给你",
+        morning: "早上好，今天想把这首歌送给你",
+        afternoon: "午后的风里，有一首歌想给你",
+        daylight: "偷一段午后，把旋律写给你",
+        sunset: "天色将晚，把这首歌放进信里",
+        evening: "晚安之前，把这首歌留给你",
+        "late-night": "夜深了，这封信只写给你"
+      };
 
       function matches(board, filter) {
         if (filter === "all") return true;
@@ -10110,6 +10207,8 @@
         const theme = resolveTimeTheme(key);
         homeScreen.dataset.time = theme.key;
         homeGreeting.textContent = theme.greeting;
+        if (vipSignScreen) vipSignScreen.dataset.time = theme.key;
+        if (vipSignKicker) vipSignKicker.textContent = vipSignLetters[theme.key];
         timeButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.time === theme.key)));
         if (updateUrl) {
           const next = new URL(window.location.href);
