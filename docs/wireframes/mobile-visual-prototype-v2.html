@@ -198,38 +198,6 @@
       padding: 34px 0 72px;
     }
 
-    .pilot-note {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 14px;
-      align-items: start;
-      max-width: 980px;
-      margin: 0 0 34px;
-      padding: 16px 18px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      color: var(--text-secondary);
-      background: linear-gradient(135deg, rgb(30 215 96 / 8%), rgb(255 255 255 / 3%));
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
-    .pilot-note strong {
-      display: block;
-      margin-bottom: 3px;
-      color: var(--text-primary);
-      font-size: 13px;
-    }
-
-    .pilot-dot {
-      width: 10px;
-      height: 10px;
-      margin-top: 5px;
-      border-radius: 50%;
-      background: var(--brand);
-      box-shadow: 0 0 0 6px rgb(30 215 96 / 10%);
-    }
-
     .boards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -247,6 +215,10 @@
       justify-items: center;
       gap: 14px;
       margin: 0;
+    }
+
+    .screen-board[data-gallery-start] {
+      grid-column-start: 1;
     }
 
     .screen-board[hidden] {
@@ -1388,6 +1360,652 @@
       font-size: 9px;
     }
 
+    .collection-content {
+      padding: 8px 0 24px;
+    }
+
+    .my-library-page {
+      background:
+        linear-gradient(180deg, rgb(0 0 0 / 10%) 0, rgb(18 18 18 / 62%) 180px, var(--surface-base) 310px),
+        url("assets/v2/avatar-profile.jpg") center top / 100% 245px no-repeat,
+        var(--surface-base);
+    }
+
+    .my-library-scroll {
+      inset: 81px 0 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 4px 16px 24px;
+      scrollbar-width: none;
+    }
+
+    .my-library-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .my-library-account {
+      display: grid;
+      position: relative;
+      justify-items: center;
+      padding: 5px 0 17px;
+      text-align: center;
+    }
+
+    .my-library-account img {
+      width: 66px;
+      height: 66px;
+      border: 2px solid rgb(255 255 255 / 22%);
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 14px 32px rgb(0 0 0 / 42%);
+    }
+
+    .my-library-account>div {
+      margin-top: 9px;
+    }
+
+    .my-library-account strong,
+    .my-library-account small {
+      display: block;
+    }
+
+    .my-library-account strong {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+    }
+
+    .my-library-account small {
+      margin-top: 5px;
+      color: var(--text-secondary);
+      font-size: 10px;
+    }
+
+    .my-library-account>.icon {
+      display: none;
+    }
+
+    .collection-filters {
+      display: flex;
+      gap: 8px;
+      margin: 2px 0 14px;
+    }
+
+    .collection-filter {
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      background: rgb(255 255 255 / 5%);
+      font-size: 10px;
+      font-weight: 720;
+    }
+
+    .collection-filter.active {
+      color: #000;
+      background: var(--brand);
+    }
+
+    .my-library-tabs {
+      height: 46px;
+      margin: 0 -2px 12px;
+    }
+
+    .my-library-tabs .tab {
+      font-size: 13px;
+    }
+
+    .my-library-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .my-library-action {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      height: 42px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      background: rgb(255 255 255 / 5%);
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .my-library-action .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .my-library-action.active {
+      color: var(--brand);
+      background: rgb(30 215 96 / 8%);
+    }
+
+    .playlist-filter-shell {
+      position: relative;
+      margin: 2px 0 18px;
+    }
+
+    .playlist-filter-bar {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) 38px;
+      gap: 4px;
+      align-items: center;
+      padding: 4px;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .playlist-filter-option,
+    .playlist-filter-more {
+      display: grid;
+      place-items: center;
+      height: 34px;
+      border-radius: 5px;
+      color: var(--text-secondary);
+      font-size: 9px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .playlist-filter-option.active {
+      color: var(--text-primary);
+      background: rgb(255 255 255 / 10%);
+    }
+
+    .playlist-filter-more {
+      border-left: 1px solid rgb(255 255 255 / 8%);
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-radius: 0 5px 5px 0;
+      background: transparent;
+      outline: none;
+      appearance: none;
+    }
+
+    .playlist-filter-more:focus {
+      color: var(--text-primary);
+      background: rgb(255 255 255 / 10%);
+    }
+
+    .playlist-filter-more .icon {
+      width: 17px;
+      height: 17px;
+    }
+
+    .playlist-more-popover {
+      position: absolute;
+      z-index: 12;
+      top: 46px;
+      right: 0;
+      display: none;
+      width: 164px;
+      padding: 6px;
+      border: 1px solid rgb(255 255 255 / 10%);
+      border-radius: 8px;
+      background: var(--surface-raised);
+      box-shadow: 0 16px 36px rgb(0 0 0 / 48%);
+    }
+
+    .playlist-filter-shell:focus-within .playlist-more-popover {
+      display: grid;
+    }
+
+    .playlist-more-item,
+    .playlist-view-row {
+      display: flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 8px;
+      border-radius: 5px;
+      color: var(--text-primary);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .playlist-more-item {
+      gap: 8px;
+    }
+
+    .playlist-more-item .icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .playlist-view-row {
+      justify-content: space-between;
+      margin-top: 4px;
+      border-top: 1px solid rgb(255 255 255 / 8%);
+      border-radius: 0;
+      color: var(--text-secondary);
+    }
+
+    .playlist-view-options {
+      display: inline-flex;
+      gap: 3px;
+      padding: 3px;
+      border-radius: 5px;
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .playlist-view-option {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+    }
+
+    .playlist-view-option.active {
+      color: #000;
+      background: var(--text-primary);
+    }
+
+    .playlist-view-option .icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .library-liked-art {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 9px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 72% 18%, rgb(255 255 255 / 30%), transparent 24%),
+        linear-gradient(135deg, #4320a8, #7c62e8 48%, #9ebaf2);
+      box-shadow: 0 10px 24px rgb(0 0 0 / 28%);
+    }
+
+    .library-liked-art .icon {
+      width: 34px;
+      height: 34px;
+      fill: currentColor;
+    }
+
+    .library-media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 8px;
+    }
+
+    .library-media-card {
+      min-width: 0;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 3%);
+    }
+
+    .library-media-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 9px;
+      object-fit: cover;
+      box-shadow: 0 10px 24px rgb(0 0 0 / 28%);
+    }
+
+    .library-media-card strong,
+    .library-media-card small {
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .library-media-card strong {
+      margin-top: 9px;
+      font-size: 11.5px;
+    }
+
+    .library-media-card small {
+      margin-top: 3px;
+      color: var(--text-tertiary);
+      font-size: 9px;
+    }
+
+    .collection-section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 2px 12px;
+    }
+
+    .collection-section-heading.spaced {
+      margin-top: 22px;
+    }
+
+    .collection-section-heading h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .collection-section-heading span {
+      color: var(--text-tertiary);
+      font-size: 9.5px;
+    }
+
+    .collection-artist-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 8px;
+    }
+
+    .collection-artist-card {
+      display: grid;
+      min-width: 0;
+      justify-items: stretch;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 3%);
+      text-align: left;
+    }
+
+    .collection-artist-card img {
+      width: 140px;
+      height: 140px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 9px 20px rgb(0 0 0 / 30%);
+      justify-self: center;
+    }
+
+    .collection-artist-card strong,
+    .collection-artist-card small,
+    .collection-album-card strong,
+    .collection-album-card small {
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .collection-artist-card strong {
+      margin-top: 9px;
+      font-size: 11.5px;
+    }
+
+    .collection-artist-card small {
+      margin-top: 3px;
+      color: var(--text-tertiary);
+      font-size: 9px;
+    }
+
+    .collection-album-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 8px;
+    }
+
+    .collection-album-card {
+      min-width: 0;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 3%);
+    }
+
+    .collection-album-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 9px;
+      object-fit: cover;
+      box-shadow: 0 10px 24px rgb(0 0 0 / 28%);
+    }
+
+    .collection-album-card strong {
+      margin-top: 9px;
+      font-size: 11.5px;
+    }
+
+    .collection-album-card small {
+      margin-top: 3px;
+      color: var(--text-tertiary);
+      font-size: 9px;
+    }
+
+    .my-library-page .audio-program-row {
+      grid-template-columns: 52px minmax(0, 1fr) 48px 22px;
+      gap: 10px;
+      min-height: 70px;
+      padding: 9px;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .my-library-page .audio-program-cover {
+      width: 52px;
+      height: 52px;
+    }
+
+    .my-library-page .audio-program-copy strong {
+      font-size: 11px;
+    }
+
+    .my-library-page .audio-program-copy small {
+      font-size: 8.5px;
+    }
+
+    .my-library-page {
+      background:
+        linear-gradient(180deg, rgb(0 0 0 / 4%) 0, rgb(18 18 18 / 18%) 150px, rgb(18 18 18 / 88%) 330px, var(--surface-base) 430px),
+        url("assets/v2/avatar-profile.jpg") center top / auto 360px no-repeat,
+        var(--surface-base);
+    }
+
+    .my-library-page .app-bar {
+      background: transparent;
+    }
+
+    .my-library-page .app-bar-center {
+      opacity: 0;
+    }
+
+    .my-library-scroll {
+      inset: 78px 0 0;
+      padding: 0 0 24px;
+    }
+
+    .my-library-account {
+      min-height: 236px;
+      padding: 18px 16px 16px;
+    }
+
+    .my-library-account img {
+      width: 78px;
+      height: 78px;
+      border-width: 3px;
+    }
+
+    .my-library-account strong {
+      font-size: 19px;
+    }
+
+    .my-library-account small {
+      font-size: 10px;
+    }
+
+    .my-profile-stats {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-top: 9px;
+      color: var(--text-primary);
+      font-size: 10px;
+      font-weight: 760;
+    }
+
+    .my-profile-quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .my-profile-quick {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      height: 38px;
+      border-radius: 7px;
+      color: rgb(255 255 255 / 88%);
+      background: rgb(255 255 255 / 11%);
+      font-size: 8.5px;
+      font-weight: 720;
+      backdrop-filter: blur(14px);
+    }
+
+    .my-profile-quick .icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .my-library-sheet {
+      min-height: 440px;
+      padding: 0 16px 118px;
+      border-radius: 18px 18px 0 0;
+      background: rgb(15 15 15 / 98%);
+      box-shadow: 0 -12px 32px rgb(0 0 0 / 22%);
+    }
+
+    .my-library-sheet .my-library-tabs {
+      height: 54px;
+      margin: 0 -4px 8px;
+    }
+
+    .my-library-sheet .playlist-filter-shell {
+      margin: 2px 0 10px;
+    }
+
+    .my-library-sheet .playlist-filter-bar {
+      display: flex;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .my-library-sheet .playlist-filter-option,
+    .my-library-sheet .playlist-filter-more {
+      flex: 0 0 auto;
+      height: 36px;
+      border-radius: 5px;
+    }
+
+    .my-library-sheet .playlist-filter-option {
+      padding: 0 10px;
+    }
+
+    .my-library-sheet .playlist-filter-option.active {
+      color: var(--text-primary);
+      background: rgb(255 255 255 / 7%);
+    }
+
+    .my-library-sheet .playlist-filter-more {
+      width: 34px;
+      margin-left: auto;
+      border-left: 0;
+    }
+
+    .my-library-sheet .my-library-actions,
+    .my-library-sheet .collection-filters {
+      display: flex;
+      gap: 6px;
+      margin: 2px 0 12px;
+    }
+
+    .my-library-sheet .my-library-action,
+    .my-library-sheet .collection-filter {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 5px;
+      color: var(--text-secondary);
+      background: transparent;
+      font-size: 9.5px;
+    }
+
+    .my-library-sheet .my-library-action.active,
+    .my-library-sheet .collection-filter.active {
+      color: var(--text-primary);
+      background: rgb(255 255 255 / 7%);
+    }
+
+    .my-library-sheet .my-library-action .icon {
+      display: none;
+    }
+
+    .library-playlist-list {
+      display: grid;
+      gap: 2px;
+    }
+
+    .library-playlist-item {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr) 24px;
+      gap: 11px;
+      align-items: center;
+      min-height: 68px;
+      padding: 7px 4px;
+      border-radius: 7px;
+    }
+
+    .library-playlist-item:first-child {
+      background: rgb(255 255 255 / 3%);
+    }
+
+    .library-playlist-cover,
+    .library-playlist-item .library-liked-art {
+      width: 54px;
+      height: 54px;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .library-playlist-copy {
+      min-width: 0;
+    }
+
+    .library-playlist-copy strong,
+    .library-playlist-copy small {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .library-playlist-copy strong {
+      font-size: 12.5px;
+    }
+
+    .library-playlist-copy small {
+      margin-top: 5px;
+      color: var(--text-secondary);
+      font-size: 9px;
+    }
+
+    .library-playlist-item>.icon {
+      width: 17px;
+      height: 17px;
+      color: var(--text-tertiary);
+    }
+
     .playlist-screen {
       background: var(--surface-base);
     }
@@ -1496,6 +2114,15 @@
       color: var(--brand);
     }
 
+    .secondary-action.liked {
+      color: var(--brand);
+    }
+
+    .secondary-action.liked .icon {
+      fill: currentColor;
+      stroke: currentColor;
+    }
+
     .secondary-action.active::after {
       position: absolute;
       bottom: 5px;
@@ -1504,6 +2131,31 @@
       border-radius: 50%;
       background: var(--brand);
       content: "";
+    }
+
+    .secondary-action.comment-action {
+      overflow: visible;
+    }
+
+    .secondary-action.comment-action::before {
+      position: absolute;
+      top: 3px;
+      right: -1px;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      min-width: 14px;
+      height: 14px;
+      padding: 0 3px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--text-secondary);
+      background: rgb(36 36 36 / 94%);
+      box-shadow: 0 4px 10px rgb(0 0 0 / 25%);
+      font-size: 7px;
+      font-weight: 760;
+      line-height: 1;
+      content: attr(data-comment-count);
     }
 
     .search-in-list {
@@ -1750,8 +2402,8 @@
       left: 48%;
       display: grid;
       place-items: center;
-      width: 78px;
-      height: 78px;
+      width: 175.5px;
+      height: 175.5px;
       overflow: hidden;
       border: 4px solid #111513;
       border-radius: 50%;
@@ -2379,37 +3031,6 @@
     .podcast-card .play-button .icon {
       width: 17px;
       height: 17px;
-    }
-
-    .favorite-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px 10px;
-      padding-top: 8px;
-    }
-
-    .favorite-item img {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: var(--radius-md);
-      object-fit: cover;
-    }
-
-    .favorite-item.artist img {
-      border-radius: 50%;
-    }
-
-    .favorite-item strong {
-      display: block;
-      margin-top: 8px;
-      font-size: 12px;
-    }
-
-    .favorite-item small {
-      display: block;
-      margin-top: 3px;
-      color: var(--text-secondary);
-      font-size: 9px;
     }
 
     .drawer-context {
@@ -3507,25 +4128,34 @@
     }
 
     .vip-sign-play {
-      right: 16px;
-      color: white;
+      right: 14px;
+      bottom: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: #07150d;
+      background: var(--brand);
+      box-shadow: var(--shadow-brand), 0 8px 16px rgb(5 22 12 / 24%);
     }
 
     .vip-sign-like {
-      right: 60px;
+      right: 62px;
+      bottom: 18px;
+      width: 32px;
+      height: 32px;
       color: var(--brand);
     }
 
     .vip-sign-play .icon {
-      width: 30px;
-      height: 30px;
+      width: 16px;
+      height: 16px;
       fill: currentColor;
       stroke: none;
     }
 
     .vip-sign-like .icon {
-      width: 29px;
-      height: 29px;
+      width: 32px;
+      height: 32px;
       fill: currentColor;
       stroke: none;
     }
@@ -3676,13 +4306,23 @@
     .vip-sign-actions button {
       min-height: 40px;
       padding: 0 12px;
-      border: 0;
       border-radius: var(--radius-pill);
-      color: #202832;
-      background: rgb(250 251 252 / 94%);
-      box-shadow: 0 12px 30px rgb(6 14 12 / 18%);
       font-size: 11px;
       font-weight: 850;
+    }
+
+    .vip-sign-primary {
+      border: 0;
+      color: #07150d;
+      background: var(--brand);
+      box-shadow: var(--shadow-brand), 0 12px 30px rgb(6 14 12 / 16%);
+    }
+
+    .vip-sign-secondary {
+      border: 1px solid rgb(255 255 255 / 42%);
+      color: #f7faf8;
+      background: rgb(13 23 18 / 40%);
+      box-shadow: 0 12px 30px rgb(6 14 12 / 13%);
       backdrop-filter: blur(14px);
     }
 
@@ -4466,6 +5106,955 @@
       font-size: 10px;
     }
 
+    /* Final review batch: settings use the Web hierarchy without its desktop tabs. */
+    .settings-v2-screen {
+      background:
+        radial-gradient(circle at 12% 0%, rgb(30 215 96 / 7%), transparent 28%),
+        linear-gradient(180deg, #111713 0%, var(--surface-base) 22%);
+    }
+
+    .settings-v2-screen .app-bar {
+      border-bottom: 0;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .settings-v2-scroll {
+      position: absolute;
+      inset: 81px 0 16px;
+      overflow: auto;
+      padding: 8px 16px 28px;
+      scrollbar-width: none;
+    }
+
+    .settings-v2-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .settings-v2-section {
+      margin-top: 18px;
+    }
+
+    .settings-v2-section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 2px 8px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid rgb(255 255 255 / 9%);
+      color: var(--text-secondary);
+      font-size: 8.5px;
+      font-weight: 880;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    .settings-v2-section-title small {
+      color: var(--text-tertiary);
+      font-size: 8px;
+      font-weight: 650;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .settings-v2-panel {
+      padding: 0 11px;
+      border-radius: 10px;
+      background: rgb(255 255 255 / 3.5%);
+    }
+
+    .settings-v2-row {
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 64px;
+      padding: 8px 0;
+    }
+
+    .settings-v2-row.plain {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .settings-v2-row+.settings-v2-row {
+      border-top: 1px solid rgb(255 255 255 / 7%);
+    }
+
+    .settings-v2-row-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      background: rgb(255 255 255 / 6%);
+    }
+
+    .settings-v2-row-icon .icon {
+      width: 17px;
+      height: 17px;
+    }
+
+    .settings-v2-row-copy {
+      min-width: 0;
+    }
+
+    .settings-v2-row-copy strong,
+    .settings-v2-row-copy small {
+      display: block;
+    }
+
+    .settings-v2-row-copy strong {
+      font-size: 12px;
+      font-weight: 720;
+    }
+
+    .settings-v2-row-copy small {
+      overflow: hidden;
+      margin-top: 4px;
+      color: var(--text-tertiary);
+      font-size: 9px;
+      line-height: 1.35;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .settings-v2-chevron {
+      width: 16px;
+      height: 16px;
+      color: var(--text-tertiary);
+    }
+
+    .settings-v2-value,
+    .settings-v2-badge {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+      min-height: 25px;
+      padding: 0 9px;
+      border-radius: 6px;
+      color: var(--text-secondary);
+      background: rgb(255 255 255 / 6%);
+      font-size: 9px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .settings-v2-badge.success {
+      color: var(--brand);
+      background: rgb(30 215 96 / 10%);
+    }
+
+    .settings-v2-badge.warning {
+      color: #f6b45e;
+      background: rgb(246 180 94 / 10%);
+    }
+
+    .settings-v2-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .settings-v2-switch {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      border-radius: var(--radius-pill);
+      background: rgb(255 255 255 / 13%);
+    }
+
+    .settings-v2-switch::after {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--text-secondary);
+      content: "";
+    }
+
+    .settings-v2-switch.on {
+      background: var(--brand);
+    }
+
+    .settings-v2-switch.on::after {
+      left: 21px;
+      background: #061109;
+    }
+
+    .settings-v2-segmented {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      padding: 3px;
+      border-radius: 8px;
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .settings-v2-segmented span {
+      display: grid;
+      place-items: center;
+      min-height: 28px;
+      border-radius: 6px;
+      color: var(--text-tertiary);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .settings-v2-segmented span.active {
+      color: #050b07;
+      background: var(--brand);
+    }
+
+    .settings-v2-note {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 9px;
+      color: var(--text-secondary);
+      background: rgb(255 255 255 / 4%);
+    }
+
+    .settings-v2-note .icon {
+      width: 17px;
+      height: 17px;
+      margin: 2px auto 0;
+      color: var(--brand);
+    }
+
+    .settings-v2-note strong,
+    .settings-v2-note small {
+      display: block;
+    }
+
+    .settings-v2-note strong {
+      color: var(--text-primary);
+      font-size: 10px;
+    }
+
+    .settings-v2-note small {
+      margin-top: 4px;
+      font-size: 8.5px;
+      line-height: 1.5;
+    }
+
+    .settings-v2-field {
+      margin-top: 16px;
+    }
+
+    .settings-v2-field>span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--text-secondary);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .settings-v2-input {
+      display: flex;
+      align-items: center;
+      min-height: 46px;
+      padding: 0 13px;
+      border: 1px solid #727272;
+      border-radius: 8px;
+      color: var(--text-primary);
+      background: transparent;
+      font-size: 10px;
+    }
+
+    .settings-v2-helper {
+      display: block;
+      margin-top: 6px;
+      color: var(--text-tertiary);
+      font-size: 8px;
+      line-height: 1.4;
+    }
+
+    .settings-v2-endpoint {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .settings-v2-endpoint span {
+      padding: 9px 8px;
+      border-radius: 7px;
+      color: var(--text-tertiary);
+      background: rgb(255 255 255 / 4%);
+      font-size: 8px;
+    }
+
+    .settings-v2-endpoint b {
+      display: block;
+      overflow: hidden;
+      margin-top: 4px;
+      color: var(--text-primary);
+      font-size: 9px;
+      text-overflow: ellipsis;
+    }
+
+    .settings-v2-connection {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding: 11px 12px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      background: rgb(30 215 96 / 7%);
+      font-size: 8.5px;
+    }
+
+    .settings-v2-connection strong {
+      color: var(--brand);
+      font-size: 9px;
+    }
+
+    .settings-v2-actions {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .settings-v2-primary,
+    .settings-v2-secondary {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: var(--radius-pill);
+      font-size: 10px;
+      font-weight: 820;
+    }
+
+    .settings-v2-primary {
+      color: #020804;
+      background: var(--brand);
+      box-shadow: 0 8px 22px rgb(30 215 96 / 18%);
+    }
+
+    .settings-v2-secondary {
+      border: 1px solid rgb(255 255 255 / 15%);
+      color: var(--text-primary);
+      background: transparent;
+    }
+
+    .settings-v2-primary .icon,
+    .settings-v2-secondary .icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .settings-v2-storage-summary {
+      margin-top: 13px;
+      padding: 16px;
+      border-radius: 11px;
+      background:
+        linear-gradient(135deg, rgb(30 215 96 / 12%), transparent 68%),
+        rgb(255 255 255 / 4%);
+    }
+
+    .settings-v2-storage-summary h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+    }
+
+    .settings-v2-storage-summary p {
+      margin: 4px 0 0;
+      color: var(--text-secondary);
+      font-size: 9px;
+    }
+
+    .settings-v2-meter {
+      display: flex;
+      gap: 3px;
+      height: 7px;
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: var(--radius-pill);
+      background: rgb(255 255 255 / 8%);
+    }
+
+    .settings-v2-meter i:nth-child(1) { width: 17%; background: var(--brand); }
+    .settings-v2-meter i:nth-child(2) { width: 10%; background: #7b61ff; }
+    .settings-v2-meter i:nth-child(3) { width: 7%; background: #4aa9ff; }
+
+    .settings-v2-legend {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      color: var(--text-tertiary);
+      font-size: 7.5px;
+    }
+
+    .settings-v2-legend span::before {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      content: "";
+    }
+
+    .settings-v2-about {
+      display: grid;
+      justify-items: center;
+      padding: 27px 0 16px;
+      text-align: center;
+    }
+
+    .settings-v2-about img {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      box-shadow: 0 18px 42px rgb(0 0 0 / 44%);
+    }
+
+    .settings-v2-about h1 {
+      margin: 13px 0 0;
+      font-size: 23px;
+      font-weight: 920;
+      letter-spacing: -0.04em;
+    }
+
+    .settings-v2-about p {
+      margin: 5px 0 0;
+      color: var(--text-secondary);
+      font-size: 9px;
+    }
+
+    .settings-v2-about small {
+      margin-top: 9px;
+      color: var(--text-tertiary);
+      font-size: 8px;
+      line-height: 1.5;
+    }
+
+    .settings-v2-about-scroll {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 12px;
+    }
+
+    .settings-v2-about-scroll > .page-subtitle {
+      flex: 0 0 auto;
+      margin: auto 0 2px;
+      text-align: center;
+    }
+
+    .state-skeleton {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: linear-gradient(100deg, rgb(255 255 255 / 5%), rgb(255 255 255 / 10%) 48%, rgb(255 255 255 / 5%));
+    }
+
+    .state-skeleton-faint {
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .state-home-skeleton-screen .app-bar {
+      grid-template-columns: 44px 1fr 44px;
+    }
+
+    .state-home-skeleton-scroll {
+      bottom: 62px;
+      padding: 8px 16px 18px;
+    }
+
+    .state-home-skeleton-scroll .shortcut-grid {
+      margin-top: 16px;
+    }
+
+    .state-skeleton-greeting {
+      width: 154px;
+      height: 24px;
+      border-radius: 5px;
+    }
+
+    .state-skeleton-shortcut {
+      height: 48px;
+      border-radius: 6px;
+    }
+
+    .state-skeleton-heading {
+      width: 118px;
+      height: 18px;
+      border-radius: 4px;
+    }
+
+    .state-skeleton-meta {
+      width: 46px;
+      height: 9px;
+      border-radius: 3px;
+    }
+
+    .state-skeleton-feature {
+      height: 126px;
+      margin-top: 10px;
+      border-radius: var(--radius-lg);
+    }
+
+    .state-skeleton-media-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .state-skeleton-media-card {
+      display: grid;
+      gap: 7px;
+    }
+
+    .state-skeleton-media-art {
+      width: 100%;
+      aspect-ratio: 1;
+    }
+
+    .state-skeleton-line {
+      height: 9px;
+      border-radius: 3px;
+    }
+
+    .state-skeleton-line.short {
+      width: 66%;
+    }
+
+    .state-home-skeleton-screen .shell-layer {
+      padding-top: 5px;
+    }
+
+    .state-detail-skeleton-screen {
+      background: var(--surface-base);
+    }
+
+    .state-detail-skeleton-screen .app-bar {
+      grid-template-columns: 44px 1fr 44px;
+    }
+
+    .state-detail-skeleton-scroll {
+      padding: 8px 16px 18px;
+    }
+
+    .state-detail-skeleton-hero {
+      display: grid;
+      justify-items: center;
+      padding-top: 8px;
+    }
+
+    .state-detail-skeleton-cover {
+      width: 142px;
+      height: 142px;
+      border-radius: var(--radius-md);
+    }
+
+    .state-detail-skeleton-hero .state-skeleton-line:nth-child(2) {
+      width: 154px;
+      height: 22px;
+      margin-top: 14px;
+    }
+
+    .state-detail-skeleton-hero .state-skeleton-line:nth-child(3) {
+      width: 208px;
+      margin-top: 8px;
+    }
+
+    .state-skeleton-action-row {
+      display: grid;
+      grid-template-columns: 54px 34px 34px 34px;
+      justify-content: center;
+      gap: 13px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .state-skeleton-action-row > * {
+      height: 34px;
+    }
+
+    .state-skeleton-action-row > :first-child {
+      height: 54px;
+      border-radius: 50%;
+    }
+
+    .state-skeleton-action-row > :not(:first-child) {
+      border-radius: 50%;
+    }
+
+    .state-skeleton-track-list {
+      display: grid;
+      gap: 2px;
+      margin-top: 24px;
+    }
+
+    .state-skeleton-track {
+      display: grid;
+      grid-template-columns: 16px 42px minmax(0, 1fr) 18px;
+      gap: 10px;
+      align-items: center;
+      min-height: 58px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgb(255 255 255 / 5%);
+    }
+
+    .state-skeleton-track .state-skeleton-index {
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+    }
+
+    .state-skeleton-track .state-skeleton-cover-sm {
+      width: 42px;
+      height: 42px;
+      border-radius: 5px;
+    }
+
+    .state-skeleton-track-copy {
+      display: grid;
+      gap: 7px;
+    }
+
+    .state-skeleton-track-copy > :first-child {
+      width: 72%;
+    }
+
+    .state-skeleton-track-copy > :last-child {
+      width: 46%;
+    }
+
+    .state-skeleton-track .state-skeleton-more {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
+
+    .state-page-error-screen {
+      background: linear-gradient(180deg, rgb(30 215 96 / 7%), transparent 30%), var(--surface-base);
+    }
+
+    .state-page-error-screen .app-bar {
+      grid-template-columns: 44px 1fr 44px;
+    }
+
+    .state-page-error-content {
+      position: absolute;
+      inset: 81px 0 121px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .state-page-error-content > div {
+      max-width: 254px;
+    }
+
+    .state-error-orb {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto;
+      border: 1px solid rgb(248 113 113 / 26%);
+      border-radius: 50%;
+      color: #fda4af;
+      background: rgb(248 113 113 / 9%);
+    }
+
+    .state-error-orb .icon {
+      width: 27px;
+      height: 27px;
+    }
+
+    .state-page-error-content h1 {
+      margin: 17px 0 0;
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .state-page-error-content p {
+      margin: 8px 0 0;
+      color: var(--text-secondary);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .state-error-actions {
+      display: grid;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .state-primary-action,
+    .state-secondary-action {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .state-primary-action {
+      border: 0;
+      color: #07150d;
+      background: var(--brand);
+      box-shadow: var(--shadow-brand);
+    }
+
+    .state-secondary-action {
+      border: 1px solid rgb(255 255 255 / 18%);
+      color: var(--text-primary);
+      background: transparent;
+    }
+
+    .state-primary-action .icon,
+    .state-secondary-action .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .state-partial-screen .app-bar {
+      grid-template-columns: 44px 1fr 44px;
+    }
+
+    .state-partial-scroll {
+      padding: 8px 16px 18px;
+    }
+
+    .state-partial-continue {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) auto;
+      gap: 11px;
+      align-items: center;
+      margin-top: 14px;
+      padding: 8px;
+      border-radius: var(--radius-md);
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .state-partial-continue img {
+      width: 58px;
+      height: 58px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .state-partial-continue strong,
+    .state-partial-continue small {
+      display: block;
+    }
+
+    .state-partial-continue strong {
+      font-size: 13px;
+    }
+
+    .state-partial-continue small {
+      margin-top: 4px;
+      color: var(--text-secondary);
+      font-size: 9px;
+    }
+
+    .state-inline-error {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr) auto;
+      gap: 9px;
+      align-items: center;
+      margin-top: 14px;
+      padding: 12px 0;
+      border-top: 1px solid rgb(255 255 255 / 9%);
+      border-bottom: 1px solid rgb(255 255 255 / 9%);
+    }
+
+    .state-inline-error .icon {
+      width: 19px;
+      height: 19px;
+      color: #f5c36d;
+    }
+
+    .state-inline-error strong,
+    .state-inline-error small {
+      display: block;
+    }
+
+    .state-inline-error strong {
+      font-size: 11px;
+    }
+
+    .state-inline-error small {
+      margin-top: 3px;
+      color: var(--text-secondary);
+      font-size: 9px;
+    }
+
+    .state-inline-retry {
+      padding: 6px 9px;
+      border-radius: var(--radius-pill);
+      color: var(--brand);
+      background: rgb(30 215 96 / 9%);
+      font-size: 9px;
+      font-weight: 850;
+    }
+
+    .state-partial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    .state-partial-card {
+      min-width: 0;
+    }
+
+    .state-partial-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+    }
+
+    .state-partial-card strong,
+    .state-partial-card small {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .state-partial-card strong {
+      margin-top: 7px;
+      font-size: 11px;
+    }
+
+    .state-partial-card small {
+      margin-top: 3px;
+      color: var(--text-secondary);
+      font-size: 8px;
+    }
+
+    .state-session-screen .app-bar {
+      grid-template-columns: 44px 1fr 44px;
+    }
+
+    .state-session-scroll {
+      padding: 8px 16px 18px;
+    }
+
+    .state-session-context {
+      display: grid;
+      gap: 18px;
+      padding-top: 10px;
+    }
+
+    .state-session-context .feature-banner {
+      margin-top: -2px;
+    }
+
+    .state-session-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 18;
+      background: rgb(0 0 0 / 64%);
+      backdrop-filter: blur(3px);
+    }
+
+    .state-session-dialog {
+      position: absolute;
+      z-index: 19;
+      top: 50%;
+      right: 22px;
+      left: 22px;
+      padding: 24px 20px 20px;
+      border: 1px solid rgb(255 255 255 / 13%);
+      border-radius: var(--radius-xl);
+      background: rgb(40 40 40 / 98%);
+      box-shadow: 0 22px 52px rgb(0 0 0 / 62%);
+      text-align: center;
+      transform: translateY(-44%);
+    }
+
+    .state-session-dialog .state-error-orb {
+      width: 54px;
+      height: 54px;
+      border-color: rgb(30 215 96 / 24%);
+      color: var(--brand);
+      background: rgb(30 215 96 / 9%);
+    }
+
+    .state-session-dialog .state-error-orb .icon {
+      width: 23px;
+      height: 23px;
+    }
+
+    .state-session-dialog h1 {
+      margin: 14px 0 0;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+    }
+
+    .state-session-dialog p {
+      margin: 8px 0 0;
+      color: var(--text-secondary);
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .state-session-dialog .state-primary-action {
+      width: 100%;
+      margin-top: 19px;
+    }
+
+    .state-session-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 50%;
+      color: var(--text-secondary);
+      background: transparent;
+    }
+
+    .state-session-close .icon {
+      width: 17px;
+      height: 17px;
+    }
+
+    .state-playback-failure-screen .player-content {
+      padding-top: 10px;
+    }
+
+    .state-playback-failure-screen .turntable {
+      width: 270px;
+      height: 270px;
+      margin-top: 100px;
+    }
+
+    .state-playback-failure-screen .global-toast {
+      top: 84px;
+      z-index: 21;
+    }
+
     .skeleton {
       position: relative;
       overflow: hidden;
@@ -5178,16 +6767,14 @@
       padding: 3px 0 4px;
     }
 
-    .discover-intro h1,
-    .favorites-intro h1 {
+    .discover-intro h1 {
       margin: 5px 0 0;
       font-size: 27px;
       font-weight: 900;
       letter-spacing: -0.05em;
     }
 
-    .discover-intro p,
-    .favorites-intro p {
+    .discover-intro p {
       margin: 6px 0 0;
       color: var(--text-secondary);
       font-size: 10px;
@@ -5351,173 +6938,6 @@
       font-size: 8px;
     }
 
-    .podcasts-screen {
-      background:
-        linear-gradient(to bottom, rgb(89 59 33 / 48%), var(--surface-base) 44%),
-        url("assets/v2/cover-podcast.jpg") center top / 100% 330px no-repeat,
-        var(--surface-base);
-    }
-
-    .podcast-collection-hero {
-      display: grid;
-      justify-items: center;
-      padding: 4px 10px 12px;
-      text-align: center;
-    }
-
-    .podcast-collection-hero>img {
-      width: 142px;
-      height: 142px;
-      padding: 3px;
-      border: 1px solid rgb(255 255 255 / 16%);
-      border-radius: var(--radius-lg);
-      object-fit: cover;
-      box-shadow: 0 25px 52px rgb(0 0 0 / 48%);
-    }
-
-    .podcast-collection-hero .type-badge {
-      margin-top: 10px;
-    }
-
-    .podcast-collection-hero h1 {
-      margin: 8px 0 0;
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: -0.045em;
-    }
-
-    .podcast-collection-hero p {
-      margin: 5px 0 0;
-      color: var(--text-secondary);
-      font-size: 10px;
-    }
-
-    .podcasts-screen .podcast-card {
-      grid-template-columns: 58px minmax(0, 1fr) 34px;
-      min-height: 72px;
-      padding: 7px;
-      border: 1px solid rgb(255 255 255 / 5%);
-    }
-
-    .podcasts-screen .podcast-card img {
-      width: 58px;
-      height: 58px;
-    }
-
-    .podcasts-screen .podcast-card strong,
-    .podcasts-screen .podcast-card span,
-    .podcasts-screen .podcast-card small {
-      display: block;
-    }
-
-    .podcasts-screen .podcast-card strong {
-      font-size: 10px;
-      line-height: 1.35;
-    }
-
-    .podcasts-screen .podcast-card span {
-      margin-top: 3px;
-      color: var(--text-secondary);
-      font-size: 8px;
-    }
-
-    .podcasts-screen .podcast-card small {
-      margin-top: 4px;
-      color: var(--text-tertiary);
-      font-size: 8px;
-    }
-
-    .favorites-screen {
-      background:
-        radial-gradient(circle at 85% 2%, rgb(126 34 206 / 18%), transparent 30%),
-        radial-gradient(circle at 5% 22%, rgb(30 215 96 / 9%), transparent 28%),
-        var(--surface-base);
-    }
-
-    .favorites-screen .batch-scroll {
-      padding-top: 12px;
-      padding-bottom: 28px;
-    }
-
-    .favorites-intro {
-      padding: 2px 0 16px;
-    }
-
-    .favorites-screen .favorite-grid {
-      gap: 20px 12px;
-      padding-top: 0;
-    }
-
-    .favorites-screen .favorite-item {
-      position: relative;
-      min-width: 0;
-    }
-
-    .favorites-screen .favorite-item img {
-      aspect-ratio: 1.24;
-      filter: saturate(0.82) brightness(0.72);
-    }
-
-    .favorite-count {
-      position: absolute;
-      top: 9px;
-      right: 9px;
-      padding: 4px 7px;
-      border: 1px solid rgb(255 255 255 / 12%);
-      border-radius: var(--radius-pill);
-      color: #fff;
-      background: rgb(0 0 0 / 42%);
-      font-size: 8px;
-      font-weight: 850;
-      backdrop-filter: blur(10px);
-    }
-
-    .favorites-screen .favorite-item strong {
-      margin-top: 10px;
-      font-size: 11px;
-    }
-
-    .favorites-screen .favorite-item small {
-      margin-top: 4px;
-    }
-
-    .favorites-screen .section-heading {
-      margin-top: 24px;
-      margin-bottom: 12px;
-    }
-
-    .favorites-screen .podcast-card {
-      grid-template-columns: 58px minmax(0, 1fr) 34px;
-      min-height: 72px;
-    }
-
-    .favorites-screen .podcast-card img {
-      width: 58px;
-      height: 58px;
-    }
-
-    .favorites-screen .podcast-card strong,
-    .favorites-screen .podcast-card span,
-    .favorites-screen .podcast-card small {
-      display: block;
-    }
-
-    .favorites-screen .podcast-card strong {
-      font-size: 10px;
-    }
-
-    .favorites-screen .podcast-card span {
-      margin-top: 3px;
-      color: var(--text-secondary);
-      font-size: 8px;
-    }
-
-    .favorites-screen .podcast-card small {
-      margin-top: 4px;
-      color: var(--text-tertiary);
-      font-size: 8px;
-    }
-
     @media (max-width: 840px) {
       .header-row {
         align-items: start;
@@ -5569,12 +6989,6 @@
         transition-duration: 0.01ms !important;
       }
     }
-    /* Batch 3: contextual actions, recent playback and user profiles. */
-    html[data-gallery-filter="review-three"] .boards {
-      grid-template-columns: repeat(3, minmax(360px, 1fr));
-      column-gap: 20px;
-    }
-
     .batch3-modal-context {
       background:
         linear-gradient(180deg, rgb(8 28 22 / 25%), rgb(0 0 0 / 88%)),
@@ -5979,6 +7393,50 @@
       margin-top: 0;
     }
 
+    .profile-v3-content>.profile-section-heading:first-child {
+      margin-bottom: 9px;
+    }
+
+    .profile-v3-content>.profile-section-heading:first-child h2 {
+      font-size: 16px;
+    }
+
+    .profile-v3-content>.profile-section-heading:first-child span {
+      font-size: 8.5px;
+    }
+
+    .profile-recent-tracks .track-row {
+      grid-template-columns: 18px 48px minmax(0, 1fr) 34px 28px;
+      gap: 9px;
+      min-height: 65px;
+      padding: 8px 4px;
+    }
+
+    .profile-recent-tracks .playlist-track-cover {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+    }
+
+    .profile-recent-tracks .playlist-playing-indicator {
+      width: 14px;
+      height: 14px;
+    }
+
+    .profile-recent-tracks .playlist-track-copy strong {
+      font-size: 14.5px;
+      font-weight: 620;
+    }
+
+    .profile-recent-tracks .playlist-track-meta {
+      margin-top: 5px;
+      font-size: 10px;
+    }
+
+    .profile-recent-tracks .playlist-track-duration {
+      font-size: 9.5px;
+    }
+
     .profile-playlist-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6168,6 +7626,515 @@
       font-size: 8px;
       line-height: 1.55;
     }
+
+    .artist-v4 {
+      background: var(--surface-base);
+    }
+
+    .artist-v4::before {
+      display: none;
+    }
+
+    .artist-v4 .playlist-hero-bg {
+      background:
+        linear-gradient(to bottom, rgb(45 48 62 / 48%), rgb(18 18 18 / 70%) 64%, var(--surface-base)),
+        url("assets/v2/cover-podcast.jpg") center 32% / cover;
+    }
+
+    .artist-v4-scroll {
+      inset: 72px 0 0;
+      padding: 6px 16px 18px;
+    }
+
+    .artist-v4-hero {
+      min-height: 0;
+    }
+
+    .artist-v4-avatar {
+      width: 136px;
+      height: 136px;
+      padding: 3px;
+      border: 1px solid rgb(255 255 255 / 28%);
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 20px 44px rgb(0 0 0 / 48%);
+    }
+
+    .artist-v4-hero h1 {
+      margin-top: 14px;
+    }
+
+    .artist-v4-hero p {
+      max-width: 290px;
+    }
+
+    .artist-v4-meta {
+      margin-top: 6px;
+      color: var(--text-tertiary);
+      font-size: 10px;
+    }
+
+    .artist-v4 .action-station {
+      justify-content: flex-start;
+    }
+
+    .artist-v4-content {
+      margin: 0;
+      padding: 0 0 26px;
+      background: transparent;
+    }
+
+    .v4-section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 0 4px;
+    }
+
+    .v4-section-heading.spaced {
+      margin-top: 12px;
+    }
+
+    .v4-section-heading h2 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 860;
+    }
+
+    .v4-section-heading span {
+      color: var(--text-tertiary);
+      font-size: 8px;
+    }
+
+    .artist-album-grid {
+      margin-top: 7px;
+    }
+
+    .album-v4 .playlist-hero-bg {
+      background:
+        linear-gradient(to bottom, rgb(89 33 28 / 42%), rgb(18 18 18 / 70%) 64%, var(--surface-base)),
+        url("assets/v2/cover-vinyl.jpg") center / cover;
+    }
+
+    .album-v4 .detail-description,
+    .audio-v4 .detail-description {
+      -webkit-line-clamp: 2;
+    }
+
+    .audio-v4 .playlist-hero-bg {
+      background:
+        linear-gradient(to bottom, rgb(45 48 62 / 48%), rgb(18 18 18 / 70%) 64%, var(--surface-base)),
+        url("assets/v2/cover-podcast.jpg") center / cover;
+    }
+
+    .audio-v4 .detail-cover {
+      border-radius: 18px;
+    }
+
+    .audio-program-list {
+      display: grid;
+      margin-top: 7px;
+    }
+
+    .audio-program-row {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) 46px 24px;
+      gap: 9px;
+      align-items: center;
+      min-height: 60px;
+      padding: 8px 0;
+    }
+
+    .audio-program-cover {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .audio-program-copy strong,
+    .audio-program-copy small {
+      display: block;
+    }
+
+    .audio-program-copy strong {
+      overflow: hidden;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .audio-program-copy small {
+      margin-top: 4px;
+      color: var(--text-secondary);
+      font-size: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .audio-program-status {
+      display: grid;
+      gap: 5px;
+      justify-items: end;
+    }
+
+    .audio-progress-badge {
+      padding: 3px 5px;
+      border-radius: 5px;
+      color: var(--brand);
+      background: rgb(30 215 96 / 9%);
+      font-size: 7px;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .audio-program-status time {
+      color: var(--text-tertiary);
+      font-size: 7.5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .audio-program-row>.icon {
+      width: 15px;
+      height: 15px;
+      color: var(--text-tertiary);
+    }
+
+    .lyrics-v4 .player-background {
+      display: block;
+    }
+
+    .lyric-stage-v4 {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      justify-content: center;
+      gap: 21px;
+      min-height: 0;
+      padding: 10px 4px 22px;
+      text-align: left;
+    }
+
+    .lyric-pair {
+      margin: 0;
+      color: rgb(255 255 255 / 34%);
+    }
+
+    .lyric-pair strong,
+    .lyric-pair span {
+      display: block;
+    }
+
+    .lyric-pair strong {
+      font-size: 18px;
+      font-weight: 760;
+      letter-spacing: -0.025em;
+      line-height: 1.35;
+    }
+
+    .lyric-pair span {
+      margin-top: 5px;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .lyric-pair.active {
+      color: var(--text-primary);
+      text-shadow: 0 8px 28px rgb(30 215 96 / 18%);
+    }
+
+    .lyric-pair.active strong {
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .lyrics-v4 .player-track-heading {
+      margin-top: 0;
+    }
+
+    .queue-v4 {
+      background: #07100d;
+    }
+
+    .queue-v4 .player-background {
+      display: block;
+      opacity: 0.56;
+      filter: blur(14px) saturate(0.7) brightness(0.48);
+      transform: scale(1.08);
+    }
+
+    .queue-v4>.status-bar {
+      z-index: 4;
+    }
+
+    .queue-sheet-v4 {
+      position: absolute;
+      inset: 92px 0 0;
+      z-index: 3;
+      padding: 10px 18px 24px;
+      border: 1px solid rgb(255 255 255 / 8%);
+      border-bottom: 0;
+      border-radius: 28px 28px 0 0;
+      background: rgb(18 18 18 / 96%);
+      box-shadow: 0 -24px 70px rgb(0 0 0 / 48%);
+      backdrop-filter: blur(28px);
+    }
+
+    .queue-sheet-v4 .sheet-handle {
+      margin-bottom: 12px;
+    }
+
+    .queue-v4-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .queue-v4-header h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .queue-v4-header span {
+      color: var(--text-tertiary);
+      font-size: 9px;
+    }
+
+    .queue-mode-bar {
+      display: flex;
+      gap: 7px;
+      margin: 14px 0 10px;
+    }
+
+    .queue-mode-bar span {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      background: rgb(255 255 255 / 5%);
+      font-size: 8px;
+    }
+
+    .queue-mode-bar .active {
+      color: var(--brand);
+    }
+
+    .queue-mode-bar .icon {
+      width: 13px;
+      height: 13px;
+    }
+
+    .queue-sheet-v4 .playlist-tracks {
+      margin-top: 10px;
+    }
+
+    .queue-sheet-v4 .playlist-tracks .track-row.current {
+      margin-right: -10px;
+      margin-left: -10px;
+      padding-right: 10px;
+      padding-left: 10px;
+      border-radius: 8px;
+      background: rgb(30 215 96 / 7%);
+    }
+
+    .comments-v4 {
+      background: var(--surface-base);
+    }
+
+    .comments-v4-scroll {
+      position: absolute;
+      inset: 81px 0 66px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 6px 14px 18px;
+      scrollbar-width: none;
+    }
+
+    .comments-v4-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .comment-song-v4 {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgb(255 255 255 / 4%);
+    }
+
+    .comment-song-v4 img {
+      width: 54px;
+      height: 54px;
+      border-radius: 7px;
+      object-fit: cover;
+      box-shadow: 0 10px 24px rgb(0 0 0 / 28%);
+    }
+
+    .comment-song-v4 strong,
+    .comment-song-v4 small {
+      display: block;
+    }
+
+    .comment-song-v4 strong {
+      font-size: 14px;
+    }
+
+    .comment-song-v4 small {
+      margin-top: 5px;
+      color: var(--text-secondary);
+      font-size: 9.5px;
+    }
+
+    .comment-song-v4>.icon {
+      width: 17px;
+      height: 17px;
+      color: var(--text-tertiary);
+    }
+
+    .comment-tabs-v4 {
+      display: flex;
+      gap: 22px;
+      height: 38px;
+      margin-bottom: 2px;
+      padding: 0 4px;
+    }
+
+    .comment-tabs-v4 span {
+      position: relative;
+      color: var(--text-tertiary);
+      font-size: 11px;
+      font-weight: 760;
+    }
+
+    .comment-tabs-v4 .active {
+      color: var(--text-primary);
+    }
+
+    .comment-tabs-v4 .active::after {
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      left: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--brand);
+      content: "";
+    }
+
+    .comment-item-v4 {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 11px;
+      padding: 12px 4px;
+      border-bottom: 1px solid rgb(255 255 255 / 5%);
+    }
+
+    .comment-item-v4>img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .comment-author-v4 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .comment-author-v4 strong {
+      font-size: 11px;
+    }
+
+    .comment-like-v4 {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      color: var(--text-tertiary);
+      font-size: 9px;
+    }
+
+    .comment-like-v4 .icon {
+      width: 13px;
+      height: 13px;
+    }
+
+    .comment-item-v4 p {
+      margin: 7px 0 0;
+      color: rgb(255 255 255 / 86%);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .comment-item-v4 small {
+      display: block;
+      margin-top: 7px;
+      color: var(--text-tertiary);
+      font-size: 8.5px;
+    }
+
+    .comment-reply-v4 {
+      margin-top: 8px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      background: rgb(255 255 255 / 4%);
+      font-size: 9.5px;
+      line-height: 1.45;
+    }
+
+    .comment-composer-v4 {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 36px;
+      gap: 8px;
+      align-items: center;
+      height: 66px;
+      padding: 8px 14px 14px;
+      border-top: 1px solid rgb(255 255 255 / 7%);
+      background: rgb(18 18 18 / 94%);
+      backdrop-filter: blur(18px);
+    }
+
+    .comment-composer-v4 .composer-input {
+      display: flex;
+      align-items: center;
+      height: 38px;
+      padding: 0 12px;
+      border-radius: 8px;
+      color: var(--text-tertiary);
+      background: rgb(255 255 255 / 6%);
+      font-size: 10px;
+    }
+
+    .comment-composer-v4 button {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 8px;
+      color: #000;
+      background: var(--brand);
+    }
+
+    .comment-composer-v4 button .icon {
+      width: 16px;
+      height: 16px;
+    }
   </style>
 </head>
 
@@ -6274,6 +8241,13 @@
       <path d="M11 19H3" />
       <path d="M21 16V5" />
       <circle cx="18" cy="16" r="3" />
+    </symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <rect width="7" height="7" x="3" y="3" rx="1" />
+      <rect width="7" height="7" x="14" y="3" rx="1" />
+      <rect width="7" height="7" x="3" y="14" rx="1" />
+      <rect width="7" height="7" x="14" y="14" rx="1" />
     </symbol>
     <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
       stroke-linejoin="round">
@@ -6410,36 +8384,28 @@
       <div class="header-row">
         <div class="header-copy">
           <h1>Scopify Mobile · V2 完整视觉稿</h1>
-          <p>视觉真源为 Scopify Web 主题与当前组件配方；Mobile 仅承担窄屏、触摸目标与 Android 系统边界的必要适配。所有页面均为静态评审状态，不执行真实业务操作。</p>
         </div>
         <span class="header-version">Web source · 3f48c849</span>
       </div>
       <nav class="filters" aria-label="页面筛选">
         <button class="filter-button" type="button" data-filter="all" aria-pressed="true">全部画面</button>
-        <button class="filter-button" type="button" data-filter="review-three">第三批 6 张</button>
-        <button class="filter-button" type="button" data-filter="time-themes">时间主题</button>
         <button class="filter-button" type="button" data-filter="home">首页</button>
         <button class="filter-button" type="button" data-filter="search">搜索</button>
         <button class="filter-button" type="button" data-filter="my">我的</button>
-        <button class="filter-button" type="button" data-filter="drawer">Drawer / Modal</button>
-        <button class="filter-button" type="button" data-filter="catalog">详情</button>
         <button class="filter-button" type="button" data-filter="profile">资料</button>
+        <button class="filter-button" type="button" data-filter="catalog">内容详情</button>
         <button class="filter-button" type="button" data-filter="player">播放器</button>
+        <button class="filter-button" type="button" data-filter="drawer">抽屉 / 弹层</button>
+        <button class="filter-button" type="button" data-filter="auth">登录</button>
         <button class="filter-button" type="button" data-filter="settings">设置</button>
         <button class="filter-button" type="button" data-filter="states">状态</button>
-        <button class="filter-button" type="button" data-filter="auth">登录</button>
       </nav>
     </div>
   </header>
 
   <main class="prototype-main">
-    <aside class="pilot-note">
-      <span class="pilot-dot"></span>
-      <div><strong>V2 设计合同</strong>同一套 Scopify Web token、媒体处理、动作层级和状态组件贯穿全部画面。旧 V1 线稿冻结保留；本文件负责完整的跨端视觉与静态状态验收。</div>
-    </aside>
-
     <div class="boards">
-      <figure class="screen-board" data-screen="time-themes" data-groups="home time-themes">
+      <figure class="screen-board" data-screen="time-themes" data-groups="home time-themes" data-gallery-start="home">
         <figcaption class="screen-caption"><strong>HOME-TIME · Web 八段时间主题</strong><span>直接映射 Web TIME_THEMES 与正式 theme
             token；点击任一主题可把 HOME-01 切到对应时间段。</span></figcaption>
         <section class="time-theme-board">
@@ -6541,91 +8507,46 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="my-music" data-groups="my shell">
-        <figcaption class="screen-caption"><strong>MY-01 · 我的 / 音乐</strong><span>资料主视觉、四个快捷动作、玻璃内容面与三项内部切换保持同一层级。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen my-screen">
-            <div class="my-atmosphere"><img src="assets/v2/avatar-profile.jpg" alt="" /></div>
-            <div class="status-bar"><span>19:37</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar">
-              <button class="icon-button" aria-label="打开菜单"><svg class="icon">
-                  <use href="#i-menu"></use>
-                </svg></button><span></span>
-              <button class="icon-button" aria-label="更多"><svg class="icon">
-                  <use href="#i-more"></use>
-                </svg></button>
-            </div>
-            <div class="content-scroll with-shell my-scroll">
-              <header class="profile-hero">
-                <div class="profile-avatar"><img src="assets/v2/avatar-profile.jpg" alt="Momo 的头像" /></div>
-                <h2>Momo_Super_Cool <span class="vip-badge">VIP</span></h2>
-                <p>音乐把漫长的夜晚变成另一种旅行。</p>
-                <div class="profile-stats">
-                  <span><strong>4</strong>关注</span><span><strong>9</strong>粉丝</span><span><strong>117</strong>喜欢</span>
-                </div>
-              </header>
-              <div class="quick-actions">
-                <span class="quick-action"><svg class="icon">
-                    <use href="#i-clock"></use>
-                  </svg>最近</span>
-                <span class="quick-action"><svg class="icon">
-                    <use href="#i-heart"></use>
-                  </svg>我喜欢</span>
-                <span class="quick-action"><svg class="icon">
-                    <use href="#i-plus"></use>
-                  </svg>创建歌单</span>
-                <span class="quick-action"><svg class="icon">
-                    <use href="#i-settings"></use>
-                  </svg>设置</span>
-              </div>
-              <section class="library-panel">
-                <div class="tabs"><span class="tab active">音乐</span><span class="tab">播客</span><span
-                    class="tab">收藏</span></div>
-                <div class="subfilters"><span class="subfilter active">最近</span><span class="subfilter">创建 3</span><span
-                    class="subfilter">收藏歌单 12</span></div>
-                <div class="track-row liked-row"><span class="liked-cover"><svg class="icon">
-                      <use href="#i-heart"></use>
-                    </svg></span><span class="media-copy"><strong>我喜欢的音乐</strong><small>117 首 · 935
-                      次播放</small></span><span class="count-pill">心动模式</span></div>
-                <div class="track-row liked-row"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
-                    class="media-copy"><strong>深夜循环</strong><small>自建歌单 · 48 首</small></span><span
-                    class="row-action"><svg class="icon">
-                      <use href="#i-more"></use>
-                    </svg></span></div>
-                <div class="track-row liked-row"><img src="assets/v2/cover-vinyl.jpg" alt="" /><span
-                    class="media-copy"><strong>独立热浪</strong><small>收藏歌单 · 89 首</small></span><span
-                    class="row-action"><svg class="icon">
-                      <use href="#i-more"></use>
-                    </svg></span></div>
-              </section>
-            </div>
-            <div class="shell-layer">
-              <div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
-                  class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg
-                    class="icon">
-                    <use href="#i-heart"></use>
-                  </svg></span><span class="mini-icon"><svg class="icon">
-                    <use href="#i-pause"></use>
-                  </svg></span></div>
-              <nav class="bottom-nav" aria-label="一级导航">
-                <span class="nav-item"><svg class="icon">
-                    <use href="#i-home"></use>
-                  </svg>首页</span>
-                <span class="nav-item"><svg class="icon">
-                    <use href="#i-search"></use>
-                  </svg>搜索</span>
-                <span class="nav-item active"><svg class="icon">
-                    <use href="#i-library"></use>
-                  </svg>我的</span>
-              </nav>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="my-music" data-groups="my shell" data-gallery-start="my">
+        <figcaption class="screen-caption"><strong>MY-01 · 我的 / 音乐</strong><span>参考沉浸资料页：完整个人 Hero + 圆角内容 Sheet；歌单默认统一为 List Item。</span></figcaption>
+        <div class="device"><section class="screen my-library-page">
+          <div class="status-bar"><span>19:37</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle" aria-label="打开菜单"><svg class="icon"><use href="#i-menu"></use></svg></button><div class="app-bar-center"><strong>我的</strong></div><button class="icon-button subtle" aria-label="设置"><svg class="icon"><use href="#i-settings"></use></svg></button></div>
+          <div class="content-scroll with-shell my-library-scroll">
+            <section class="my-library-account"><img src="assets/v2/avatar-profile.jpg" alt="Momo 的头像" /><div><strong>Momo_Super_Cool <span class="vip-badge">VIP</span></strong><small>把深夜收藏成歌单</small></div><div class="my-profile-stats"><span>4 关注</span><span>9 粉丝</span><span>117 喜欢</span></div><div class="my-profile-quick-actions"><span class="my-profile-quick"><svg class="icon"><use href="#i-clock"></use></svg>最近</span><span class="my-profile-quick"><svg class="icon"><use href="#i-library"></use></svg>本地</span><span class="my-profile-quick"><svg class="icon"><use href="#i-mic"></use></svg>识曲</span><span class="my-profile-quick"><svg class="icon"><use href="#i-user"></use></svg>会员</span></div></section>
+            <section class="my-library-sheet"><div class="tabs my-library-tabs"><span class="tab active">音乐</span><span class="tab">播客</span><span class="tab">收藏</span></div><div class="playlist-filter-shell"><div class="playlist-filter-bar" aria-label="歌单来源筛选"><span class="playlist-filter-option active">全部</span><span class="playlist-filter-option">我创建的</span><span class="playlist-filter-option">我收藏的</span><button class="playlist-filter-more" type="button" aria-label="更多：创建歌单、切换 Grid 或 List 视图" title="创建歌单 · Grid / List"><svg class="icon"><use href="#i-more"></use></svg></button></div><div class="playlist-more-popover"><span class="playlist-more-item"><svg class="icon"><use href="#i-plus"></use></svg>创建歌单</span><span class="playlist-view-row"><span>显示方式</span><span class="playlist-view-options"><span class="playlist-view-option" title="Grid"><svg class="icon"><use href="#i-grid"></use></svg></span><span class="playlist-view-option active" title="List"><svg class="icon"><use href="#i-list"></use></svg></span></span></span></div></div><div class="library-playlist-list"><article class="library-playlist-item"><span class="library-liked-art"><svg class="icon"><use href="#i-heart-filled"></use></svg></span><span class="library-playlist-copy"><strong>我喜欢的音乐</strong><small>你的歌单 · 117 首</small></span><svg class="icon"><use href="#i-more"></use></svg></article><article class="library-playlist-item"><img class="library-playlist-cover" src="assets/v2/cover-weightless.jpg" alt="深夜循环歌单封面" /><span class="library-playlist-copy"><strong>深夜循环</strong><small>你创建的 · 48 首</small></span><svg class="icon"><use href="#i-more"></use></svg></article><article class="library-playlist-item"><img class="library-playlist-cover" src="assets/v2/cover-vinyl.jpg" alt="独立热浪歌单封面" /><span class="library-playlist-copy"><strong>独立热浪</strong><small>收藏自 Neon Harbor · 89 首</small></span><svg class="icon"><use href="#i-more"></use></svg></article><article class="library-playlist-item"><img class="library-playlist-cover" src="assets/v2/cover-podcast.jpg" alt="凌晨之后歌单封面" /><span class="library-playlist-copy"><strong>凌晨之后</strong><small>你创建的 · 24 首</small></span><svg class="icon"><use href="#i-more"></use></svg></article></div></section>
+          </div>
+          <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="playlist" data-groups="catalog detail shell">
+      <figure class="screen-board" data-screen="my-podcasts" data-groups="my shell">
+        <figcaption class="screen-caption"><strong>MY-02 · 我的 / 播客</strong><span>共享完整个人 Hero 与圆角内容 Sheet，二级筛选保持轻量文字状态。</span></figcaption>
+        <div class="device"><section class="screen my-library-page">
+          <div class="status-bar"><span>19:37</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle" aria-label="打开菜单"><svg class="icon"><use href="#i-menu"></use></svg></button><div class="app-bar-center"><strong>我的</strong></div><button class="icon-button subtle" aria-label="设置"><svg class="icon"><use href="#i-settings"></use></svg></button></div>
+          <div class="content-scroll with-shell my-library-scroll">
+            <section class="my-library-account"><img src="assets/v2/avatar-profile.jpg" alt="Momo 的头像" /><div><strong>Momo_Super_Cool <span class="vip-badge">VIP</span></strong><small>把深夜收藏成歌单</small></div><div class="my-profile-stats"><span>4 关注</span><span>9 粉丝</span><span>117 喜欢</span></div><div class="my-profile-quick-actions"><span class="my-profile-quick"><svg class="icon"><use href="#i-clock"></use></svg>最近</span><span class="my-profile-quick"><svg class="icon"><use href="#i-library"></use></svg>本地</span><span class="my-profile-quick"><svg class="icon"><use href="#i-mic"></use></svg>识曲</span><span class="my-profile-quick"><svg class="icon"><use href="#i-user"></use></svg>会员</span></div></section>
+            <section class="my-library-sheet"><div class="tabs my-library-tabs"><span class="tab">音乐</span><span class="tab active">播客</span><span class="tab">收藏</span></div><div class="my-library-actions"><span class="my-library-action active"><svg class="icon"><use href="#i-radio"></use></svg>订阅 12</span><span class="my-library-action"><svg class="icon"><use href="#i-plus"></use></svg>创建 2</span><span class="my-library-action"><svg class="icon"><use href="#i-heart"></use></svg>喜欢的声音</span></div><div class="collection-section-heading"><h3>订阅的播客</h3><span>查看全部</span></div><div class="library-media-grid"><article class="library-media-card"><img src="assets/v2/cover-podcast.jpg" alt="城市夜航播客封面" /><strong>城市夜航</strong><small>8 集未听 · Neon Harbor</small></article><article class="library-media-card"><img src="assets/v2/cover-vinyl.jpg" alt="声音笔记播客封面" /><strong>声音笔记</strong><small>3 集未听 · 耳边世界</small></article></div><div class="collection-section-heading spaced"><h3>推荐的播客</h3><span>换一批</span></div><div class="library-media-grid"><article class="library-media-card"><img src="assets/v2/cover-weightless.jpg" alt="雨声电台播客封面" /><strong>雨声电台</strong><small>环境声音 · Solitude FM</small></article><article class="library-media-card"><img src="assets/v2/avatar-profile.jpg" alt="夜行漫游播客封面" /><strong>夜行漫游</strong><small>城市人文 · Neon Harbor</small></article></div></section>
+          </div>
+          <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+        </section></div>
+      </figure>
+
+      <figure class="screen-board" data-screen="my-collection" data-groups="my shell">
+        <figcaption class="screen-caption"><strong>MY-03 · 我的 / 收藏</strong><span>共享完整个人 Hero 与圆角内容 Sheet，歌手和专辑只在内容层承担主视觉。</span></figcaption>
+        <div class="device"><section class="screen my-library-page">
+          <div class="status-bar"><span>19:37</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle" aria-label="打开菜单"><svg class="icon"><use href="#i-menu"></use></svg></button><div class="app-bar-center"><strong>我的</strong></div><button class="icon-button subtle" aria-label="设置"><svg class="icon"><use href="#i-settings"></use></svg></button></div>
+          <div class="content-scroll with-shell my-library-scroll">
+            <section class="my-library-account"><img src="assets/v2/avatar-profile.jpg" alt="Momo 的头像" /><div><strong>Momo_Super_Cool <span class="vip-badge">VIP</span></strong><small>把深夜收藏成歌单</small></div><div class="my-profile-stats"><span>4 关注</span><span>9 粉丝</span><span>117 喜欢</span></div><div class="my-profile-quick-actions"><span class="my-profile-quick"><svg class="icon"><use href="#i-clock"></use></svg>最近</span><span class="my-profile-quick"><svg class="icon"><use href="#i-library"></use></svg>本地</span><span class="my-profile-quick"><svg class="icon"><use href="#i-mic"></use></svg>识曲</span><span class="my-profile-quick"><svg class="icon"><use href="#i-user"></use></svg>会员</span></div></section>
+            <section class="my-library-sheet"><div class="tabs my-library-tabs"><span class="tab">音乐</span><span class="tab">播客</span><span class="tab active">收藏</span></div><div class="collection-filters"><span class="collection-filter active">全部</span><span class="collection-filter">歌手 4</span><span class="collection-filter">专辑 12</span></div><div class="collection-content"><div class="collection-section-heading"><h3>关注的歌手</h3><span>查看全部</span></div><div class="collection-artist-grid"><article class="collection-artist-card"><img src="assets/v2/cover-podcast.jpg" alt="Bbcsr" /><strong>Bbcsr</strong><small>12.8 万听众</small></article><article class="collection-artist-card"><img src="assets/v2/avatar-profile.jpg" alt="Neon Harbor" /><strong>Neon Harbor</strong><small>8.6 万听众</small></article></div><div class="collection-section-heading spaced"><h3>收藏的专辑</h3><span>全部 12 张</span></div><div class="collection-album-grid"><article class="collection-album-card"><img src="assets/v2/cover-vinyl.jpg" alt="循环边界专辑封面" /><strong>循环边界</strong><small>Bbcsr · 2026</small></article><article class="collection-album-card"><img src="assets/v2/cover-weightless.jpg" alt="失重轨迹专辑封面" /><strong>失重轨迹</strong><small>Neon Harbor · 2025</small></article></div></div></section>
+          </div>
+          <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+        </section></div>
+      </figure>
+
+      <figure class="screen-board" data-screen="playlist" data-groups="catalog detail shell" data-gallery-start="catalog">
         <figcaption class="screen-caption"><strong>PLAYLIST-01 · 歌单详情</strong><span>图片提色 Hero、绿色主播放、弱化次级动作与透明曲目行来自 Web
             详情配方。</span></figcaption>
         <div class="device">
@@ -6657,6 +8578,9 @@
                   </svg></button>
                 <span class="secondary-action active"><svg class="icon">
                     <use href="#i-shuffle"></use>
+                  </svg></span>
+                <span class="secondary-action comment-action" data-comment-count="168" aria-label="查看歌单评论 168 条"><svg class="icon">
+                    <use href="#i-comment"></use>
                   </svg></span>
                 <span class="secondary-action"><svg class="icon">
                     <use href="#i-heart"></use>
@@ -6712,7 +8636,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="player-disc" data-groups="player immersive">
+      <figure class="screen-board" data-screen="player-disc" data-groups="player immersive" data-gallery-start="player">
         <figcaption class="screen-caption"><strong>PLAYER-01A · 完整播放页 / 唱机中心</strong><span>移除唱机外框，真实黑胶与透明磁臂独立分层；播放时旋转落针，暂停时抬臂回到右侧停放位。</span></figcaption>
         <div class="device">
           <section class="screen player-screen">
@@ -6781,7 +8705,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="login" data-groups="auth immersive login-effects">
+      <figure class="screen-board" data-screen="login" data-groups="auth immersive login-effects" data-gallery-start="auth">
         <figcaption class="screen-caption"><strong>AUTH-01A · 二维码登录 /
             等待扫码</strong><span>二维码清晰可扫，状态区只提示主要动作；页面骨架在后续状态中保持不变。</span></figcaption>
         <div class="device">
@@ -6810,7 +8734,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="login-scanned" data-groups="auth states login-effects">
+      <figure class="screen-board" data-screen="login-scanned" data-groups="auth login-effects">
         <figcaption class="screen-caption"><strong>AUTH-01B · 二维码登录 / 已扫码</strong><span>二维码原位压暗，明确告诉用户去手机端确认；Mobile
             端不出现多余按钮。</span></figcaption>
         <div class="device">
@@ -6843,7 +8767,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="login-expired" data-groups="auth states login-effects">
+      <figure class="screen-board" data-screen="login-expired" data-groups="auth login-effects">
         <figcaption class="screen-caption"><strong>AUTH-01C · 二维码登录 /
             已过期</strong><span>失效信息与唯一恢复动作覆盖在二维码上，避免用户到页面其他位置寻找刷新入口。</span></figcaption>
         <div class="device">
@@ -6876,7 +8800,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="login-success" data-groups="auth states login-effects">
+      <figure class="screen-board" data-screen="login-success" data-groups="auth login-effects">
         <figcaption class="screen-caption"><strong>AUTH-01D · 二维码登录 /
             登录成功</strong><span>二维码原位切换为明确的成功反馈，短暂停留后进入首页，不额外要求用户操作。</span></figcaption>
         <div class="device">
@@ -6909,7 +8833,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="login-network" data-groups="auth states login-effects">
+      <figure class="screen-board" data-screen="login-network" data-groups="auth login-effects">
         <figcaption class="screen-caption"><strong>AUTH-01E · 二维码登录 /
             网络不可用</strong><span>保留二维码位置与登录上下文，用局部错误反馈提供重试，不把用户踢出登录页。</span></figcaption>
         <div class="device">
@@ -6944,7 +8868,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="launch-gate" data-groups="auth states runtime review-one">
+      <figure class="screen-board" data-screen="launch-gate" data-groups="auth immersive">
         <figcaption class="screen-caption"><strong>SYS-01 · 启动门 / 本地状态恢复</strong><span>沿用 Web/Electron
             的旋转黑胶与扫光文字；启动过程只传达等待，不暴露内部恢复步骤。</span></figcaption>
         <div class="device">
@@ -6964,7 +8888,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="login-state-matrix" data-groups="auth states review-one">
+      <figure class="screen-board" data-screen="login-state-matrix" data-groups="auth">
         <figcaption class="screen-caption"><strong>AUTH · 二维码状态规范</strong><span>五种反馈改成真实移动端状态清单，统一图标、说明和动作强度。</span>
         </figcaption>
         <div class="device">
@@ -7009,7 +8933,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="search-discover" data-groups="search shell review-one search-flow"
+      <figure class="screen-board" data-screen="search-discover" data-groups="search shell search-flow" data-gallery-start="search"
         data-flow-order="1">
         <figcaption class="screen-caption"><strong>SEARCH-01 · 搜索发现 /
             默认</strong><span>搜索框直接进入顶部操作区；正文只负责内容发现，不再常驻最近搜索组件。</span></figcaption>
@@ -7061,7 +8985,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="search-dropdown" data-groups="search shell states search-flow"
+      <figure class="screen-board" data-screen="search-dropdown" data-groups="search shell search-flow"
         data-flow-order="2">
         <figcaption class="screen-caption"><strong>SEARCH-02 · 搜索发现 / 聚焦下拉</strong><span>点击顶部搜索框后，最近搜索在同一块 Web
             风格深灰浮层中展开，背景内容保持连续。</span></figcaption>
@@ -7214,7 +9138,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="my-guest" data-groups="my auth shell review-one">
+      <figure class="screen-board" data-screen="my-guest" data-groups="my shell">
         <figcaption class="screen-caption"><strong>MY-01 · 我的 / 游客</strong><span>登录价值只在 Hero
             说明一次；本机能力改为无卡片纵向列表，避免重复盒子层级。</span></figcaption>
         <div class="device">
@@ -7267,130 +9191,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="my-podcasts" data-groups="my shell review-one">
-        <figcaption class="screen-caption"><strong>MY-03 · 我的播客</strong><span>节目资料只承担识别与统计，播放动作收进单集列表，避免重复入口。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen podcasts-screen">
-            <div class="status-bar"><span>09:12</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>我的播客</strong></div><button class="icon-button subtle"><svg
-                  class="icon">
-                  <use href="#i-more"></use>
-                </svg></button>
-            </div>
-            <div class="batch-scroll">
-              <section class="podcast-collection-hero"><img src="assets/v2/cover-podcast.jpg" alt="通勤陪伴播客封面" /><span
-                  class="type-badge">YOUR PODCASTS</span>
-                <h1>通勤陪伴</h1>
-                <p>订阅 12 个节目 · 8 集未听</p>
-              </section>
-              <div class="section-heading">
-                <h3>最新单集</h3><span>查看全部</span>
-              </div>
-              <article class="podcast-card"><img src="assets/v2/cover-podcast.jpg" alt="" />
-                <div><strong>城市夜航：凌晨两点的路灯</strong><span>把日常生活重新听一遍</span><small>今天 · 42 分钟</small></div><button
-                  class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
-              <article class="podcast-card"><img src="assets/v2/cover-weightless.jpg" alt="" />
-                <div><strong>声音笔记：一场没有终点的散步</strong><span>耳边世界</span><small>昨天 · 28 分钟</small></div><button
-                  class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
-              <article class="podcast-card"><img src="assets/v2/cover-vinyl.jpg" alt="" />
-                <div><strong>深夜制作人：唱片背后的房间</strong><span>独立现场</span><small>周一 · 36 分钟</small></div><button
-                  class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
-            </div>
-            <div class="shell-layer">
-              <div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
-                  class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg
-                    class="icon">
-                    <use href="#i-heart"></use>
-                  </svg></span><span class="mini-icon"><svg class="icon">
-                    <use href="#i-pause"></use>
-                  </svg></span></div>
-              <nav class="bottom-nav"><span class="nav-item"><svg class="icon">
-                    <use href="#i-home"></use>
-                  </svg>首页</span><span class="nav-item"><svg class="icon">
-                    <use href="#i-search"></use>
-                  </svg>搜索</span><span class="nav-item active"><svg class="icon">
-                    <use href="#i-library"></use>
-                  </svg>我的</span></nav>
-            </div>
-          </section>
-        </div>
-      </figure>
-
-      <figure class="screen-board" data-screen="my-favorites" data-groups="my shell review-one">
-        <figcaption class="screen-caption"><strong>MY-04 · 收藏聚合</strong><span>收藏类型使用真实媒体缩略图、数量浮层和最近内容，不再是四个空数字盒子。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen favorites-screen">
-            <div class="status-bar"><span>09:12</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>我的收藏</strong></div><button class="icon-button subtle"><svg
-                  class="icon">
-                  <use href="#i-search"></use>
-                </svg></button>
-            </div>
-            <div class="batch-scroll">
-              <header class="favorites-intro"><span class="eyebrow">YOUR LIBRARY</span>
-                <h1>收藏</h1>
-                <p>按内容类型整理，最近更新优先。</p>
-              </header>
-              <div class="favorite-grid">
-                <article class="favorite-item"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
-                    class="favorite-count">128</span><strong>歌曲</strong><small>今天新增 2 首</small></article>
-                <article class="favorite-item"><img src="assets/v2/cover-vinyl.jpg" alt="" /><span
-                    class="favorite-count">24</span><strong>专辑</strong><small>按更新时间排序</small></article>
-                <article class="favorite-item artist"><img src="assets/v2/avatar-profile.jpg" alt="" /><span
-                    class="favorite-count">36</span><strong>歌手</strong><small>4 条新动态</small></article>
-                <article class="favorite-item"><img src="assets/v2/cover-podcast.jpg" alt="" /><span
-                    class="favorite-count">12</span><strong>播客</strong><small>8 集未听</small></article>
-              </div>
-              <div class="section-heading">
-                <h3>最近收藏</h3><span>查看全部</span>
-              </div>
-              <article class="podcast-card"><img src="assets/v2/cover-weightless.jpg" alt="" />
-                <div><strong>失重拥抱</strong><span>Bbcsr · 循环边界</span><small>今天收藏</small></div><button
-                  class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
-            </div>
-            <div class="shell-layer">
-              <div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span
-                  class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg
-                    class="icon">
-                    <use href="#i-heart"></use>
-                  </svg></span><span class="mini-icon"><svg class="icon">
-                    <use href="#i-pause"></use>
-                  </svg></span></div>
-              <nav class="bottom-nav"><span class="nav-item"><svg class="icon">
-                    <use href="#i-home"></use>
-                  </svg>首页</span><span class="nav-item"><svg class="icon">
-                    <use href="#i-search"></use>
-                  </svg>搜索</span><span class="nav-item active"><svg class="icon">
-                    <use href="#i-library"></use>
-                  </svg>我的</span></nav>
-            </div>
-          </section>
-        </div>
-      </figure>
-
-      <figure class="screen-board" data-screen="drawer-auth" data-groups="drawer review-two">
+      <figure class="screen-board" data-screen="drawer-auth" data-groups="drawer" data-gallery-start="drawer">
         <figcaption class="screen-caption"><strong>DRAWER-01 · 已登录侧栏</strong><span>沿用 Web
             的深色面板、弱边界与扁平菜单层级，移动端仅保留覆盖式抽屉几何。</span></figcaption>
         <div class="device">
@@ -7438,7 +9239,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="drawer-guest" data-groups="drawer auth review-two">
+      <figure class="screen-board" data-screen="drawer-guest" data-groups="drawer">
         <figcaption class="screen-caption"><strong>DRAWER-02 ·
             游客侧栏</strong><span>工具位置与登录态完全一致，只把账户与乐签区域收敛为一次清晰的登录邀请。</span></figcaption>
         <div class="device">
@@ -7487,7 +9288,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="drawer-vip-sign" data-groups="drawer immersive review-two">
+      <figure class="screen-board" data-screen="drawer-vip-sign" data-groups="drawer immersive">
         <figcaption class="screen-caption"><strong>DRAWER-03 · VIP 签到结果</strong><span>全屏氛围背景承载大型纵向乐签，放大封面、日期、祝福语与本月累计。</span></figcaption>
         <div class="device">
           <section class="screen vip-sign-screen">
@@ -7501,13 +9302,13 @@
                 <div class="vip-sign-tear"><span aria-hidden="true"></span></div>
                 <div class="vip-sign-summary"><div class="vip-sign-total"><strong>6<small>天</small></strong><span>本月累计打卡</span></div><div class="vip-sign-streak"><strong>4<small>天</small></strong><span>连续签到</span></div></div>
               </article>
-              <div class="vip-sign-actions"><button>保存 / 定制乐签</button><button>去分享</button></div>
+              <div class="vip-sign-actions"><button class="vip-sign-primary">保存 / 定制乐签</button><button class="vip-sign-secondary">去分享</button></div>
             </div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="drawer-sleep-timer" data-groups="drawer modal player review-two">
+      <figure class="screen-board" data-screen="drawer-sleep-timer" data-groups="drawer modal">
         <figcaption class="screen-caption"><strong>DRAWER-04 ·
             睡眠定时</strong><span>定时选项改为紧凑的时间预设，当前歌曲结束保持为独立语义，不堆成长设置列表。</span></figcaption>
         <div class="device">
@@ -7537,7 +9338,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="drawer-song-recognition" data-groups="drawer immersive review-two">
+      <figure class="screen-board" data-screen="drawer-song-recognition" data-groups="drawer immersive">
         <figcaption class="screen-caption"><strong>DRAWER-05 · 听歌识曲</strong><span>从 Drawer 进入独立的全屏识别流程，声纹舞台和停止动作占据完整沉浸空间。</span></figcaption>
         <div class="device">
           <section class="screen recognition-screen">
@@ -7556,7 +9357,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="drawer-check-update" data-groups="drawer modal settings review-two">
+      <figure class="screen-board" data-screen="drawer-check-update" data-groups="drawer modal">
         <figcaption class="screen-caption"><strong>DRAWER-06 · 检查更新</strong><span>用真实的可更新状态呈现版本、更新说明、APK
             信息与主次动作，移除调试式状态矩阵。</span></figcaption>
         <div class="device">
@@ -7590,7 +9391,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="guest-action-gate" data-groups="auth modal states review-three">
+      <figure class="screen-board" data-screen="guest-action-gate" data-groups="auth modal">
         <figcaption class="screen-caption"><strong>AUTH-03 · 游客操作门</strong><span>保留歌曲上下文，只解释一次原因；主动作统一使用“登录”。</span>
         </figcaption>
         <div class="device">
@@ -7620,7 +9421,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="create-playlist" data-groups="catalog modal review-three">
+      <figure class="screen-board" data-screen="create-playlist" data-groups="drawer modal">
         <figcaption class="screen-caption"><strong>PLAYLIST-02 · 创建歌单</strong><span>底部表单只保留名称与隐私，封面作为轻量视觉锚点。</span>
         </figcaption>
         <div class="device">
@@ -7656,7 +9457,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="recent" data-groups="catalog shell review-three">
+      <figure class="screen-board" data-screen="recent" data-groups="catalog shell">
         <figcaption class="screen-caption"><strong>RECENT-01 · 最近播放</strong><span>完整复用歌单详情的封面 Hero 与曲目列表，以最近播放的第一首歌曲作为封面和背景提色来源。</span>
         </figcaption>
         <div class="device">
@@ -7714,7 +9515,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="profile-self" data-groups="profile catalog review-three">
+      <figure class="screen-board" data-screen="profile-self" data-groups="profile" data-gallery-start="profile">
         <figcaption class="screen-caption"><strong>PROFILE-01A · 个人主页 / 自己</strong><span>最近歌曲保持连续 Row，最近歌单映射 Web 的双列 GridView；编辑资料与分享收进右上角 More。</span></figcaption>
         <div class="device">
           <section class="screen profile-v3 self-profile">
@@ -7757,7 +9558,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="profile-other" data-groups="profile catalog review-three">
+      <figure class="screen-board" data-screen="profile-other" data-groups="profile">
         <figcaption class="screen-caption"><strong>PROFILE-01B · 个人主页 / 他人</strong><span>公开歌单与本人页最近歌单共用双列 GridView；关注与分享收进右上角 More。</span>
         </figcaption>
         <div class="device">
@@ -7797,7 +9598,7 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="profile-edit" data-groups="profile modal review-three">
+      <figure class="screen-board" data-screen="profile-edit" data-groups="profile modal">
         <figcaption class="screen-caption"><strong>PROFILE-02 · 编辑资料</strong><span>覆盖式编辑页只保留后端已支持字段；输入内容与保存动作始终可见。</span>
         </figcaption>
         <div class="device">
@@ -7822,633 +9623,375 @@
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="artist" data-groups="catalog profile">
-        <figcaption class="screen-caption"><strong>ARTIST-01 · 歌手详情</strong><span>沉浸封面、关注动作与热门歌曲在一屏内建立清晰主次。</span>
-        </figcaption>
+      <figure class="screen-board" data-screen="artist" data-groups="catalog shell">
+        <figcaption class="screen-caption"><strong>ARTIST-01 · 歌手详情</strong><span>与歌单、专辑、播客使用同一详情 Hero 与 Action Station；热门歌曲保持歌曲级评论入口。</span></figcaption>
         <div class="device">
-          <section class="screen artist-hero-bg">
-            <div class="status-bar"><span>18:42</span><span class="camera-dot"></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button><span></span><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-more"></use>
-                </svg></button></div>
-            <div class="artist-scroll">
-              <section class="artist-title"><span class="type-badge">ARTIST</span>
+          <section class="screen playlist-screen artist-v4">
+            <div class="playlist-hero-bg"></div>
+            <div class="status-bar"><span>18:42</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><button class="icon-button" aria-label="返回"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>歌手</strong></div><button class="icon-button" aria-label="更多"><svg class="icon"><use href="#i-more"></use></svg></button></div>
+            <div class="content-scroll with-shell playlist-scroll artist-v4-scroll">
+              <header class="detail-hero artist-v4-hero">
+                <img class="detail-cover artist-v4-avatar" src="assets/v2/cover-podcast.jpg" alt="Bbcsr 头像" />
                 <h1>Bbcsr</h1>
-                <p>在缓慢旋转的节拍中，写下城市边缘的失重感。</p>
-                <div><button class="follow-pill">+ 关注</button><button class="icon-button"><svg class="icon">
-                      <use href="#i-play"></use>
-                    </svg></button></div>
-              </section>
-              <section class="profile-content-card">
-                <h2>热门歌曲</h2>
-                <article class="podcast-card"><b>01</b>
-                  <div><strong>失重拥抱</strong><span>循环边界</span><small>02:56</small></div><svg class="icon">
-                    <use href="#i-more"></use>
-                  </svg>
-                </article>
-                <article class="podcast-card"><b>02</b>
-                  <div><strong>凌晨折返</strong><span>单曲</span><small>03:41</small></div><svg class="icon">
-                    <use href="#i-more"></use>
-                  </svg>
-                </article>
-                <h2>专辑</h2>
-                <article class="podcast-card"><img src="assets/v2/cover-vinyl.jpg" alt="" />
-                  <div><strong>循环边界</strong><span>2026 · 8 首</span></div><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg>
-                </article>
-              </section>
-            </div>
-          </section>
-        </div>
-      </figure>
-
-      <figure class="screen-board" data-screen="album" data-groups="catalog">
-        <figcaption class="screen-caption"><strong>ALBUM-01 · 专辑详情</strong><span>封面、元数据和曲目表沿用 Web 详情页的阅读顺序。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>18:42</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>专辑</strong></div><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-more"></use>
-                </svg></button>
-            </div>
-            <div class="album-scroll">
-              <section class="album-hero"><img src="assets/v2/cover-vinyl.jpg" alt="" />
-                <div><span class="type-badge">ALBUM</span>
-                  <h1>循环边界</h1>
-                  <p>Bbcsr · 2026</p><small>8 首歌曲 · 26 分钟</small>
+                <p class="detail-description">在缓慢旋转的节拍中，写下城市边缘的失重感。</p>
+                <div class="artist-v4-meta"><span>12.8 万听众</span><span>8 张专辑</span></div>
+              </header>
+              <div class="action-station"><button class="play-button" aria-label="播放 Bbcsr 热门歌曲"><svg class="icon"><use href="#i-play"></use></svg></button><button class="follow-pill">关注</button><span class="secondary-action comment-action" data-comment-count="1.2k" aria-label="查看 Bbcsr 热门歌曲评论"><svg class="icon"><use href="#i-comment"></use></svg></span><span class="secondary-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+              <section class="artist-v4-content">
+                <div class="v4-section-heading"><h2>热门歌曲</h2><span>查看全部</span></div>
+                <div class="playlist-tracks">
+                  <div class="track-row current"><span class="playlist-track-index"><img class="playlist-playing-indicator" src="assets/v2/web-eq-playing.svg" alt="正在播放" /></span><img class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><span class="playlist-track-copy"><strong>失重拥抱</strong><span class="playlist-track-meta"><span class="track-quality-badge">Hi-Res</span><span>Bbcsr · 循环边界</span></span></span><time class="playlist-track-duration">02:56</time><span class="row-action" aria-label="失重拥抱的更多操作，含评论"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                  <div class="track-row"><span class="playlist-track-index">2</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="凌晨折返封面" /><span class="playlist-track-copy"><strong>凌晨折返</strong><span class="playlist-track-meta"><span>Bbcsr · Single</span></span></span><time class="playlist-track-duration">03:41</time><span class="row-action" aria-label="凌晨折返的更多操作，含评论"><svg class="icon"><use href="#i-more"></use></svg></span></div>
                 </div>
-              </section>
-              <div class="button-row"><button class="primary-pill"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg>播放全部</button><button class="secondary-pill"><svg class="icon">
-                    <use href="#i-heart"></use>
-                  </svg>收藏</button></div>
-              <section class="settings-card">
-                <div class="settings-row"><b>01</b><span><strong>失重拥抱</strong><small>02:56</small></span><svg
-                    class="icon">
-                    <use href="#i-more"></use>
-                  </svg></div>
-                <div class="settings-row"><b>02</b><span><strong>凌晨折返</strong><small>03:41</small></span><svg
-                    class="icon">
-                    <use href="#i-more"></use>
-                  </svg></div>
-                <div class="settings-row"><b>03</b><span><strong>回声走廊</strong><small>03:18</small></span><svg
-                    class="icon">
-                    <use href="#i-more"></use>
-                  </svg></div>
-                <div class="settings-row"><b>04</b><span><strong>低空飞行</strong><small>03:02</small></span><svg
-                    class="icon">
-                    <use href="#i-more"></use>
-                  </svg></div>
+                <div class="v4-section-heading spaced"><h2>专辑</h2><span>全部 8 张</span></div>
+                <div class="profile-playlist-grid artist-album-grid"><article class="profile-playlist-tile"><img src="assets/v2/cover-vinyl.jpg" alt="循环边界专辑封面" /><strong>循环边界</strong><small>2026 · 专辑</small></article><article class="profile-playlist-tile"><img src="assets/v2/cover-weightless.jpg" alt="失重轨迹专辑封面" /><strong>失重轨迹</strong><small>2025 · EP</small></article></div>
               </section>
             </div>
+            <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="audio-content" data-groups="catalog player">
-        <figcaption class="screen-caption"><strong>AUDIO-01 · 声音内容详情</strong><span>播客、声音节目与 DJ
-            内容共享音频详情骨架，用类型标识区分语义。</span></figcaption>
+      <figure class="screen-board" data-screen="album" data-groups="catalog shell">
+        <figcaption class="screen-caption"><strong>ALBUM-01 · 专辑详情</strong><span>与歌单共用封面 Hero、Action Station 和透明曲目 Row，只替换专辑元数据。</span></figcaption>
         <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>18:42</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>声音内容</strong></div><button class="icon-button subtle"><svg
-                  class="icon">
-                  <use href="#i-more"></use>
-                </svg></button>
-            </div>
-            <div class="page-scroll no-shell">
-              <section class="audio-hero"><img src="assets/v2/cover-podcast.jpg" alt="" /><span
-                  class="type-badge">PODCAST · EP. 48</span>
-                <h1>凌晨两点的路灯</h1>
-                <p>城市夜航 · 2026-08-23</p><button class="primary-pill"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg>从 18:20 继续</button>
+          <section class="screen playlist-screen album-v4">
+            <div class="playlist-hero-bg"></div>
+            <div class="status-bar"><span>18:42</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><button class="icon-button" aria-label="返回"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>专辑</strong></div><button class="icon-button" aria-label="更多"><svg class="icon"><use href="#i-more"></use></svg></button></div>
+            <div class="content-scroll with-shell playlist-scroll">
+              <header class="detail-hero"><img class="detail-cover" src="assets/v2/cover-vinyl.jpg" alt="循环边界专辑封面" /><h1>循环边界</h1><p class="detail-description">在电子节拍和城市夜色之间，记录一段不断返回原点的旅程。</p><div class="creator-line"><img src="assets/v2/cover-podcast.jpg" alt="" /><strong>Bbcsr</strong><span>·</span><span>专辑</span></div><div class="meta-line">2026 · 8 首歌曲 · 26 分钟</div></header>
+              <div class="action-station"><button class="play-button" aria-label="播放整张专辑"><svg class="icon"><use href="#i-play"></use></svg></button><span class="secondary-action comment-action" data-comment-count="52" aria-label="查看专辑评论 52 条"><svg class="icon"><use href="#i-comment"></use></svg></span><span class="secondary-action active"><svg class="icon"><use href="#i-shuffle"></use></svg></span><span class="secondary-action liked" aria-label="已喜欢这张专辑"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="secondary-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+              <section class="playlist-tracks" aria-label="专辑曲目列表">
+                <div class="track-row current"><span class="playlist-track-index"><img class="playlist-playing-indicator" src="assets/v2/web-eq-playing.svg" alt="正在播放" /></span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="" /><span class="playlist-track-copy"><strong>失重拥抱</strong><span class="playlist-track-meta"><span class="track-quality-badge">Hi-Res</span><span>Bbcsr · 循环边界</span></span></span><time class="playlist-track-duration">02:56</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">2</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="" /><span class="playlist-track-copy"><strong>凌晨折返</strong><span class="playlist-track-meta"><span>Bbcsr · 循环边界</span></span></span><time class="playlist-track-duration">03:41</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">3</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="" /><span class="playlist-track-copy"><strong>回声走廊</strong><span class="playlist-track-meta"><span class="track-quality-badge lossless">Lossless</span><span>Bbcsr · 循环边界</span></span></span><time class="playlist-track-duration">03:18</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">4</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="" /><span class="playlist-track-copy"><strong>低空飞行</strong><span class="playlist-track-meta"><span>Bbcsr · 循环边界</span></span></span><time class="playlist-track-duration">03:02</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
               </section>
-              <section class="surface-card">
-                <h2>本期简介</h2>
-                <p>在城市安静下来之后，和三位夜班工作者一起穿过凌晨的街道。</p>
-              </section>
-              <div class="state-matrix">
-                <div class="state-tile"><strong>声音</strong><span>可收藏 · 可评论</span></div>
-                <div class="state-tile"><strong>播客</strong><span>可订阅 · 有节目页</span></div>
-                <div class="state-tile"><strong>DJ</strong><span>显示主播与节目</span></div>
-              </div>
             </div>
+            <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+          </section>
+        </div>
+      </figure>
+
+      <figure class="screen-board" data-screen="audio-content" data-groups="catalog shell">
+        <figcaption class="screen-caption"><strong>AUDIO-01 · 声音内容详情</strong><span>对齐 Web Radio：播客 Hero 使用主封面，每期节目保留独立封面、收听进度与时长。</span></figcaption>
+        <div class="device">
+          <section class="screen playlist-screen audio-v4">
+            <div class="playlist-hero-bg"></div>
+            <div class="status-bar"><span>18:42</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><button class="icon-button" aria-label="返回"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>播客</strong></div><button class="icon-button" aria-label="更多"><svg class="icon"><use href="#i-more"></use></svg></button></div>
+            <div class="content-scroll with-shell playlist-scroll">
+              <header class="detail-hero"><img class="detail-cover" src="assets/v2/cover-podcast.jpg" alt="城市夜航播客封面" /><h1>城市夜航</h1><p class="detail-description">在城市安静下来之后，听见夜班工作者、深夜电台与街道留下的声音。</p><div class="creator-line"><img src="assets/v2/avatar-profile.jpg" alt="" /><strong>Neon Harbor</strong><span>·</span><span>播客</span></div><div class="meta-line">12 个节目 · 每周更新</div></header>
+              <div class="action-station"><button class="play-button" aria-label="播放最新节目"><svg class="icon"><use href="#i-play"></use></svg></button><span class="secondary-action comment-action" data-comment-count="86" aria-label="查看播客评论 86 条"><svg class="icon"><use href="#i-comment"></use></svg></span><span class="secondary-action liked" aria-label="已喜欢这个播客"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="secondary-action active" aria-label="随机播放已开启"><svg class="icon"><use href="#i-shuffle"></use></svg></span><span class="secondary-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+              <div class="v4-section-heading"><h2>最新节目</h2><span>查看全部</span></div>
+              <section class="audio-program-list" aria-label="播客节目列表">
+                <article class="audio-program-row"><img class="audio-program-cover" src="assets/v2/cover-podcast.jpg" alt="凌晨两点的路灯节目封面" /><span class="audio-program-copy"><strong>凌晨两点的路灯</strong><small>跟随夜班司机穿过仍然亮着的街区</small></span><span class="audio-program-status"><b class="audio-progress-badge">听到 42%</b><time>42:18</time></span><svg class="icon"><use href="#i-more"></use></svg></article>
+                <article class="audio-program-row"><img class="audio-program-cover" src="assets/v2/cover-vinyl.jpg" alt="城市醒来以前节目封面" /><span class="audio-program-copy"><strong>城市醒来以前</strong><small>清晨四点，第一班地铁发车之前</small></span><span class="audio-program-status"><b class="audio-progress-badge">未收听</b><time>36:05</time></span><svg class="icon"><use href="#i-more"></use></svg></article>
+                <article class="audio-program-row"><img class="audio-program-cover" src="assets/v2/cover-weightless.jpg" alt="末班车之后节目封面" /><span class="audio-program-copy"><strong>末班车之后</strong><small>那些没有赶上末班车的人去了哪里</small></span><span class="audio-program-status"><b class="audio-progress-badge">已听完</b><time>31:44</time></span><svg class="icon"><use href="#i-more"></use></svg></article>
+              </section>
+            </div>
+            <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
           </section>
         </div>
       </figure>
 
       <figure class="screen-board" data-screen="player-lyrics" data-groups="player immersive">
-        <figcaption class="screen-caption"><strong>PLAYER-02 · 歌词</strong><span>与唱片页同一背景体系，歌词成为唯一主视觉，控制区仍压到安全区上方。</span>
-        </figcaption>
+        <figcaption class="screen-caption"><strong>PLAYER-02 · 同步歌词中心</strong><span>与唱机中心共享同一顶部栏和下半控制，只用原文 + 翻译双行替换中央主视觉。</span></figcaption>
         <div class="device">
-          <section class="screen player-screen">
-            <div class="status-bar"><span>20:30</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-down"></use>
-                </svg></button>
-              <div class="app-bar-center"><small>正在播放</small><strong>循环边界</strong></div><button
-                class="icon-button subtle"><svg class="icon">
-                  <use href="#i-share"></use>
-                </svg></button>
-            </div>
-            <div class="lyric-stage">
-              <p class="lyric-line">在回声抵达以前</p>
-              <p class="lyric-line active">我们交换一次失重的拥抱</p>
-              <p class="lyric-line">灯光沿着车窗后退</p>
-              <p class="lyric-line">夜色把方向轻轻藏好</p>
-              <p class="lyric-line">再慢一点离开</p>
-            </div>
-            <div class="lyric-player-lower">
+          <section class="screen player-screen lyrics-v4">
+            <div class="player-background"></div>
+            <div class="status-bar"><span>20:30</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar"><button class="icon-button" aria-label="收起播放器"><svg class="icon"><use href="#i-chevron-down"></use></svg></button><div class="app-bar-center"><small>正在播放</small><strong>深夜循环</strong></div><button class="icon-button" aria-label="分享"><svg class="icon"><use href="#i-share"></use></svg></button></div>
+            <div class="player-content">
+              <section class="lyric-stage-v4" aria-label="同步歌词，轻点返回唱机中心">
+                <p class="lyric-pair"><strong>在回声抵达以前</strong><span>Before the echo reaches us</span></p>
+                <p class="lyric-pair active"><strong>我们交换一次失重的拥抱</strong><span>We trade one weightless embrace</span></p>
+                <p class="lyric-pair"><strong>灯光沿着车窗后退</strong><span>The lights fall back along the window</span></p>
+                <p class="lyric-pair"><strong>夜色把方向轻轻藏好</strong><span>The night quietly hides the way</span></p>
+              </section>
+              <div class="player-track-heading"><div><h1>失重拥抱</h1><p>Bbcsr · 关注</p></div><span class="player-like"><svg class="icon"><use href="#i-heart"></use></svg></span></div>
               <div class="progress-track" aria-label="播放进度，包含两段副歌区间"><span class="chorus-range" style="--range-start: 27%; --range-end: 40%" aria-hidden="true"></span><span class="chorus-range" style="--range-start: 60%; --range-end: 73%" aria-hidden="true"></span></div>
-              <div class="time-row"><span>01:43</span><span>02:56</span></div>
-              <div class="player-controls"><span class="control active"><svg class="icon">
-                    <use href="#i-shuffle"></use>
-                  </svg></span><span class="control"><svg class="icon">
-                    <use href="#i-skip-back"></use>
-                  </svg></span><span class="control"><span class="main-control"><svg class="icon">
-                      <use href="#i-pause"></use>
-                    </svg></span></span><span class="control"><svg class="icon">
-                    <use href="#i-skip-forward"></use>
-                  </svg></span><span class="control"><svg class="icon">
-                    <use href="#i-list"></use>
-                  </svg></span></div><span class="comment-handle"></span>
+              <div class="time-row"><span>01:43</span><span class="quality-badge">HI-RES</span><span>02:56</span></div>
+              <div class="player-controls"><span class="control active"><svg class="icon"><use href="#i-shuffle"></use></svg></span><span class="control"><svg class="icon"><use href="#i-skip-back"></use></svg></span><span class="control"><span class="main-control"><svg class="icon"><use href="#i-pause"></use></svg></span></span><span class="control"><svg class="icon"><use href="#i-skip-forward"></use></svg></span><span class="control"><svg class="icon"><use href="#i-list"></use></svg></span></div>
+              <div class="player-tools"><span class="player-tool"><svg class="icon"><use href="#i-cast"></use></svg>设备</span><span class="player-tool"><svg class="icon"><use href="#i-sliders"></use></svg>音效</span><span class="player-tool"><svg class="icon"><use href="#i-clock"></use></svg>定时</span><span class="player-tool"><strong>HQ</strong>音质</span><span class="player-tool"><svg class="icon"><use href="#i-more"></use></svg>更多</span></div>
+              <span class="comment-handle" aria-label="上滑查看评论"></span>
             </div>
           </section>
         </div>
       </figure>
 
       <figure class="screen-board" data-screen="queue" data-groups="player modal">
-        <figcaption class="screen-caption"><strong>PLAYER-03 · 播放队列</strong><span>队列以播放器上方的持久底部表呈现，突出当前歌曲和拖动顺序。</span>
-        </figcaption>
+        <figcaption class="screen-caption"><strong>PLAYER-03 · 播放队列</strong><span>曲目完整复用详情页 Row，正在播放歌曲直接停留在队列原位置并以绿色波形标记。</span></figcaption>
         <div class="device">
-          <section class="screen modal-context">
-            <div class="status-bar"><span>20:30</span><span class="camera-dot"></span></div>
-            <div class="bottom-sheet queue-sheet"><span class="sheet-handle"></span>
-              <div class="modal-header">
-                <div><small>UP NEXT</small>
-                  <h1>播放队列 · 12</h1>
-                </div><button class="modal-close"><svg class="icon">
-                    <use href="#i-x"></use>
-                  </svg></button>
+          <section class="screen queue-v4">
+            <div class="player-background"></div>
+            <div class="status-bar"><span>20:30</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <section class="queue-sheet-v4">
+              <span class="sheet-handle"></span>
+              <header class="queue-v4-header">
+                <div><h1>播放队列</h1><span>共 12 首 · 可长按调整顺序</span></div>
+                <button class="modal-close" aria-label="关闭队列"><svg class="icon"><use href="#i-x"></use></svg></button>
+              </header>
+              <div class="queue-mode-bar">
+                <span class="active"><svg class="icon"><use href="#i-shuffle"></use></svg>随机播放</span>
+                <span><svg class="icon"><use href="#i-list"></use></svg>循环队列</span>
               </div>
-              <div class="queue-now"><img src="assets/v2/cover-weightless.jpg" alt="" />
-                <div><small>正在播放</small><strong>失重拥抱</strong><span>Bbcsr</span></div><svg class="icon">
-                  <use href="#i-volume"></use>
-                </svg>
+              <section class="playlist-tracks" aria-label="播放队列曲目">
+                <div class="track-row"><span class="playlist-track-index">1</span><img class="playlist-track-cover" src="assets/v2/cover-podcast.jpg" alt="城市频率封面" /><span class="playlist-track-copy"><strong>城市频率</strong><span class="playlist-track-meta"><span>Neon Harbor · 夜航</span></span></span><time class="playlist-track-duration">04:29</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">2</span><img class="playlist-track-cover" src="assets/v2/cover-vinyl.jpg" alt="Dissolve 封面" /><span class="playlist-track-copy"><strong>Dissolve</strong><span class="playlist-track-meta"><span class="track-quality-badge lossless">Lossless</span><span>Absofacto</span></span></span><time class="playlist-track-duration">03:44</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row current" aria-current="true"><span class="playlist-track-index"><img class="playlist-playing-indicator" src="assets/v2/web-eq-playing.svg" alt="正在播放" /></span><img class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><span class="playlist-track-copy"><strong>失重拥抱</strong><span class="playlist-track-meta"><span class="track-quality-badge">Hi-Res</span><span>Bbcsr · 循环边界</span></span></span><time class="playlist-track-duration">02:56</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">4</span><img class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="Moon River 封面" /><span class="playlist-track-copy"><strong>Moon River</strong><span class="playlist-track-meta"><span>Frank Ocean · Single</span></span></span><time class="playlist-track-duration">03:08</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+                <div class="track-row"><span class="playlist-track-index">5</span><img class="playlist-track-cover" src="assets/v2/cover-weightless.jpg" alt="清晨以前封面" /><span class="playlist-track-copy"><strong>清晨以前</strong><span class="playlist-track-meta"><span>Bbcsr · Single</span></span></span><time class="playlist-track-duration">03:52</time><span class="row-action"><svg class="icon"><use href="#i-more"></use></svg></span></div>
+              </section>
+            </section>
+          </section>
+        </div>
+      </figure>
+
+      <figure class="screen-board" data-screen="comments" data-groups="catalog modal">
+        <figcaption class="screen-caption"><strong>COMMENT-01 · 评论</strong><span>由歌单、专辑、播客和歌曲的统一评论入口进入；内容摘要固定在顶部，热门与最新并列。</span></figcaption>
+        <div class="device">
+          <section class="screen comments-v4">
+            <div class="status-bar"><span>20:30</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+            <div class="app-bar">
+              <button class="icon-button subtle" aria-label="收起评论"><svg class="icon"><use href="#i-chevron-down"></use></svg></button>
+              <div class="app-bar-center"><strong>评论 · 428</strong></div>
+              <button class="icon-button subtle" aria-label="更多评论操作"><svg class="icon"><use href="#i-more"></use></svg></button>
+            </div>
+            <div class="comments-v4-scroll">
+              <div class="comment-song-v4">
+                <img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" />
+                <div><strong>失重拥抱</strong><small>Bbcsr · 深夜循环</small></div>
+                <svg class="icon"><use href="#i-chevron-right"></use></svg>
               </div>
-              <h2 class="section-title">接下来播放</h2>
-              <div class="queue-row"><b>02</b><span><strong>凌晨折返</strong><small>Bbcsr</small></span><svg class="icon">
-                  <use href="#i-menu"></use>
-                </svg></div>
-              <div class="queue-row"><b>03</b><span><strong>低空飞行</strong><small>Neon Harbor</small></span><svg
-                  class="icon">
-                  <use href="#i-menu"></use>
-                </svg></div>
-              <div class="queue-row"><b>04</b><span><strong>回声走廊</strong><small>Solitude FM</small></span><svg
-                  class="icon">
-                  <use href="#i-menu"></use>
-                </svg></div>
-              <div class="queue-row"><b>05</b><span><strong>清晨以前</strong><small>Bbcsr</small></span><svg class="icon">
-                  <use href="#i-menu"></use>
-                </svg></div>
+              <div class="comment-tabs-v4"><span class="active">热门评论</span><span>最新评论</span></div>
+              <article class="comment-item-v4">
+                <img src="assets/v2/avatar-profile.jpg" alt="" />
+                <div>
+                  <div class="comment-author-v4"><strong>远处的灯</strong><span class="comment-like-v4"><svg class="icon"><use href="#i-heart"></use></svg>128</span></div>
+                  <p>副歌像凌晨回家的那一段路，安静，但并不孤单。</p>
+                  <small>8 月 22 日 · 上海 · 回复</small>
+                  <div class="comment-reply-v4"><strong>海盐频率：</strong>那一小段鼓点一进来，整首歌就亮了。</div>
+                </div>
+              </article>
+              <article class="comment-item-v4">
+                <img src="assets/v2/cover-podcast.jpg" alt="" />
+                <div>
+                  <div class="comment-author-v4"><strong>海盐频率</strong><span class="comment-like-v4"><svg class="icon"><use href="#i-heart"></use></svg>42</span></div>
+                  <p>戴耳机听的时候，能感觉声音从很远的地方慢慢靠近。</p>
+                  <small>8 月 20 日 · 杭州 · 回复</small>
+                </div>
+              </article>
+              <article class="comment-item-v4">
+                <img src="assets/v2/cover-vinyl.jpg" alt="" />
+                <div>
+                  <div class="comment-author-v4"><strong>十二点以后</strong><span class="comment-like-v4"><svg class="icon"><use href="#i-heart"></use></svg>31</span></div>
+                  <p>第二遍开始注意到背景里那条很轻的合成器，像车窗外掠过的灯。</p>
+                  <small>8 月 19 日 · 北京 · 回复</small>
+                </div>
+              </article>
+              <article class="comment-item-v4">
+                <img src="assets/v2/cover-weightless.jpg" alt="" />
+                <div>
+                  <div class="comment-author-v4"><strong>缓慢失重</strong><span class="comment-like-v4"><svg class="icon"><use href="#i-heart"></use></svg>18</span></div>
+                  <p>最后十秒没有急着结束，给整首歌留了一点呼吸。</p>
+                  <small>8 月 18 日 · 成都 · 回复</small>
+                </div>
+              </article>
+              <article class="comment-item-v4">
+                <img src="assets/v2/avatar-profile.jpg" alt="" />
+                <div>
+                  <div class="comment-author-v4"><strong>回声收件箱</strong><span class="comment-like-v4"><svg class="icon"><use href="#i-heart"></use></svg>9</span></div>
+                  <p>今晚的单曲循环。</p>
+                  <small>8 月 17 日 · 南京 · 回复</small>
+                </div>
+              </article>
+            </div>
+            <div class="comment-composer-v4">
+              <div class="composer-input">写下你的评论…</div>
+              <button aria-label="发送评论"><svg class="icon"><use href="#i-send"></use></svg></button>
             </div>
           </section>
         </div>
       </figure>
 
-      <figure class="screen-board" data-screen="comments" data-groups="player modal states">
-        <figcaption class="screen-caption"><strong>COMMENT-01 · 评论</strong><span>歌曲摘要、热门/最新排序、回复层级和输入器构成完整静态状态。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>20:30</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-down"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>评论 · 428</strong></div><button class="icon-button subtle"><svg
-                  class="icon">
-                  <use href="#i-more"></use>
-                </svg></button>
-            </div>
-            <div class="comments-scroll">
-              <div class="song-summary"><img src="assets/v2/cover-weightless.jpg" alt="" />
-                <div><strong>失重拥抱</strong><span>Bbcsr · 循环边界</span></div><svg class="icon">
-                  <use href="#i-chevron-right"></use>
-                </svg>
-              </div>
-              <div class="segmented-control"><button class="active">热门</button><button>最新</button></div>
-              <article class="comment-row"><img src="assets/v2/avatar-profile.jpg" alt="" />
-                <div><strong>远处的灯</strong>
-                  <p>副歌像凌晨回家的那一段路，安静但不孤单。</p><small>8 月 22 日 · 上海 · 128 赞</small>
-                </div>
-              </article>
-              <article class="comment-row"><img src="assets/v2/cover-podcast.jpg" alt="" />
-                <div><strong>海盐频率</strong>
-                  <p>鼓点进来的位置太舒服了。</p><small>8 月 20 日 · 42 赞 · 3 回复</small>
-                </div>
-              </article>
-            </div>
-            <div class="comment-composer">
-              <div class="composer-input">写下你的评论…</div><button><svg class="icon">
-                  <use href="#i-send"></use>
-                </svg></button>
-            </div>
-          </section>
-        </div>
-      </figure>
-
-      <figure class="screen-board" data-screen="settings-index" data-groups="settings">
-        <figcaption class="screen-caption"><strong>SETTINGS-01 · 设置索引</strong><span>按通用、播放、网络、存储与关于分组，复用 Web
-            的表面与弱分隔线。</span></figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>设置</strong></div><span></span>
-            </div>
-            <div class="page-scroll no-shell">
-              <p class="settings-group-title">应用</p>
-              <div class="settings-card">
-                <div class="settings-row"><svg class="icon">
-                    <use href="#i-sliders"></use>
-                  </svg><span><strong>通用</strong><small>外观、语言与通知</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg><span><strong>播放</strong><small>音质、淡入淡出与耳机</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><svg class="icon">
-                    <use href="#i-wifi"></use>
-                  </svg><span><strong>网络与服务</strong><small>服务器地址与连接状态</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><svg class="icon">
-                    <use href="#i-database"></use>
-                  </svg><span><strong>存储</strong><small>缓存与下载内容</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-              </div>
-              <p class="settings-group-title">Scopify</p>
-              <div class="settings-card">
-                <div class="settings-row"><svg class="icon">
-                    <use href="#i-info"></use>
-                  </svg><span><strong>关于</strong><small>版本、开源许可与隐私</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-              </div>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="settings-index" data-groups="settings" data-gallery-start="settings">
+        <figcaption class="screen-caption"><strong>SETTINGS-01 · 设置索引</strong><span>系统列表层级承载五个分组；图标、说明和进入动作复用同一设置行。</span></figcaption>
+        <div class="device"><section class="screen page-screen settings-v2-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>设置</strong></div><span></span></div>
+          <div class="page-scroll no-shell settings-v2-scroll">
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">应用偏好</h2><div class="settings-v2-panel">
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-sliders"></use></svg></span><span class="settings-v2-row-copy"><strong>通用</strong><small>界面语言、主题与动态效果</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div>
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-play"></use></svg></span><span class="settings-v2-row-copy"><strong>播放</strong><small>音质、蜂窝网络与睡眠定时</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div>
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-wifi"></use></svg></span><span class="settings-v2-row-copy"><strong>网络与服务</strong><small>后端服务与请求策略</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div>
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-database"></use></svg></span><span class="settings-v2-row-copy"><strong>存储</strong><small>页面缓存与播放数据缓存</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div>
+            </div></section>
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">Scopify</h2><div class="settings-v2-panel"><div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-info"></use></svg></span><span class="settings-v2-row-copy"><strong>关于</strong><small>版本、源代码、许可与隐私</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div></div></section>
+          </div>
+        </section></div>
       </figure>
 
       <figure class="screen-board" data-screen="settings-general" data-groups="settings">
-        <figcaption class="screen-caption"><strong>SETTINGS-02 · 通用</strong><span>深色主题为当前唯一设计目标，同时保留语言、通知和启动行为。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>通用</strong></div><span></span>
-            </div>
-            <div class="page-scroll no-shell">
-              <p class="settings-group-title">外观</p>
-              <div class="settings-card">
-                <div class="settings-row"><span><strong>主题</strong><small>深色</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><span><strong>跟随时段氛围</strong><small>首页顶部使用 8 段渐变</small></span><span
-                    class="switch on"></span></div>
-              </div>
-              <p class="settings-group-title">偏好</p>
-              <div class="settings-card">
-                <div class="settings-row"><span><strong>语言</strong><small>简体中文</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><span><strong>新内容通知</strong><small>关注歌手与播客更新</small></span><span
-                    class="switch on"></span></div>
-                <div class="settings-row"><span><strong>启动后继续播放</strong><small>默认关闭</small></span><span
-                    class="switch"></span></div>
-              </div>
-            </div>
-          </section>
-        </div>
+        <figcaption class="screen-caption"><strong>SETTINGS-02 · 通用</strong><span>沿用 Web 的标题—说明—控件层级，深色为本轮选中态，不额外绘制浅色页面。</span></figcaption>
+        <div class="device"><section class="screen page-screen settings-v2-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>通用</strong></div><span></span></div>
+          <div class="page-scroll no-shell settings-v2-scroll">
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">应用与显示</h2><div class="settings-v2-panel">
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>界面语言</strong><small>支持简体中文、繁體中文和英语</small></span><span class="settings-v2-value">简体中文 <svg class="settings-v2-chevron"><use href="#i-chevron-down"></use></svg></span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>界面主题</strong><small>切换浅色、暗色或跟随系统模式</small></span><span class="settings-v2-value">暗色 <svg class="settings-v2-chevron"><use href="#i-chevron-down"></use></svg></span></div>
+            </div></section>
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">辅助体验</h2><div class="settings-v2-panel"><div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>减少动态效果</strong><small>降低页面移动、唱片旋转和连续动画</small></span><span class="settings-v2-switch"></span></div></div></section>
+          </div>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="settings-playback" data-groups="settings player">
-        <figcaption class="screen-caption"><strong>SETTINGS-03 · 播放</strong><span>音质和播放行为只描述当前客户端能控制的能力。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>播放</strong></div><span></span>
-            </div>
-            <div class="page-scroll no-shell">
-              <p class="settings-group-title">音质</p>
-              <div class="settings-card">
-                <div class="settings-row"><span><strong>在线播放音质</strong><small>极高 · 320 kbps</small></span><svg
-                    class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><span><strong>移动网络降低音质</strong><small>节省流量</small></span><span
-                    class="switch on"></span></div>
-              </div>
-              <p class="settings-group-title">播放行为</p>
-              <div class="settings-card">
-                <div class="settings-row"><span><strong>无缝播放</strong><small>曲目切换不中断</small></span><span
-                    class="switch on"></span></div>
-                <div class="settings-row"><span><strong>耳机拔出时暂停</strong><small>推荐</small></span><span
-                    class="switch on"></span></div>
-                <div class="settings-row"><span><strong>记住播放队列</strong><small>下次启动恢复</small></span><span
-                    class="switch on"></span></div>
-              </div>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="settings-playback" data-groups="settings">
+        <figcaption class="screen-caption"><strong>SETTINGS-03 · 播放</strong><span>音质、队列和设备行为集中管理，不展示 V1 不支持的下载能力。</span></figcaption>
+        <div class="device"><section class="screen page-screen settings-v2-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>播放</strong></div><span></span></div>
+          <div class="page-scroll no-shell settings-v2-scroll">
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">音质</h2><div class="settings-v2-panel">
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>默认播放音质</strong><small>Wi-Fi 下在线播放使用的音质</small></span><span class="settings-v2-value">极高 · 320 kbps <svg class="settings-v2-chevron"><use href="#i-chevron-down"></use></svg></span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>蜂窝网络策略</strong><small>移动数据环境下的音质选择</small></span><span class="settings-v2-value">自动降低 <svg class="settings-v2-chevron"><use href="#i-chevron-down"></use></svg></span></div>
+            </div></section>
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">播放</h2><div class="settings-v2-panel"><div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>睡眠定时</strong><small>到期停止播放，不清空当前队列</small></span><span class="settings-v2-value">未开启 <svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></span></div></div></section>
+            <div class="settings-v2-note"><svg class="icon"><use href="#i-volume"></use></svg><span><strong>支持 Android 后台播放</strong><small>通知栏、锁屏和媒体按键控制同一条设备本地队列。</small></span></div>
+          </div>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="settings-network" data-groups="settings states">
-        <figcaption class="screen-caption"><strong>SETTINGS-04 ·
-            网络与服务</strong><span>服务地址、连接结果和诊断动作集中展示，失败时保留可恢复路径。</span></figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>网络与服务</strong></div><button class="compact-button">保存</button>
-            </div>
-            <div class="page-scroll no-shell"><label class="setting-field"><span>Scopify 服务地址</span>
-                <div class="setting-input">https://music.example.com</div><small>仅接受 HTTPS 或本地开发地址</small>
-              </label>
-              <div class="connection-state"><span></span>连接正常 · 延迟 46 ms</div>
-              <p class="settings-group-title">网络偏好</p>
-              <div class="settings-card">
-                <div class="settings-row"><span><strong>仅 Wi-Fi 下载</strong><small>保护移动数据</small></span><span
-                    class="switch on"></span></div>
-                <div class="settings-row"><span><strong>允许局域网服务</strong><small>开发环境</small></span><span
-                    class="switch"></span></div>
-              </div><button class="secondary-pill"><svg class="icon">
-                  <use href="#i-refresh"></use>
-                </svg>重新测试连接</button>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="settings-network" data-groups="settings">
+        <figcaption class="screen-caption"><strong>SETTINGS-04 · 网络与服务</strong><span>完整 URL、解析信息、安全状态与连接诊断在一页内闭环。</span></figcaption>
+        <div class="device"><section class="screen page-screen settings-v2-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>网络与服务</strong></div><button class="compact-button">保存</button></div>
+          <div class="page-scroll no-shell settings-v2-scroll">
+            <label class="settings-v2-field"><span>Scopify 服务地址</span><div class="settings-v2-input">https://music.example.com:443</div><small class="settings-v2-helper">公共地址必须使用 HTTPS；本地私网 HTTP 会明确标注风险。</small></label>
+            <div class="settings-v2-endpoint"><span>协议<b>HTTPS</b></span><span>主机<b>music.example.com</b></span><span>端口<b>443</b></span></div>
+            <div class="settings-v2-connection"><strong>● 连接正常</strong><span>46 ms · Backend v2.8.1</span></div>
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">网络 <small>安全连接</small></h2><div class="settings-v2-panel">
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>连接测试</strong><small>使用当前地址发送 Ping 请求</small></span><span class="settings-v2-value"><svg class="settings-v2-chevron"><use href="#i-radio"></use></svg> Ping</span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>超时时间</strong><small>请求超时时间，单位毫秒</small></span><span class="settings-v2-value">12000 ms</span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>随机中国 IP</strong><small>用于绕过部分地域限制</small></span><span class="settings-v2-value">关闭 <svg class="settings-v2-chevron"><use href="#i-chevron-down"></use></svg></span></div>
+            </div></section>
+            <div class="settings-v2-actions"><button class="settings-v2-secondary"><svg class="icon"><use href="#i-refresh"></use></svg>恢复默认地址</button><button class="settings-v2-primary"><svg class="icon"><use href="#i-check"></use></svg>保存更改</button></div>
+          </div>
+        </section></div>
       </figure>
 
       <figure class="screen-board" data-screen="settings-storage" data-groups="settings">
-        <figcaption class="screen-caption"><strong>SETTINGS-05 · 存储</strong><span>把缓存与离线下载分开统计，清理操作明确说明影响范围。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>存储</strong></div><span></span>
-            </div>
-            <div class="page-scroll no-shell">
-              <section class="surface-card">
-                <h2>已使用 1.8 GB</h2>
-                <p>设备剩余空间 48.2 GB</p>
-                <div class="storage-meter"><span></span></div>
-                <div class="state-matrix">
-                  <div class="state-tile"><strong>1.2 GB</strong><span>离线音乐</span></div>
-                  <div class="state-tile"><strong>482 MB</strong><span>封面与音频缓存</span></div>
-                  <div class="state-tile"><strong>118 MB</strong><span>其他数据</span></div>
-                </div>
-              </section>
-              <div class="settings-card">
-                <div class="settings-row"><span><strong>下载音质</strong><small>极高 · 320 kbps</small></span><svg
-                    class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><span><strong>缓存上限</strong><small>2 GB</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-              </div><button class="secondary-pill">清除缓存 · 482 MB</button>
-            </div>
-          </section>
-        </div>
+        <figcaption class="screen-caption"><strong>SETTINGS-05 · 存储</strong><span>只统计可重建的页面、图片与临时播放缓存；V1 不声明离线下载。</span></figcaption>
+        <div class="device"><section class="screen page-screen settings-v2-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>存储</strong></div><span></span></div>
+          <div class="page-scroll no-shell settings-v2-scroll">
+            <section class="settings-v2-storage-summary"><h2>98 MB</h2><p>缓存数据占用 · 总上限 320 MB</p><div class="settings-v2-meter"><i></i><i></i></div><div class="settings-v2-legend"><span style="color:#1ed760">页面缓存 86 MB</span><span style="color:#7b61ff">播放数据 12 MB</span></div></section>
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">页面缓存 <small>歌单、专辑、歌手与搜索</small></h2><div class="settings-v2-panel">
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>启用页面缓存</strong><small>加快再次打开内容页面的速度</small></span><span class="settings-v2-switch on"></span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>页面缓存上限</strong><small>超过上限时优先移除较旧内容</small></span><span class="settings-v2-value">256 MB</span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>缓存时间</strong><small>页面 30 分钟 · 搜索 5 分钟</small></span><span class="settings-v2-value">编辑</span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>数据占用</strong><small>已使用 86 MB / 256 MB</small></span><span class="settings-v2-value">管理 <svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></span></div>
+            </div></section>
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">播放数据缓存 <small>不包含音频文件</small></h2><div class="settings-v2-panel">
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>启用播放数据缓存</strong><small>保存临时播放地址与在线歌词</small></span><span class="settings-v2-switch on"></span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>播放缓存上限</strong><small>超过上限时优先移除较旧数据</small></span><span class="settings-v2-value">64 MB</span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>最多缓存歌曲数</strong><small>播放地址和歌词共同计算</small></span><span class="settings-v2-value">200 首</span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>保留时间</strong><small>播放地址 15 分钟 · 歌词 24 小时</small></span><span class="settings-v2-value">编辑</span></div>
+              <div class="settings-v2-row plain"><span class="settings-v2-row-copy"><strong>数据占用</strong><small>已使用 12 MB / 64 MB</small></span><span class="settings-v2-value">管理 <svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></span></div>
+            </div></section>
+            <div class="settings-v2-actions"><button class="settings-v2-secondary">清理缓存</button></div>
+          </div>
+        </section></div>
       </figure>
 
       <figure class="screen-board" data-screen="settings-about" data-groups="settings">
-        <figcaption class="screen-caption"><strong>SETTINGS-06 · 关于</strong><span>品牌、版本、许可和隐私入口保持克制，不加入营销内容。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>关于</strong></div><span></span>
-            </div>
-            <div class="page-scroll no-shell">
-              <section class="about-brand"><img src="assets/v2/scopify-mark.png" alt="" />
-                <h1>Scopify Mobile</h1>
-                <p>Version 2.0.0 · Android</p><small>一个专注于音乐发现与播放体验的客户端。</small>
-              </section>
-              <div class="settings-card">
-                <div class="settings-row"><span><strong>开源许可</strong><small>第三方软件与字体</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><span><strong>隐私说明</strong><small>数据与权限用途</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-                <div class="settings-row"><span><strong>检查更新</strong><small>已是最新版本</small></span><svg class="icon">
-                    <use href="#i-chevron-right"></use>
-                  </svg></div>
-              </div>
-              <p class="page-subtitle">© 2026 Scopify contributors</p>
-            </div>
-          </section>
-        </div>
+        <figcaption class="screen-caption"><strong>SETTINGS-06 · 关于</strong><span>品牌与版本作为唯一主视觉，更新、许可、源代码和隐私使用同一轻量列表。</span></figcaption>
+        <div class="device"><section class="screen page-screen settings-v2-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>关于</strong></div><span></span></div>
+          <div class="page-scroll no-shell settings-v2-scroll settings-v2-about-scroll">
+            <section class="settings-v2-about"><img src="assets/v2/scopify-mark.png" alt="Scopify" /><h1>Scopify Mobile</h1><p>2.0.0 · Build 240824 · Android</p><small>独立移动客户端<br />与 Web 共用服务，但拥有自己的播放与设置。</small></section>
+            <section class="settings-v2-section"><h2 class="settings-v2-section-title">应用信息</h2><div class="settings-v2-panel">
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-refresh"></use></svg></span><span class="settings-v2-row-copy"><strong>检查更新</strong><small>GitHub Releases</small></span><span class="settings-v2-badge success"><i class="settings-v2-dot"></i>已是最新</span></div>
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-globe"></use></svg></span><span class="settings-v2-row-copy"><strong>源代码</strong><small>查看项目与贡献者</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div>
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-info"></use></svg></span><span class="settings-v2-row-copy"><strong>开源许可</strong><small>第三方软件、图标与字体</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div>
+              <div class="settings-v2-row"><span class="settings-v2-row-icon"><svg class="icon"><use href="#i-lock"></use></svg></span><span class="settings-v2-row-copy"><strong>隐私说明</strong><small>缓存、凭据与系统权限用途</small></span><svg class="settings-v2-chevron"><use href="#i-chevron-right"></use></svg></div>
+            </div></section>
+            <p class="page-subtitle">© 2026 Scopify contributors</p>
+          </div>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="state-home-skeleton" data-groups="states home">
-        <figcaption class="screen-caption"><strong>STATE-01 · 首页骨架</strong><span>保留时段渐变与真实布局节奏，只隐藏内容语义。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen home-screen" data-time="evening">
-            <div class="status-bar"><span>19:42</span><span class="camera-dot"></span><span class="system-icons"><i
-                  class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
-            <div class="app-bar"><span></span><span></span><span></span></div>
-            <div class="page-scroll no-shell">
-              <div class="skeleton skeleton-title"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton-row">
-                <div class="skeleton skeleton-cover"></div>
-                <div class="skeleton skeleton-cover"></div>
-              </div>
-              <div class="skeleton skeleton-subtitle"></div>
-              <div class="skeleton-list">
-                <div class="skeleton skeleton-track"></div>
-                <div class="skeleton skeleton-track"></div>
-                <div class="skeleton skeleton-track"></div>
-              </div>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="state-home-skeleton" data-groups="states shell" data-gallery-start="states">
+        <figcaption class="screen-caption"><strong>STATE-01 · 首页骨架</strong><span>保留首页的时段氛围、快捷入口、Banner、内容条带与稳定底部导航；无播放上下文时不渲染迷你播放器。</span></figcaption>
+        <div class="device"><section class="screen home-screen state-home-skeleton-screen" data-time="evening">
+          <div class="status-bar"><span>19:42</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button" aria-label="打开菜单"><svg class="icon"><use href="#i-menu"></use></svg></button><div class="home-title">晚上好，Momo</div><button class="icon-button" aria-label="搜索"><svg class="icon"><use href="#i-search"></use></svg></button></div>
+          <div class="content-scroll state-home-skeleton-scroll">
+            <div class="state-skeleton state-skeleton-greeting"></div>
+            <div class="shortcut-grid"><span class="state-skeleton state-skeleton-shortcut"></span><span class="state-skeleton state-skeleton-shortcut"></span><span class="state-skeleton state-skeleton-shortcut"></span><span class="state-skeleton state-skeleton-shortcut"></span></div>
+            <section class="home-section"><div class="section-heading"><span class="state-skeleton state-skeleton-heading"></span><span class="state-skeleton state-skeleton-meta"></span></div><div class="state-skeleton state-skeleton-feature"></div></section>
+            <section class="home-section"><div class="section-heading"><span class="state-skeleton state-skeleton-heading"></span><span class="state-skeleton state-skeleton-meta"></span></div><div class="state-skeleton-media-strip"><div class="state-skeleton-media-card"><span class="state-skeleton state-skeleton-media-art"></span><span class="state-skeleton state-skeleton-line"></span><span class="state-skeleton state-skeleton-line short"></span></div><div class="state-skeleton-media-card"><span class="state-skeleton state-skeleton-media-art"></span><span class="state-skeleton state-skeleton-line"></span><span class="state-skeleton state-skeleton-line short"></span></div><div class="state-skeleton-media-card"><span class="state-skeleton state-skeleton-media-art"></span><span class="state-skeleton state-skeleton-line"></span><span class="state-skeleton state-skeleton-line short"></span></div></div></section>
+          </div>
+          <div class="shell-layer"><nav class="bottom-nav" aria-label="一级导航"><span class="nav-item active"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="state-detail-skeleton" data-groups="states catalog">
-        <figcaption class="screen-caption"><strong>STATE-02 · 详情骨架</strong><span>封面、主信息与曲目占位严格对应最终详情布局。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button><span></span><span></span></div>
-            <div class="page-scroll no-shell">
-              <div class="album-hero">
-                <div class="skeleton skeleton-cover"></div>
-                <div>
-                  <div class="skeleton skeleton-subtitle"></div>
-                  <div class="skeleton skeleton-title"></div>
-                  <div class="skeleton skeleton-text"></div>
-                </div>
-              </div>
-              <div class="skeleton-list">
-                <div class="skeleton skeleton-track"></div>
-                <div class="skeleton skeleton-track"></div>
-                <div class="skeleton skeleton-track"></div>
-                <div class="skeleton skeleton-track"></div>
-              </div>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="state-detail-skeleton" data-groups="states shell">
+        <figcaption class="screen-caption"><strong>STATE-02 · 详情骨架</strong><span>封面、标题、Action Station 与曲目行严格映射歌单详情；稳定的迷你播放器和底部导航继续可用。</span></figcaption>
+        <div class="device"><section class="screen state-detail-skeleton-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle" aria-label="返回"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>歌单</strong></div><button class="icon-button subtle" aria-label="更多"><svg class="icon"><use href="#i-more"></use></svg></button></div>
+          <div class="content-scroll with-shell state-detail-skeleton-scroll"><section class="state-detail-skeleton-hero"><span class="state-skeleton state-detail-skeleton-cover"></span><span class="state-skeleton state-skeleton-line"></span><span class="state-skeleton state-skeleton-line"></span></section><div class="state-skeleton-action-row"><span class="state-skeleton"></span><span class="state-skeleton"></span><span class="state-skeleton"></span><span class="state-skeleton"></span></div><div class="state-skeleton-track-list"><div class="state-skeleton-track"><span class="state-skeleton state-skeleton-index"></span><span class="state-skeleton state-skeleton-cover-sm"></span><span class="state-skeleton-track-copy"><i class="state-skeleton state-skeleton-line"></i><i class="state-skeleton state-skeleton-line"></i></span><span class="state-skeleton state-skeleton-more"></span></div><div class="state-skeleton-track"><span class="state-skeleton state-skeleton-index"></span><span class="state-skeleton state-skeleton-cover-sm"></span><span class="state-skeleton-track-copy"><i class="state-skeleton state-skeleton-line"></i><i class="state-skeleton state-skeleton-line"></i></span><span class="state-skeleton state-skeleton-more"></span></div><div class="state-skeleton-track"><span class="state-skeleton state-skeleton-index"></span><span class="state-skeleton state-skeleton-cover-sm"></span><span class="state-skeleton-track-copy"><i class="state-skeleton state-skeleton-line"></i><i class="state-skeleton state-skeleton-line"></i></span><span class="state-skeleton state-skeleton-more"></span></div></div></div>
+          <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav" aria-label="一级导航"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+        </section></div>
       </figure>
 
       <figure class="screen-board" data-screen="state-blocking-error" data-groups="states">
-        <figcaption class="screen-caption"><strong>STATE-03 · 阻断错误</strong><span>无可用内容时占据主区域，同时提供重试和返回两个明确出口。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-left"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>专辑</strong></div><span></span>
-            </div>
-            <div class="error-center"><span class="error-icon"><svg class="icon">
-                  <use href="#i-alert"></use>
-                </svg></span>
-              <h1>暂时无法加载内容</h1>
-              <p>服务没有响应。你的收藏和播放进度不会丢失。</p>
-              <div class="error-actions"><button class="primary-pill"><svg class="icon">
-                    <use href="#i-refresh"></use>
-                  </svg>重新加载</button><button class="secondary-pill">返回上一页</button></div>
-            </div>
-          </section>
-        </div>
+        <figcaption class="screen-caption"><strong>STATE-03 · 页面级错误</strong><span>首载没有任何可用内容时保留 App Bar、迷你播放器和导航；服务异常提供重试与网络设置两个恢复出口。</span></figcaption>
+        <div class="device"><section class="screen state-page-error-screen">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button subtle" aria-label="返回"><svg class="icon"><use href="#i-chevron-left"></use></svg></button><div class="app-bar-center"><strong>歌单</strong></div><button class="icon-button subtle" aria-label="更多"><svg class="icon"><use href="#i-more"></use></svg></button></div>
+          <section class="state-page-error-content"><div><span class="state-error-orb"><svg class="icon"><use href="#i-alert"></use></svg></span><h1>暂时无法加载内容</h1><p>服务没有响应。你的收藏、公开缓存和播放进度都不会丢失。</p><div class="state-error-actions"><button class="state-primary-action"><svg class="icon"><use href="#i-refresh"></use></svg>重新加载</button><button class="state-secondary-action"><svg class="icon"><use href="#i-settings"></use></svg>检查网络设置</button></div></div></section>
+          <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav" aria-label="一级导航"><span class="nav-item"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item active"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="state-partial-error" data-groups="states home">
-        <figcaption class="screen-caption"><strong>STATE-04 · 局部错误</strong><span>已成功内容继续显示，仅在失败模块内部提供恢复动作。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen page-screen">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-menu"></use>
-                </svg></button>
-              <div class="app-bar-center"><strong>首页</strong></div><span></span>
-            </div>
-            <div class="page-scroll no-shell">
-              <h1 class="page-title">下午好</h1>
-              <article class="podcast-card"><img src="assets/v2/cover-weightless.jpg" alt="" />
-                <div><strong>失重拥抱</strong><span>继续播放</span></div><button class="icon-button"><svg class="icon">
-                    <use href="#i-play"></use>
-                  </svg></button>
-              </article>
-              <section class="partial-error"><svg class="icon">
-                  <use href="#i-alert"></use>
-                </svg>
-                <div><strong>推荐内容加载失败</strong><span>其他内容仍可正常浏览</span></div><button class="compact-button">重试</button>
-              </section>
-              <h2 class="section-title">最近播放</h2>
-              <article class="podcast-card"><img src="assets/v2/cover-podcast.jpg" alt="" />
-                <div><strong>城市夜航</strong><span>18:20</span></div><svg class="icon">
-                  <use href="#i-chevron-right"></use>
-                </svg>
-              </article>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="state-partial-error" data-groups="states shell">
+        <figcaption class="screen-caption"><strong>STATE-04 · 局部错误</strong><span>首页已成功内容保持原位；推荐区只以一条内联提示说明失败并在原位置重试。</span></figcaption>
+        <div class="device"><section class="screen home-screen state-partial-screen" data-time="afternoon">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button" aria-label="打开菜单"><svg class="icon"><use href="#i-menu"></use></svg></button><div class="home-title">下午好，Momo</div><button class="icon-button" aria-label="搜索"><svg class="icon"><use href="#i-search"></use></svg></button></div>
+          <div class="content-scroll with-shell state-partial-scroll"><section><div class="section-heading"><h3>继续播放</h3><span>查看全部</span></div><article class="state-partial-continue"><img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /><span><strong>失重拥抱</strong><small>Bbcsr · 已播放 01:43</small></span><button class="play-button" aria-label="继续播放"><svg class="icon"><use href="#i-play"></use></svg></button></article></section><section class="home-section"><div class="section-heading"><h3>为你推荐</h3><span>刷新中断</span></div><div class="state-inline-error"><svg class="icon"><use href="#i-alert"></use></svg><span><strong>推荐内容加载失败</strong><small>其他内容仍可正常浏览</small></span><button class="state-inline-retry">重试</button></div></section><section class="home-section"><div class="section-heading"><h3>最近播放</h3><span>查看全部</span></div><div class="state-partial-grid"><article class="state-partial-card"><img src="assets/v2/cover-podcast.jpg" alt="城市夜航封面" /><strong>城市夜航</strong><small>Neon Harbor</small></article><article class="state-partial-card"><img src="assets/v2/cover-vinyl.jpg" alt="独立热浪封面" /><strong>独立热浪</strong><small>Absofacto</small></article></div></section></div>
+          <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav" aria-label="一级导航"><span class="nav-item active"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="state-session-expired" data-groups="states auth">
-        <figcaption class="screen-caption"><strong>STATE-05 · 会话过期</strong><span>保持当前页面上下文，用全局消息说明退出原因并导向重新登录。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen modal-context">
-            <div class="status-bar"><span>14:16</span><span class="camera-dot"></span></div>
-            <div class="global-toast"><svg class="icon">
-                <use href="#i-lock"></use>
-              </svg>
-              <div><strong>登录状态已过期</strong><span>为了保护账户安全，请重新扫码登录。</span></div>
-              <div class="toast-actions"><button>稍后</button><button>重新登录</button></div>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="state-session-expired" data-groups="states">
+        <figcaption class="screen-caption"><strong>STATE-05 · 会话过期</strong><span>当前公开页面与播放上下文保持可见；全局模态说明账户数据已清除，并分流至重新扫码或以游客继续。</span></figcaption>
+        <div class="device"><section class="screen home-screen state-session-screen" data-time="night">
+          <div class="status-bar"><span>14:16</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button" aria-label="打开菜单"><svg class="icon"><use href="#i-menu"></use></svg></button><div class="home-title">下午好，Momo</div><button class="icon-button" aria-label="搜索"><svg class="icon"><use href="#i-search"></use></svg></button></div>
+          <div class="content-scroll with-shell state-session-scroll"><div class="state-session-context"><div class="shortcut-grid"><div class="shortcut calendar"><span>23</span><strong>每日推荐</strong></div><div class="shortcut"><img src="assets/v2/cover-weightless.jpg" alt="" /><strong>深夜循环</strong></div><div class="shortcut"><img src="assets/v2/cover-vinyl.jpg" alt="" /><strong>独立热浪</strong></div><div class="shortcut"><img src="assets/v2/cover-podcast.jpg" alt="" /><strong>播客精选</strong></div></div><section><div class="section-heading"><h3>为你推荐</h3><span>查看全部</span></div><article class="feature-banner"><img src="assets/v2/cover-podcast.jpg" alt="" /><div class="banner-copy"><span class="eyebrow">Scopify sessions</span><strong>城市声音计划</strong><small>寻找日常里被忽略的旋律</small></div></article></section></div></div>
+          <div class="shell-layer"><div class="mini-player"><img src="assets/v2/cover-weightless.jpg" alt="" /><span class="media-copy"><strong>失重拥抱</strong><small>Bbcsr</small></span><span class="mini-icon"><svg class="icon"><use href="#i-heart"></use></svg></span><span class="mini-icon"><svg class="icon"><use href="#i-pause"></use></svg></span></div><nav class="bottom-nav" aria-label="一级导航"><span class="nav-item active"><svg class="icon"><use href="#i-home"></use></svg>首页</span><span class="nav-item"><svg class="icon"><use href="#i-search"></use></svg>搜索</span><span class="nav-item"><svg class="icon"><use href="#i-library"></use></svg>我的</span></nav></div>
+          <div class="state-session-scrim"></div><section class="state-session-dialog"><button class="state-session-close" aria-label="关闭"><svg class="icon"><use href="#i-x"></use></svg></button><span class="state-error-orb"><svg class="icon"><use href="#i-lock"></use></svg></span><h1>登录状态已过期</h1><p>账号数据已安全退出；公开内容和当前播放队列仍会保留。</p><button class="state-primary-action"><svg class="icon"><use href="#i-refresh"></use></svg>重新扫码登录</button></section>
+        </section></div>
       </figure>
 
-      <figure class="screen-board" data-screen="state-playback-failure" data-groups="states player">
-        <figcaption class="screen-caption"><strong>STATE-06 · 播放失败</strong><span>错误贴近播放器控制区呈现，可重试或跳至下一首，不清空队列。</span>
-        </figcaption>
-        <div class="device">
-          <section class="screen player-screen">
-            <div class="status-bar"><span>20:30</span><span class="camera-dot"></span></div>
-            <div class="app-bar"><button class="icon-button subtle"><svg class="icon">
-                  <use href="#i-chevron-down"></use>
-                </svg></button>
-              <div class="app-bar-center"><small>播放已暂停</small><strong>失重拥抱</strong></div><button
-                class="icon-button subtle"><svg class="icon">
-                  <use href="#i-more"></use>
-                </svg></button>
-            </div>
-            <div class="error-center"><span class="error-icon"><svg class="icon">
-                  <use href="#i-alert"></use>
-                </svg></span>
-              <h1>这首歌暂时无法播放</h1>
-              <p>音频地址已失效，播放队列仍然保留。</p>
-              <div class="error-actions"><button class="primary-pill"><svg class="icon">
-                    <use href="#i-refresh"></use>
-                  </svg>重试</button><button class="secondary-pill">播放下一首</button></div>
-            </div>
-          </section>
-        </div>
+      <figure class="screen-board" data-screen="state-playback-failure" data-groups="states">
+        <figcaption class="screen-caption"><strong>STATE-06 · 播放失败</strong><span>完整播放器、歌曲、进度与队列入口全部保留；连续失败以 App Shell 顶部错误 Toast 提供重试和下一首。</span></figcaption>
+        <div class="device"><section class="screen player-screen state-playback-failure-screen">
+          <div class="player-background"></div>
+          <div class="status-bar"><span>20:30</span><span class="camera-dot"></span><span class="system-icons"><i class="signal"></i><i class="wifi"></i><i class="battery"></i></span></div>
+          <div class="app-bar"><button class="icon-button" aria-label="收起播放器"><svg class="icon"><use href="#i-chevron-down"></use></svg></button><div class="app-bar-center"><small>播放已暂停</small><strong>深夜循环</strong></div><button class="icon-button" aria-label="分享"><svg class="icon"><use href="#i-share"></use></svg></button></div>
+          <div class="global-toast state-player-toast"><div><strong>连续多首歌曲播放失败</strong><small>可能是网络或播放源异常，播放队列仍然保留。</small></div><div class="toast-actions"><span>重试</span><span>下一首</span></div></div>
+          <div class="player-content"><section class="turntable" data-playback-state="paused" aria-label="唱片中心模式，播放已暂停"><span class="turntable-record"><img class="turntable-vinyl" src="assets/v2/vinyl-record-public-domain.png" alt="已暂停的黑胶唱片" /><span class="turntable-label"><img src="assets/v2/cover-weightless.jpg" alt="失重拥抱封面" /></span></span><img class="turntable-tonearm" src="assets/v2/turntable-tonearm-topdown-v2.png" alt="正俯视的真实磁臂，已抬起回到停放位" /></section><div class="player-track-heading"><div><h1>失重拥抱</h1><p>Bbcsr · 关注</p></div><span class="player-like"><svg class="icon"><use href="#i-heart"></use></svg></span></div><div class="progress-track" aria-label="播放进度，包含两段副歌区间"><span class="chorus-range" style="--range-start: 27%; --range-end: 40%" aria-hidden="true"></span><span class="chorus-range" style="--range-start: 60%; --range-end: 73%" aria-hidden="true"></span></div><div class="time-row"><span>01:43</span><span class="quality-badge">HI-RES</span><span>02:56</span></div><div class="player-controls"><span class="control active"><svg class="icon"><use href="#i-shuffle"></use></svg></span><span class="control"><svg class="icon"><use href="#i-skip-back"></use></svg></span><span class="control"><button class="main-control" type="button" aria-label="重试播放"><svg class="icon"><use href="#i-play"></use></svg></button></span><span class="control"><svg class="icon"><use href="#i-skip-forward"></use></svg></span><span class="control"><svg class="icon"><use href="#i-list"></use></svg></span></div><div class="player-tools"><span class="player-tool"><svg class="icon"><use href="#i-cast"></use></svg>设备</span><span class="player-tool"><svg class="icon"><use href="#i-sliders"></use></svg>音效</span><span class="player-tool"><svg class="icon"><use href="#i-clock"></use></svg>定时</span><span class="player-tool"><strong>HQ</strong>音质</span><span class="player-tool"><svg class="icon"><use href="#i-more"></use></svg>更多</span></div><span class="comment-handle" aria-label="上滑查看评论"></span></div>
+        </section></div>
       </figure>
     </div>
   </main>
@@ -8466,6 +10009,56 @@
       const homeGreeting = document.querySelector("[data-home-greeting]");
       const params = new URLSearchParams(window.location.search);
       const initial = params.get("screen") || "all";
+      const galleryOrder = {
+        "time-themes": 10,
+        home: 11,
+        "search-discover": 20,
+        "search-dropdown": 21,
+        "search-results": 22,
+        "my-music": 30,
+        "my-podcasts": 31,
+        "my-collection": 32,
+        "my-guest": 33,
+        "profile-self": 40,
+        "profile-other": 41,
+        "profile-edit": 42,
+        playlist: 50,
+        artist: 51,
+        recent: 52,
+        album: 53,
+        "audio-content": 54,
+        comments: 55,
+        "player-disc": 60,
+        "player-lyrics": 61,
+        queue: 62,
+        "drawer-auth": 70,
+        "drawer-guest": 71,
+        "drawer-vip-sign": 72,
+        "drawer-sleep-timer": 73,
+        "drawer-song-recognition": 74,
+        "drawer-check-update": 75,
+        "create-playlist": 76,
+        login: 80,
+        "login-scanned": 81,
+        "login-expired": 82,
+        "login-success": 83,
+        "login-network": 84,
+        "launch-gate": 85,
+        "login-state-matrix": 86,
+        "guest-action-gate": 87,
+        "settings-index": 90,
+        "settings-general": 91,
+        "settings-playback": 92,
+        "settings-network": 93,
+        "settings-storage": 94,
+        "settings-about": 95,
+        "state-home-skeleton": 100,
+        "state-detail-skeleton": 101,
+        "state-blocking-error": 102,
+        "state-partial-error": 103,
+        "state-session-expired": 104,
+        "state-playback-failure": 105
+      };
       const timeThemes = [
         { key: "night", start: 0, end: 5, greeting: "夜深了" },
         { key: "dawn", start: 5, end: 7, greeting: "早上好" },
@@ -8491,7 +10084,10 @@
         const isSearchFlow = safeFilter === "search-flow" || safeFilter === "search";
         boards.forEach((board) => {
           board.hidden = !matches(board, safeFilter);
-          board.style.order = isSearchFlow ? board.dataset.flowOrder || "0" : "";
+          const screen = board.dataset.screen || "";
+          board.style.order = isSearchFlow
+            ? board.dataset.flowOrder || String(galleryOrder[screen] || 999)
+            : String(galleryOrder[screen] || 999);
         });
         buttons.forEach((button) => { button.setAttribute("aria-pressed", String(button.dataset.filter === safeFilter)); });
         if (updateUrl) {
