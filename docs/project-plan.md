@@ -14,6 +14,7 @@
 | 当前低保真设计 | [mobile-wireframe-prototype.html](./wireframes/mobile-wireframe-prototype.html) |
 | Web 已有能力 | [web-capabilities.md](./web-capabilities.md) |
 | Web 设计语言如何映射到 Flutter | [web-design-language.md](./web-design-language.md) |
+| 跨端设计合同与组件接口 | [cross-platform-design-contract.md](./cross-platform-design-contract.md) |
 | Mobile 领域词汇 | [CONTEXT.md](../CONTEXT.md) |
 
 ## 1. 当前阶段目标
@@ -113,12 +114,38 @@ Android Emulator
 - My、Profile、最近播放、乐签和账号作用域缓存。
 - Drawer 中设置、听歌识曲、检查更新等入口接入对应 Module；仍优先完成读取和状态展示。
 
+#### M3a — 二维码登录与 Session 恢复
+
+- [x] My 与 Drawer 游客入口进入独立全屏二维码登录 route。
+- [x] 二维码 key、图片、801/802/800/803 轮询状态与刷新/离开失效保护。
+- [x] 登录成功后校验账号，并按 Backend Endpoint 隔离加密保存网易云 Session Credential。
+- [x] App Shell 恢复有效 Session；失效或 Endpoint 不匹配时回到游客态。
+- [x] My、Profile、最近播放与乐签接入真实账号数据和账号作用域缓存。
+- [x] 退出账号、会话过期全局 Modal 与游客继续路径。
+
+#### M3b — 线稿升级与跨端视觉落地
+
+这一阶段插在 M4 写操作之前。线稿从“低保真参考”升级为可验收的状态与构图合同，
+Web 当前实现作为视觉真源，Mobile 通过语义 token 和共享组件实现同一套产品语言。
+
+- [x] 建立 Web dark theme → Mobile `AppTokens` 的跨端设计合同。
+- [x] 将线稿核心变量对齐 Web 的背景、层级、文字、品牌绿、边界和异常色。
+- [x] 以共享按钮、图标动作、媒体卡片、列表行和状态组件完成首页、详情、登录、乐签首轮对齐。
+- [ ] 以 Android Emulator 截图逐页验收信息层级、动作主次、状态承载和大字体布局。
+- [ ] 设计阶段通过后冻结 M4 写操作所依赖的组件接口，禁止业务页重新拼装按钮样式。
+
 ### M4 — 写操作与评论
 
 - 喜欢、关注、收藏和歌单编辑。
 - 评论读取、分页、发布、回复、点赞和删除。
 - mutation 的提交中、乐观更新、失败回滚、缓存失效和全局反馈。
 - 写操作接真实账号前逐项进行产品复核，不因按钮已画出就默认授权实现。
+
+#### M4a — 乐签签到写操作
+
+- [x] Drawer 与乐签 Modal 通过统一 `ScopifyPillButton` 触发 `POST /vip/sign`。
+- [x] 提交中、成功、重复签到和失败反馈有明确状态；成功后失效并刷新账号作用域乐签缓存。
+- [ ] 继续接入喜欢、关注、收藏和评论写操作前，先完成跨端设计阶段的截图验收与组件接口冻结。
 
 ### M5 — Android 播放平台化
 

@@ -12,6 +12,9 @@ class AppFailure implements Exception {
   });
 
   factory AppFailure.fromDio(DioException error) {
+    if (error.response?.statusCode == 301) {
+      return AppFailure.unauthenticated();
+    }
     return switch (error.type) {
       DioExceptionType.connectionTimeout ||
       DioExceptionType.receiveTimeout ||
@@ -43,6 +46,14 @@ class AppFailure implements Exception {
     );
   }
 
+  factory AppFailure.unauthenticated({String? message, int? statusCode}) {
+    return AppFailure._(
+      kind: AppFailureKind.unauthenticated,
+      message: message ?? '登录状态已失效，请重新登录。',
+      statusCode: statusCode ?? 301,
+    );
+  }
+
   final AppFailureKind kind;
   final String message;
   final int? statusCode;
@@ -51,4 +62,11 @@ class AppFailure implements Exception {
   String toString() => 'AppFailure($kind, $statusCode): $message';
 }
 
-enum AppFailureKind { timeout, connection, response, business, unknown }
+enum AppFailureKind {
+  timeout,
+  connection,
+  response,
+  business,
+  unauthenticated,
+  unknown,
+}

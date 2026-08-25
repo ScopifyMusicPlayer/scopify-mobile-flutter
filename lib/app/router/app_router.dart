@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scopify_mobile/layouts/app_shell_layout.dart';
+import 'package:scopify_mobile/pages/auth/qr_login_page.dart';
 import 'package:scopify_mobile/pages/home/home_page.dart';
 import 'package:scopify_mobile/pages/my/my_page.dart';
 import 'package:scopify_mobile/pages/player/player_page.dart';
@@ -133,14 +134,13 @@ class SearchPlaylistRoute extends GoRouteData with $SearchPlaylistRoute {
 }
 
 class MyRoute extends GoRouteData with $MyRoute {
-  const MyRoute({this.fixture, this.guest = true});
+  const MyRoute({this.fixture});
 
   final String? fixture;
-  final bool guest;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return MyPage(fixtureMode: FixtureMode.fromQuery(fixture), guest: guest);
+    return MyPage(fixtureMode: FixtureMode.fromQuery(fixture));
   }
 }
 
@@ -161,6 +161,15 @@ class PlayerRoute extends GoRouteData with $PlayerRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const PlayerPage();
+}
+
+@TypedGoRoute<QrLoginRoute>(path: '/login/qr')
+class QrLoginRoute extends GoRouteData with $QrLoginRoute {
+  const QrLoginRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const QrLoginPage();
 }
 
 @TypedGoRoute<ProfileRoute>(path: '/profile')
